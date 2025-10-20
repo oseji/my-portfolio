@@ -1,0 +1,115 @@
+[
+	{
+		"id": 1,
+		"img": "/assets/pennywise.png",
+		"alt": "Pennywise app screenshot",
+		"title": "Pennywise",
+		"href": "https://pennywise-oseji.vercel.app/",
+		"githubRepo": "https://github.com/oseji/pennywise.git",
+		"about": "A smart money-tracking app that helps users manage their finances with ease. Pennywise allows users to log income and expenses, set budgets, and monitor savings, all through a clean and intuitive interface. Built with Firebase for real-time data storage and Next.js for optimal performance.",
+		"stack": ["Next.js", "TypeScript", "Firebase"]
+	},
+	{
+		"id": 2,
+		"img": "/assets/binge.png",
+		"alt": "A visually captivating landing page featuring smooth animations powered by GSAP.",
+		"title": "Binge",
+		"href": "https://binge-beta.vercel.app/",
+		"githubRepo": "https://github.com/oseji/Binge.git",
+		"about": "A media discovery platform featuring a dynamic landing page powered by GSAP animations. Users can search for movies, series, and entertainers, view detailed descriptions, images, and trailers for each result, and add media to their liked lists to keep track of their favorites.",
+		"stack": ["React", "Typescript", "Redux Toolkit", "Tailwind", "GSAP"]
+	},
+	{
+		"id": 3,
+		"img": "/assets/hrSphere.png",
+		"alt": "HR Sphere dashboard screenshot",
+		"title": "HR Sphere dashboard (WIP)",
+		"href": "https://hr-sphere.vercel.app/",
+		"githubRepo": "https://github.com/oseji/HR-Sphere.git",
+		"about": "A user-friendly HR management platform with secure authentication and real-time data handling via Firebase.",
+		"stack": ["React", "Typescript", "Tailwind", "Firebase"]
+	},
+	{
+		"id": 4,
+		"img": "/assets/afrostock.png",
+		"alt": "Afrostock landing page screenshot",
+		"title": "Afrostock",
+		"href": "https://afrostock.vercel.app/",
+		"githubRepo": "https://github.com/oseji/Afrostock.git",
+		"about": "An engaging and minimalist landing page that blends simplicity with motion. Afrostock features smooth GSAP animations and a clean layout crafted with Tailwind CSS, demonstrating how subtle motion and minimal design can create a stylish and responsive web experience.",
+		"stack": ["Next.js", "Tailwind", "GSAP"]
+	},
+	{
+		"id": 5,
+		"img": "/assets/finGenius.png",
+		"alt": "IntelliVest screenshot",
+		"title": "IntelliVest landing page",
+		"href": "https://intellivest.vercel.app/",
+		"githubRepo": "https://github.com/oseji/IntelliVest.git",
+		"about": "A sleek and animated landing page crafted with GSAP for a dynamic user experience.",
+		"stack": ["React", "Typescript", "Tailwind", "GSAP"]
+	},
+
+	{
+		"id": 6,
+		"img": "/assets/ip address.png",
+		"alt": "IP address screenshot",
+		"title": "IP address tracker",
+		"href": "https://ip-tracker-oseji.netlify.app/",
+		"githubRepo": "https://github.com/oseji/IP-Address-Tracker.git",
+		"about": "A versatile tool for tracking IP addresses. This application displays essential details like the user's IP address, ISP, and timezone, while utilizing React Leaflet to render a map showcasing the ISP location. The integration of APIs ensures real-time data accuracy.",
+		"stack": ["React", "Tailwind", "React-leaflet", "API"]
+	},
+	{
+		"id": 7,
+		"img": "/assets/toDo.png",
+		"alt": "ToDo App screenshot",
+		"title": "ToDo app",
+		"href": "https://oseji-todo.vercel.app/",
+		"githubRepo": "https://github.com/oseji/ToDo.git",
+		"about": "A practical and secure task management application with built-in user authentication powered by Firebase. Registered users can log in to manage and access their personal to-do lists, ensuring a personalized and private experience.",
+		"stack": ["React", "Typescript", "Tailwind", "Firebase"]
+	},
+	{
+		"id": 8,
+		"img": "/assets/trendy trove.png",
+		"alt": "Trendy Trove page screenshot",
+		"title": "Trendy Trove",
+		"href": "https://trendy-trove.netlify.app/",
+		"githubRepo": "https://github.com/oseji/TrendyTrove.git",
+		"about": "An engaging and minimalist landing page enriched with simple yet effective animations. The design focuses on clarity and style, making it a great example of impactful yet lightweight web development.",
+		"stack": ["React", "Typescript", "Tailwind", "Framer motion"]
+	},
+
+	{
+		"id": 9,
+		"img": "/assets/github search.png",
+		"alt": "Github profile screenshot",
+		"title": "Github profile searcher",
+		"href": "https://github-profile-finder-oseji.netlify.app/",
+		"githubRepo": "https://github.com/oseji/github-profile-search.git",
+		"about": "Search and explore GitHub profiles with user details displayed in an interactive UI.",
+		"stack": ["React", "Tailwind", "Framer motion", "API"]
+	},
+
+	{
+		"id": 10,
+		"img": "/assets/translator.png",
+		"alt": "Analytics screenshot",
+		"title": "Language translator",
+		"href": "https://translator-oseji.netlify.app/",
+		"githubRepo": "https://github.com/oseji/translator.git",
+		"about": "A multilingual translator application offering features like text translation, copy functionality, and audio playback. Its simple interface ensures accessibility for a wide audience, while APIs provide reliable translations.",
+		"stack": ["React", "Tailwind", "API"]
+	},
+	{
+		"id": 11,
+		"img": "/assets/dictionary.png",
+		"alt": "Dictionary screenshot",
+		"title": "Dictionary",
+		"href": "https://osejis-dictionary.netlify.app/",
+		"githubRepo": "https://github.com/oseji/osejis-dictionary.git",
+		"about": "An intuitive dictionary app that combines functionality and style. It features audio playback for pronunciation and theme switching for enhanced accessibility, all within a clean and modern design.",
+		"stack": ["React", "Tailwind", "Framer motion", "API"]
+	}
+]
