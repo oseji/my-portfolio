@@ -4,6 +4,10 @@
 	--primary-color: #ea580c;
 }
 
+html {
+	@apply scroll-smooth;
+}
+
 .section-padding {
 	@apply px-5 md:px-12 lg:px-16 xl:px-28 py-5 md:py-16;
 }
@@ -35,4 +39,14 @@
 
 .prevNextBtn {
 	@apply capitalize font-medium border border-gray-300 bg-gray-200 rounded-lg px-4 py-2 cursor-pointer hover:scale-110 transition ease-in-out duration-200;
+}
+
+/* CONTACT ME */
+.inputLabelGroup {
+	@apply flex flex-col gap-3 capitalize;
+}
+
+.inputLabelGroup > input,
+textarea {
+	@apply placeholder:capitalize border border-slate-200 rounded-lg p-2 focus:outline-none;
 }

@@ -5,19 +5,21 @@ import linkedInIcon from "../assets/linkedin-rounded-svgrepo-com.svg";
 
 const Header = () => {
 	return (
-		<header className=" flex flex-col md:flex-row justify-between items-center px-5 md:px-12 lg:px-16 xl:px-28 py-5">
-			<p className=" text-xl font-bold">Ose Oziegbe</p>
+		<header className=" flex flex-col md:flex-row justify-between items-center px-5 md:px-12 lg:px-16 xl:px-28 py-5 fixed w-full bg-white z-50 shadow-xl">
+			<p className=" text-xl font-bold">
+				<a href="#heroSection">Ose Oziegbe</a>
+			</p>
 
 			<nav className=" flex flex-col md:flex-row items-center gap-10">
 				<ul className=" flex flex-col md:flex-row items-center gap-4">
 					<li>
-						<a href="#">Home</a>
+						<a href="#heroSection">Home</a>
 					</li>
 					<li>
-						<a href="#">Projects</a>
+						<a href="#projects">Projects</a>
 					</li>
 					<li>
-						<a href="#">About Me</a>
+						<a href="#aboutMe">About Me</a>
 					</li>
 					<li>
 						<a
@@ -32,15 +34,27 @@ const Header = () => {
 
 				<div className=" flex flex-row items-center gap-2">
 					<div className=" bg-[#FED7AA] rounded-full p-3">
-						<Image src={githubIcon} alt="github icon" className=" h-5 w-5" />
+						<a
+							href="https://github.com/oseji"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Image src={githubIcon} alt="github icon" className=" h-5 w-5" />
+						</a>
 					</div>
 
 					<div className=" bg-[#FED7AA] rounded-full p-3">
-						<Image
-							src={linkedInIcon}
-							alt="linkedin icon"
-							className=" h-5 w-5"
-						/>
+						<a
+							href="https://www.linkedin.com/in/ose-oziegbe-648154254/"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							<Image
+								src={linkedInIcon}
+								alt="linkedin icon"
+								className=" h-5 w-5"
+							/>
+						</a>
 					</div>
 				</div>
 			</nav>

@@ -18,7 +18,7 @@ const Projects = () => {
 	const endIndex = startIndex + numberOfItemsPerPage;
 
 	return (
-		<section className=" section-padding ">
+		<section className=" section-padding" id="projects">
 			<h1 className=" sectionHeading">
 				{selectedMode === "frontend"
 					? "Front-End projects"
@@ -33,14 +33,22 @@ const Projects = () => {
 
 			<div className=" projectToggle">
 				<button
-					className=" projectToggleButtons text-white bg-[#EA580C]"
+					className={`projectToggleButtons ${
+						selectedMode === "frontend"
+							? "text-white bg-[#EA580C]"
+							: "border-gray-300 cursor-pointer"
+					}`}
 					onClick={() => setSelectedMode("frontend")}
 				>
 					front-end development
 				</button>
 
 				<button
-					className=" projectToggleButtons border-gray-300 cursor-pointer"
+					className={`projectToggleButtons ${
+						selectedMode === "qa"
+							? "text-white bg-[#EA580C]"
+							: "border-gray-300 cursor-pointer"
+					}`}
 					onClick={() => setSelectedMode("qa")}
 				>
 					quality assurance
