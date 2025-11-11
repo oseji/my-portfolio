@@ -1,10 +1,14 @@
 "use client";
 import Image from "next/image";
 import arrowIcon from "../assets/arrow-up-right.svg";
-import { use, useState } from "react";
+import { useState } from "react";
 
 const ContactMe = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+
+	const [fullName, setFullName] = useState<string>("");
+	const [email, setEmail] = useState<string>("");
+	const [message, setMessage] = useState<string>("");
 
 	return (
 		<section
@@ -37,12 +41,30 @@ const ContactMe = () => {
 				>
 					<div className=" inputLabelGroup">
 						<label htmlFor="fullName">full name</label>
-						<input type="text" id="fullName" placeholder="full name" required />
+						<input
+							type="text"
+							id="fullName"
+							placeholder="full name"
+							required
+							value={fullName}
+							onChange={(e) => {
+								setFullName(e.currentTarget.value);
+							}}
+						/>
 					</div>
 
 					<div className=" inputLabelGroup">
 						<label htmlFor="email">email</label>
-						<input type="email" id="email" placeholder="email" required />
+						<input
+							type="email"
+							id="email"
+							placeholder="email"
+							required
+							value={email}
+							onChange={(e) => {
+								setEmail(e.currentTarget.value);
+							}}
+						/>
 					</div>
 
 					<div className=" inputLabelGroup">
@@ -53,16 +75,31 @@ const ContactMe = () => {
 							placeholder="enter your message"
 							className=" h-28 max-h-28 min-h-28"
 							required
+							value={message}
+							onChange={(e) => {
+								setMessage(e.currentTarget.value);
+							}}
 						></textarea>
 					</div>
 
 					<button
-						className=" capitalize text-white bg-[#EA580C] py-3 w-full rounded-lg cursor-pointer"
+						className={`capitalize text-white bg-[#EA580C] py-3 w-full rounded-lg  ${
+							fullName === "" || email === "" || message === "" || isLoading
+								? "cursor-not-allowed"
+								: "cursor-pointer"
+						}`}
 						onClick={(e) => {
 							e.preventDefault();
 						}}
+						disabled={
+							fullName === "" || email === "" || message === "" || isLoading
+						}
 					>
-						send message
+						{!isLoading ? (
+							"send message"
+						) : (
+							<div className="w-8 h-8  mx-auto border-3 border-white border-t-transparent rounded-full animate-spin"></div>
+						)}
 					</button>
 				</form>
 			</div>

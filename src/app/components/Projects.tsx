@@ -80,7 +80,7 @@ const Projects = () => {
 								{element.stack.map((stack, index) => (
 									<span
 										key={index}
-										className=" capitalize border border-gray-300 bg-gray-200 rounded-lg px-4 py-2"
+										className=" capitalize border border-gray-300 bg-gray-200 rounded-lg px-4 py-2 text-sm"
 									>
 										{stack}
 									</span>
