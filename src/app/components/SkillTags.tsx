@@ -33,10 +33,11 @@ const SkillTags = () => {
 
 		elements.forEach((el) => {
 			gsap.to(el, {
-				y: () => gsap.utils.random(-15, 15),
-				x: () => gsap.utils.random(-10, 10),
-				rotation: () => gsap.utils.random(-30, 30),
+				y: () => gsap.utils.random(-10, 10),
+				x: () => gsap.utils.random(-30, 30),
+				rotation: () => gsap.utils.random(-20, 20),
 				duration: () => gsap.utils.random(2, 4),
+				scale: () => gsap.utils.random(0.95, 1.25),
 				ease: "sine.inOut",
 				yoyo: true,
 				repeat: -1,
@@ -53,7 +54,7 @@ const SkillTags = () => {
 			{tags.map((tag, i) => (
 				<div
 					key={i}
-					className={`tag px-5 py-2 rounded-full font-medium text-sm shadow-sm flex flex-row justify-center items-center gap-1 border border-black min-w-28 text-xl ${tag.color}`}
+					className={`tag px-5 py-2 rounded-full font-medium  shadow-sm flex flex-row justify-center items-center gap-1 border border-black min-w-28 text-xl  ${tag.color}`}
 				>
 					{/* <span className="w-4 h-4 flex items-center justify-center bg-black text-white rounded-full text-[10px]">
 							↻

@@ -26,10 +26,12 @@ const ContactMe = () => {
 
 				<p>Available for network and collaborations</p>
 
-				<button className=" flex flex-row items-center gap-4 bg-white w-full rounded-full py-3 justify-center text-black mt-10 cursor-pointer transition ease-in-out duration-300 hover:scale-110">
-					<span>Contact me</span>
-					<Image src={arrowIcon} alt="arrow icon" />
-				</button>
+				<a href="mailto:oseoziegbe0@gmail.com">
+					<button className=" flex flex-row items-center gap-4 bg-white w-full rounded-full py-3 justify-center text-black mt-10 cursor-pointer transition ease-in-out duration-300 hover:scale-110">
+						<span>Contact me</span>
+						<Image src={arrowIcon} alt="arrow icon" />
+					</button>
+				</a>
 			</div>
 
 			<div className=" bg-white rounded-lg p-5 md:w-1/2 xl:w-1/2">
