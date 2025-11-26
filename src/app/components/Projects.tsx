@@ -5,10 +5,8 @@ import { useState, useEffect, useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
-// ──────────────────────────────────────────────────
-// Your project images
-// ──────────────────────────────────────────────────
 import pennyWiseImg from "../assets/projects/pennywise.png";
 import bingeImg from "../assets/projects/binge.png";
 import hrSphereImg from "../assets/projects/hrSphere.png";
@@ -20,6 +18,7 @@ import trendyTroveImg from "../assets/projects/trendy trove.png";
 import githubSearchImg from "../assets/projects/github search.png";
 import translatorImg from "../assets/projects/translator.png";
 import dictionaryImg from "../assets/projects/dictionary.png";
+import githubIcon from "../assets/github-svgrepo-com.svg";
 
 type ModeType = "frontend" | "qa";
 
@@ -151,15 +150,24 @@ const Projects = () => {
 
 	const [selectedPage, setSelectedPage] = useState(0);
 	const [selectedMode, setSelectedMode] = useState<ModeType>("frontend");
+	const [slidesPerView, setSlidesPerView] = useState(1); // default = 1 (matches server)
 
-	const getSlidesPerView = useCallback(() => {
-		if (typeof window === "undefined") return 1;
-		if (window.innerWidth >= 1024) return 3; //desktop
-		if (window.innerWidth >= 768) return 2; //tablet
-		return 1; // mobile
+	useEffect(() => {
+		const calculateSlidesPerView = () => {
+			if (window.innerWidth >= 1024) return 3;
+			if (window.innerWidth >= 768) return 2;
+			return 1;
+		};
+
+		const handleResize = () => {
+			setSlidesPerView(calculateSlidesPerView());
+		};
+
+		handleResize(); // set initial value
+		window.addEventListener("resize", handleResize);
+
+		return () => window.removeEventListener("resize", handleResize);
 	}, []);
-
-	const slidesPerView = getSlidesPerView();
 
 	const projects =
 		selectedMode === "frontend" ? frontendProjectData : qaProjectData;
@@ -254,10 +262,6 @@ const Projects = () => {
 								key={project.id}
 								className="flex-none w-full sm:w-[85%] md:w-[48%] lg:w-[32%]  rounded-xl p-4  h-full"
 							>
-								{/* <div className="bg-white rounded-xl shadow-md p-4 hover:shadow-lg transition h-full">
-									
-								</div> */}
-
 								<div className="min-h-80">
 									<div className="rounded-xl overflow-hidden aspect-video">
 										<Image
@@ -269,7 +273,7 @@ const Projects = () => {
 										/>
 									</div>
 
-									<div className="flex flex-col gap-3 justify-between min-h-36 mt-4">
+									<div className="flex flex-col gap-3 justify-between min-h-40 mt-4">
 										<div className=" flex flex-col gap-3">
 											<h2 className="font-bold capitalize text-lg">
 												{project.title}
@@ -279,15 +283,35 @@ const Projects = () => {
 											</p>
 										</div>
 
-										<div className="flex flex-row gap-3 flex-wrap">
-											{project.stack.map((tech, i) => (
-												<span
-													key={i}
-													className="capitalize border  bg-[#EA580C] text-white rounded-lg px-3 py-1.5 text-xs font-medium"
+										<div className=" flex flex-col gap-3">
+											<div className="flex flex-row gap-3 flex-wrap">
+												{project.stack.map((tech, i) => (
+													<span
+														key={i}
+														className="capitalize border  bg-[#EA580C] text-white rounded-lg px-3 py-1.5 text-xs font-medium"
+													>
+														{tech}
+													</span>
+												))}
+											</div>
+
+											<div className="flex flex-row justify-between items-center w-full">
+												<a href={project.githubRepo}>
+													<Image
+														src={githubIcon}
+														alt="GitHub Icon"
+														className=" h-4 w-fit hover:scale-110 transition ease-in duration-200"
+													/>
+												</a>
+
+												<a
+													href={project.href}
+													className=" hover:text-[#EA580C] text-sm flex flex-row items-center gap-2 hover:scale-110 transition ease-in duration-200"
 												>
-													{tech}
-												</span>
-											))}
+													<span>Visit</span>
+													<ArrowUpRight className=" h-4 " />
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>

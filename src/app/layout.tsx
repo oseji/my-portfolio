@@ -3,7 +3,7 @@ import { satoshiVariable } from "./fonts/satoshi";
 import "./globals.css";
 
 export const metadata: Metadata = {
-	title: "My Portfolio",
+	title: "Ose Oziegbe's Portfolio",
 	description: "This is my personal portfolio website",
 };
 
