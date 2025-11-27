@@ -12,7 +12,7 @@ const ContactMe = () => {
 
 	return (
 		<section
-			className=" section-padding flex flex-col md:flex-row gap md:justify-between items-center gap-44 bg-[#EA580C]"
+			className=" section-padding flex flex-col md:flex-row gap md:justify-between items-center gap-10 md:gap-44 bg-[#EA580C]"
 			style={{
 				backgroundImage: `url(/backgroundImage.svg)`,
 				backgroundSize: "cover",
@@ -34,7 +34,7 @@ const ContactMe = () => {
 				</a>
 			</div>
 
-			<div className=" bg-white rounded-lg p-5 md:w-1/2 xl:w-1/2">
+			<div className=" bg-white rounded-lg p-5 w-full md:w-1/2 xl:w-1/2">
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();

@@ -43,7 +43,9 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<SkillTags />
+			<div className=" hidden md:block">
+				<SkillTags />
+			</div>
 		</footer>
 	);
 };

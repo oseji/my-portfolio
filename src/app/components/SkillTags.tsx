@@ -49,12 +49,12 @@ const SkillTags = () => {
 	return (
 		<div
 			ref={containerRef}
-			className="flex flex-wrap justify-center gap-4 py-10"
+			className="flex flex-wrap justify-center gap-4 py-10 mt-10 md:mt-0"
 		>
 			{tags.map((tag, i) => (
 				<div
 					key={i}
-					className={`tag px-5 py-2 rounded-full font-medium  shadow-sm flex flex-row justify-center items-center gap-1 border border-black min-w-28 text-xl  ${tag.color}`}
+					className={`tag px-3 py-1.5 md:px-5 md:py-2 rounded-full font-medium  shadow-sm flex flex-row justify-center items-center gap-1 border border-black min-w-28 text-sm md:text-xl  ${tag.color}`}
 				>
 					{/* <span className="w-4 h-4 flex items-center justify-center bg-black text-white rounded-full text-[10px]">
 							↻

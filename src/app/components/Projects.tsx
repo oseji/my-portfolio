@@ -254,22 +254,22 @@ const Projects = () => {
 			</div>
 
 			{/* Carousel */}
-			<section className="relative max-w-7xl mx-auto px-6 py-16">
+			<section className="relative max-w-7xl mx-auto px-6 py-6">
 				<div className=" overflow-x-hidden" ref={emblaRef} tabIndex={-1}>
 					<div className="flex gap-8">
 						{projects.map((project) => (
 							<div
 								key={project.id}
-								className="flex-none w-full sm:w-[85%] md:w-[48%] lg:w-[32%]  rounded-xl p-4  h-full"
+								className="flex-none w-full sm:w-[85%] md:w-[48%] lg:w-[32%]  rounded-xl p-4 h-full bg-[#FFF7ED]"
 							>
 								<div className="min-h-80">
 									<div className="rounded-xl overflow-hidden aspect-video">
 										<Image
 											src={project.img}
 											alt={project.title}
-											width={800}
-											height={450}
-											className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+											// width={800}
+											// height={450}
+											className="w-full h-full object-cover hover:scale-110 transition-transform ease-in-out duration-500 rounded-xl"
 										/>
 									</div>
 
@@ -296,7 +296,11 @@ const Projects = () => {
 											</div>
 
 											<div className="flex flex-row justify-between items-center w-full">
-												<a href={project.githubRepo}>
+												<a
+													href={project.githubRepo}
+													target="_blank"
+													rel="noopener noreferrer"
+												>
 													<Image
 														src={githubIcon}
 														alt="GitHub Icon"
@@ -306,7 +310,9 @@ const Projects = () => {
 
 												<a
 													href={project.href}
-													className=" hover:text-[#EA580C] text-sm flex flex-row items-center gap-2 hover:scale-110 transition ease-in duration-200"
+													target="_blank"
+													rel="noopener noreferrer"
+													className=" hover:text-[#EA580C] text-sm flex flex-row items-center gap-0 hover:scale-110 transition ease-in duration-200"
 												>
 													<span>Visit</span>
 													<ArrowUpRight className=" h-4 " />
