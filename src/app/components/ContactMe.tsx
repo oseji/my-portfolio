@@ -1,14 +1,54 @@
 "use client";
 import Image from "next/image";
 import arrowIcon from "../assets/arrow-up-right.svg";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
+import toast from "react-hot-toast";
 
 const ContactMe = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [error, setError] = useState<string | null>(null);
 
-	const [fullName, setFullName] = useState<string>("");
+	const [name, setName] = useState<string>("");
 	const [email, setEmail] = useState<string>("");
 	const [message, setMessage] = useState<string>("");
+
+	async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+		setIsLoading(true);
+
+		const formData = new FormData(e.currentTarget);
+		const data = {
+			name: formData.get("name") as string,
+			email: formData.get("email") as string,
+			message: formData.get("message") as string,
+		};
+
+		try {
+			const response = await fetch("/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(data),
+			});
+
+			const result = await response.json();
+
+			if (response.ok) {
+				toast.success("Message sent successfully!");
+				setName("");
+				setEmail("");
+				setMessage("");
+				e.currentTarget.reset();
+			} else {
+				toast.dismiss();
+				toast.error(result.error || "Failed to send message");
+			}
+		} catch (err) {
+			setError(err instanceof Error ? err.message : String(err));
+			console.log(error);
+		} finally {
+			console.log("function fired");
+			setIsLoading(false);
+		}
+	}
 
 	return (
 		<section
@@ -38,19 +78,21 @@ const ContactMe = () => {
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
+						handleSubmit(e);
 					}}
 					className=" flex flex-col gap-5"
 				>
 					<div className=" inputLabelGroup">
-						<label htmlFor="fullName">full name</label>
+						<label htmlFor="name">full name</label>
 						<input
 							type="text"
-							id="fullName"
+							id="name"
+							name="name"
 							placeholder="full name"
 							required
-							value={fullName}
+							value={name}
 							onChange={(e) => {
-								setFullName(e.currentTarget.value);
+								setName(e.currentTarget.value);
 							}}
 						/>
 					</div>
@@ -60,6 +102,7 @@ const ContactMe = () => {
 						<input
 							type="email"
 							id="email"
+							name="email"
 							placeholder="email"
 							required
 							value={email}
@@ -86,15 +129,16 @@ const ContactMe = () => {
 
 					<button
 						className={`capitalize text-white bg-[#EA580C] py-3 w-full rounded-lg  ${
-							fullName === "" || email === "" || message === "" || isLoading
+							name === "" || email === "" || message === "" || isLoading
 								? "cursor-not-allowed"
 								: "cursor-pointer"
 						}`}
-						onClick={(e) => {
-							e.preventDefault();
-						}}
+						// onClick={(e) => {
+						// 	e.preventDefault();
+						// 	handleSubmit(e);
+						// }}
 						disabled={
-							fullName === "" || email === "" || message === "" || isLoading
+							name === "" || email === "" || message === "" || isLoading
 						}
 					>
 						{!isLoading ? (

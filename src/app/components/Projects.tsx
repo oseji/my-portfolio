@@ -1,7 +1,7 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -278,7 +278,7 @@ const Projects = () => {
 											<h2 className="font-bold capitalize text-lg">
 												{project.title}
 											</h2>
-											<p className="text-gray-500 text-sm leading-relaxed">
+											<p className="text-black text-sm leading-relaxed">
 												{project.about}
 											</p>
 										</div>
