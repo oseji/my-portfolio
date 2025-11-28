@@ -260,9 +260,9 @@ const Projects = () => {
 						{projects.map((project) => (
 							<div
 								key={project.id}
-								className="flex-none w-full sm:w-[85%] md:w-[48%] lg:w-[32%]  rounded-xl p-4 h-full bg-[#FFF7ED]"
+								className="flex-none w-full sm:w-[85%] md:w-[30%]  rounded-xl p-4 h-[450px] bg-[#FFF7ED]"
 							>
-								<div className="min-h-80">
+								<div className=" h-full relative">
 									<div className="rounded-xl overflow-hidden aspect-video">
 										<Image
 											src={project.img}
@@ -273,7 +273,7 @@ const Projects = () => {
 										/>
 									</div>
 
-									<div className="flex flex-col gap-3 justify-between min-h-40 mt-4">
+									<div className="flex flex-col gap-3 justify-between mt-4">
 										<div className=" flex flex-col gap-3">
 											<h2 className="font-bold capitalize text-lg">
 												{project.title}
@@ -283,7 +283,7 @@ const Projects = () => {
 											</p>
 										</div>
 
-										<div className=" flex flex-col gap-3">
+										<div className=" flex flex-col w-full gap-3 absolute bottom-0">
 											<div className="flex flex-row gap-3 flex-wrap">
 												{project.stack.map((tech, i) => (
 													<span

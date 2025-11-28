@@ -8,15 +8,21 @@ const HeroSection = () => {
 			className=" section-padding flex flex-col items-center justify-center gap-20 md:gap-60 lg:gap-80 xl:gap-20 min-h-screen bg-[#FFF7ED]"
 			id="heroSection"
 		>
-			<div className="mt-10 relative translate-y-1/4 md:translate-y-1/2">
+			<div className=" relative translate-y-1/4 md:translate-y-1/2">
 				<div className=" capitalize text-center px-5 py-2 bg-[var(--primary-color)] w-fit mx-auto rounded-full border-black border-2 text-white">
-					hey there 👋
+					ose oziegbe
 				</div>
 
-				<h1 className=" text-2xl md:text-4xl lg:text-7xl xl:text-4xl font-semibold text-center mb-11">
-					I’m Ose, blending frontend development and QA to build user-friendly,
-					high-quality products.
+				<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center">
+					Frontend Developer
 				</h1>
+				<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center mb-2">
+					Quality Assurance Engineer
+				</h1>
+
+				<p className=" text-center mb-10">
+					I build it beautiful. I break it better.
+				</p>
 
 				<a
 					href="mailto:oseoziegbe0@gmail.com"

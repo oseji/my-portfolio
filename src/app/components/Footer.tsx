@@ -11,10 +11,8 @@ const Footer = () => {
 			</h1>
 
 			<p className=" text-center mt-4">
-				Interest among Nigerian and African students in studying abroad has
-				significantly increased. Over the past year, Zeem has focused on turning
-				this aspiration into a reality by ensuring the process is seamless and
-				accessible
+				© 2025 Ose Oziegbe • Frontend & QA Engineer <br /> Turning pixels into
+				products and bugs into features
 			</p>
 
 			<div className=" flex flex-row items-center justify-center gap-2 mb-10 mt-4">
