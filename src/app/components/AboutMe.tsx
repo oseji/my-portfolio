@@ -9,27 +9,40 @@ type modeType = "frontend" | "qa";
 const AboutMe = () => {
 	const [selectedMode, setSelectedMode] = useState<modeType>("frontend");
 	const frontendSkills = [
+		"HTML5",
+		"CSS3",
+		"SCSS",
+		"JavaScript",
 		"TypeScript",
-		"React",
+		"React.js",
 		"Next.js",
 		"Redux Toolkit",
 		"Zustand",
-		"SCSS",
-		"TailwindCSS",
-		"API Integration",
-		"Git",
-		"GSAP",
-		"Framer Motion",
+		"Tailwind CSS",
 		"Firebase",
+		"API Integration",
+		"Framer Motion",
+		"GSAP (GreenSock)",
+		"Git & GitHub",
 	];
 
 	const qaSkills = [
-		"TypeScript",
-		"Selenium",
+		"Selenium WebDriver",
 		"Postman",
 		"Swagger",
-		"JMeter",
 		"Jira",
+		"Test Case Design & Execution",
+		"Bug Reporting & Tracking",
+		"Database Validation ",
+		"Manual Testing",
+		"Automated Testing",
+		"Functional Testing",
+		"Regression Testing",
+		"End-to-End Testing",
+		"Smoke Testing",
+		"User Acceptance Testing",
+		"Exploratory Testing",
+		"Cross-Browser Testing",
 	];
 
 	return (
@@ -81,8 +94,8 @@ const AboutMe = () => {
 							and turning bold ideas into digital experiences that feel
 							intuitive and delightful. When I’m not coding, I’m experimenting
 							with fresh design trends or finding new ways to make websites pop
-							with personality. Explore my projects below—let’s build something
-							extraordinary together.
+							with personality. Explore my projects above and let’s build
+							something extraordinary together.
 						</p>
 					) : (
 						<p>
@@ -104,23 +117,16 @@ const AboutMe = () => {
 					<h2 className=" font-medium text-xl mb-4 mt-10">Key skills</h2>
 
 					<div className=" flex flex-row flex-wrap items-center gap-4">
-						{selectedMode === "frontend"
-							? frontendSkills.map((skill, index) => (
-									<span
-										key={index}
-										className=" capitalize border border-gray-300 bg-gray-200 rounded-lg px-4 py-2"
-									>
-										{skill}
-									</span>
-							  ))
-							: qaSkills.map((skill, index) => (
-									<span
-										key={index}
-										className=" capitalize border border-gray-300 bg-gray-200 rounded-lg px-4 py-2"
-									>
-										{skill}
-									</span>
-							  ))}
+						{(selectedMode === "frontend" ? frontendSkills : qaSkills).map(
+							(skill, index) => (
+								<span
+									key={index}
+									className=" capitalize border border-gray-300 bg-gray-200 rounded-lg px-4 py-2 text-sm"
+								>
+									{skill}
+								</span>
+							)
+						)}
 					</div>
 				</div>
 			</div>

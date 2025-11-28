@@ -64,7 +64,7 @@ const ContactMe = () => {
 					Got a Project Idea? Let’s create Something amazing
 				</h1>
 
-				<p>Available for network and collaborations</p>
+				<p>Open for exciting freelance & full-time opportunities</p>
 
 				<a href="mailto:oseoziegbe0@gmail.com">
 					<button className=" flex flex-row items-center gap-4 bg-white w-full rounded-full py-3 justify-center text-black mt-10 cursor-pointer transition ease-in-out duration-300 hover:scale-110">

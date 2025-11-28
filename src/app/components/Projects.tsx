@@ -225,8 +225,8 @@ const Projects = () => {
 
 			<p className="sectionHeadingSubText">
 				{selectedMode === "frontend"
-					? "Selected works with thoughtful, user-friendly designs. Built with heart, purpose, and pixel magic."
-					: "Coming soon..."}
+					? "Elegant UIs powered by React, Next.js, TypeScript, and Tailwind."
+					: "Breaking things so your users never have to."}
 			</p>
 
 			{/* Toggle Buttons */}
