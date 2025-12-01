@@ -10,7 +10,7 @@ import linkedInIcon from "../assets/linkedin-rounded-svgrepo-com.svg";
 const Header = () => {
 	const [isMenuToggled, setIsMenuToggled] = useState(false);
 	const menuLineRefs = useRef<HTMLSpanElement[]>([]);
-	const navRef = useRef<HTMLElement | null>(null);
+	const navRef = useRef<HTMLDivElement | null>(null);
 	const { mode, toggle } = useModeStore();
 
 	const toggleMenu = () => {
@@ -44,8 +44,8 @@ const Header = () => {
 	}, [isMenuToggled]);
 
 	return (
-		<header className=" flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 px-5 md:px-12 lg:px-16 xl:px-28 py-5 fixed w-full bg-white z-50 shadow-xl">
-			<div className=" w-full md:w-auto flex flex-row justify-between items-center">
+		<header className=" flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-0 px-5 md:px-12 lg:px-16 xl:px-28 py-5 fixed w-full bg-white z-50 shadow-xl">
+			<div className=" w-full lg:w-auto flex flex-row justify-between items-center">
 				<a href="#heroSection" className=" text-xl font-bold">
 					Ose Oziegbe
 				</a>
@@ -72,12 +72,12 @@ const Header = () => {
 				</div>
 			</div>
 
-			<div className=" flex flex-col md:flex-row md:gap-10">
-				<nav
-					className=" hideNav flex flex-col md:flex-row items-center gap-10 transition ease-in-out duration-500"
-					ref={navRef}
-				>
-					<ul className=" flex flex-col md:flex-row items-center gap-4">
+			<div
+				className="hideNav flex flex-col lg:flex-row gap-10 transition ease-in-out duration-300 bg-white w-fit lg:w-auto"
+				ref={navRef}
+			>
+				<nav className="  flex flex-col lg:flex-row items-center gap-10 ">
+					<ul className=" flex flex-col lg:flex-row items-center gap-4">
 						<li>
 							<a href="#projects" onClick={() => setIsMenuToggled(false)}>
 								Projects

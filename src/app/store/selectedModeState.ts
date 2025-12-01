@@ -1,4 +1,3 @@
-// store/useModeStore.ts
 import { create } from "zustand";
 
 type Mode = "frontend" | "qa";

@@ -21,11 +21,11 @@ html {
 }
 
 .menuContainer {
-	@apply w-8 h-6 md:hidden relative flex flex-col justify-center z-50;
+	@apply w-8 h-6 lg:hidden relative flex flex-col justify-center z-50;
 }
 
 .hideNav {
-	@apply absolute md:relative -translate-y-[750px]  md:-translate-y-0 opacity-0 md:opacity-100;
+	@apply absolute lg:relative -translate-y-[750px]  lg:-translate-y-0 opacity-0 lg:opacity-100;
 }
 
 /* PROJECTS */
