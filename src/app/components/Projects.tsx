@@ -8,6 +8,7 @@ import { useModeStore } from "../store/selectedModeState";
 
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
+import { GithubIcon } from "lucide-react";
 import pennyWiseImg from "../assets/projects/pennywise.png";
 import bingeImg from "../assets/projects/binge.png";
 import hrSphereImg from "../assets/projects/hrSphere.png";
@@ -217,7 +218,10 @@ const Projects = () => {
 	};
 
 	return (
-		<section className="section-padding" id="projects">
+		<section
+			className=" dark:bg-[#262626] dark:text-white section-padding"
+			id="projects"
+		>
 			<h1 className="sectionHeading">
 				{mode === "frontend"
 					? "Front-End Projects"
@@ -231,13 +235,13 @@ const Projects = () => {
 			</p>
 
 			{/* Carousel */}
-			<section className="relative max-w-7xl mx-auto px-6 py-6">
+			<section className=" relative max-w-7xl mx-auto px-6 py-6">
 				<div className=" overflow-x-hidden" ref={emblaRef} tabIndex={-1}>
 					<div className="flex gap-8">
 						{projects.map((project) => (
 							<div
 								key={project.id}
-								className="flex-none w-full sm:w-[85%] md:w-[30%]  rounded-xl p-4 h-[450px] bg-[#FFF7ED]"
+								className="flex-none w-full sm:w-[85%] md:w-[30%]  rounded-xl p-4 h-[450px] bg-[#FFF7ED] dark:bg-[#3b3b3b]"
 							>
 								<div className=" h-full relative">
 									<div className="rounded-xl overflow-hidden aspect-video">
@@ -255,7 +259,7 @@ const Projects = () => {
 											<h2 className="font-bold capitalize text-lg">
 												{project.title}
 											</h2>
-											<p className="text-black text-sm leading-relaxed">
+											<p className="text-black dark:text-white text-sm leading-relaxed">
 												{project.about}
 											</p>
 										</div>
@@ -265,7 +269,7 @@ const Projects = () => {
 												{project.stack.map((tech, i) => (
 													<span
 														key={i}
-														className="capitalize border  bg-[#EA580C] text-white rounded-lg px-3 py-1.5 text-xs font-medium"
+														className="capitalize border dark:border-0  bg-[#EA580C] text-white  rounded-lg px-3 py-1.5 text-xs font-medium"
 													>
 														{tech}
 													</span>
@@ -278,11 +282,7 @@ const Projects = () => {
 													target="_blank"
 													rel="noopener noreferrer"
 												>
-													<Image
-														src={githubIcon}
-														alt="GitHub Icon"
-														className=" h-4 w-fit hover:scale-110 transition ease-in duration-200"
-													/>
+													<GithubIcon className=" h-4 hover:scale-110 transition ease-in duration-200 text-black dark:text-white" />
 												</a>
 
 												<a

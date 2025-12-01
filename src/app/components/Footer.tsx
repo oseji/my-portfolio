@@ -5,18 +5,14 @@ import linkedInIcon from "../assets/linkedin-rounded-svgrepo-com.svg";
 
 const Footer = () => {
 	return (
-		<footer className=" section-padding ">
-			{/* <h1 className=" capitalize font-semibold text-2xl text-center">
-				ose oziegbe
-			</h1> */}
-
+		<footer className=" dark:bg-[#262626] dark:text-white section-padding ">
 			<p className=" text-center mt-4">© 2025 Ose Oziegbe</p>
 			<p className=" text-center mt-4">Frontend & QA Engineer</p>
 			<p className=" text-center mt-4">
 				Turning pixels into products and bugs into features
 			</p>
 
-			<div className=" flex flex-row items-center justify-center gap-2 mb-10 mt-4">
+			<div className="  flex flex-row items-center justify-center gap-2 mb-10 mt-4">
 				<div className=" bg-[#FED7AA] rounded-full p-3">
 					<a
 						href="https://github.com/oseji"

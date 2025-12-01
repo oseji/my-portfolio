@@ -44,7 +44,7 @@ const Header = () => {
 	}, [isMenuToggled]);
 
 	return (
-		<header className=" flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-0 px-5 md:px-12 lg:px-16 xl:px-28 py-5 fixed w-full bg-white z-50 shadow-xl">
+		<header className=" dark:bg-[#262626] dark:text-white flex flex-col lg:flex-row justify-between items-center gap-10 lg:gap-0 px-5 md:px-12 lg:px-16 xl:px-28 py-5 fixed w-full bg-white z-50 shadow-xl">
 			<div className=" w-full lg:w-auto flex flex-row justify-between items-center">
 				<a href="#heroSection" className=" text-xl font-bold">
 					Ose Oziegbe
@@ -73,10 +73,10 @@ const Header = () => {
 			</div>
 
 			<div
-				className="hideNav flex flex-col lg:flex-row gap-10 transition ease-in-out duration-300 bg-white w-fit lg:w-auto"
+				className="hideNav flex flex-col lg:flex-row gap-10 transition ease-in-out duration-300 bg-white dark:bg-[#262626] w-fit lg:w-auto"
 				ref={navRef}
 			>
-				<nav className="  flex flex-col lg:flex-row items-center gap-10 ">
+				<nav className=" dark:text-white  flex flex-col lg:flex-row items-center gap-10 ">
 					<ul className=" flex flex-col lg:flex-row items-center gap-4">
 						<li>
 							<a href="#projects" onClick={() => setIsMenuToggled(false)}>
@@ -132,7 +132,7 @@ const Header = () => {
 
 				<button
 					onClick={toggle}
-					className="relative flex h-12 w-52 items-center justify-center rounded-full bg-gray-200 p-1 shadow-inner transition-all"
+					className="relative flex h-12 w-52 items-center justify-center rounded-full bg-gray-200 dark:bg-[#3b3b3b] p-1 shadow-inner transition-all cursor-pointer"
 				>
 					{/* Sliding background */}
 					<div

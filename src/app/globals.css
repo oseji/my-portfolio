@@ -17,7 +17,7 @@ html {
 }
 
 .sectionHeadingSubText {
-	@apply text-center text-gray-500 mb-5;
+	@apply text-center text-gray-500 dark:text-white mb-5 md:mb-10;
 }
 
 .menuContainer {

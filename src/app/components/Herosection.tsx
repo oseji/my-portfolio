@@ -5,7 +5,7 @@ import arrowOrange from "../assets/arrow orange.svg";
 const HeroSection = () => {
 	return (
 		<section
-			className=" section-padding flex flex-col items-center justify-center gap-20 md:gap-60 lg:gap-80 xl:gap-20 min-h-screen bg-[#FFF7ED]"
+			className=" dark:bg-[#262626] dark:text-white section-padding flex flex-col items-center justify-center gap-20 md:gap-60 lg:gap-80 xl:gap-20 min-h-screen bg-[#FFF7ED]"
 			id="heroSection"
 		>
 			<div className=" relative translate-y-1/4 md:translate-y-1/2">

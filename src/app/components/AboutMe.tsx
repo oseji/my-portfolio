@@ -71,7 +71,10 @@ const AboutMe = () => {
 	const { mode } = useModeStore();
 
 	return (
-		<section className=" section-padding" id="aboutMe">
+		<section
+			className=" dark:bg-[#262626] dark:text-white section-padding"
+			id="aboutMe"
+		>
 			<h1 className=" sectionHeading">about me</h1>
 
 			<p className=" sectionHeadingSubText">
@@ -92,7 +95,7 @@ const AboutMe = () => {
 							(skill, index) => (
 								<span
 									key={index}
-									className=" capitalize border border-gray-300 bg-gray-200 rounded-lg px-4 py-2 text-sm"
+									className=" capitalize border border-gray-300 dark:border-0 dark:bg-orange-500 bg-gray-200 rounded-lg px-4 py-2 text-sm"
 								>
 									{skill}
 								</span>

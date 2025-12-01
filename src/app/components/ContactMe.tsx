@@ -4,6 +4,8 @@ import arrowIcon from "../assets/arrow-up-right.svg";
 import { useState, FormEvent } from "react";
 import toast from "react-hot-toast";
 
+import { ArrowUpRight } from "lucide-react";
+
 const ContactMe = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 	const [error, setError] = useState<string | null>(null);
@@ -52,7 +54,7 @@ const ContactMe = () => {
 
 	return (
 		<section
-			className=" section-padding flex flex-col md:flex-row gap md:justify-between items-center gap-10 md:gap-44 bg-[#EA580C]"
+			className=" dark:bg-[#262626] dark:text-white section-padding flex flex-col md:flex-row gap md:justify-between items-center gap-10 md:gap-44 bg-[#EA580C]"
 			style={{
 				backgroundImage: `url(/backgroundImage.svg)`,
 				backgroundSize: "cover",
@@ -67,14 +69,14 @@ const ContactMe = () => {
 				<p>Open for exciting freelance & full-time opportunities</p>
 
 				<a href="mailto:oseoziegbe0@gmail.com">
-					<button className=" flex flex-row items-center gap-4 bg-white w-full rounded-full py-3 justify-center text-black mt-10 cursor-pointer transition ease-in-out duration-300 hover:scale-110">
+					<button className=" flex flex-row items-center gap-4 bg-white dark:bg-orange-500 dark:text-white w-full rounded-full py-3 justify-center text-black mt-10 cursor-pointer transition ease-in-out duration-300 hover:scale-110">
 						<span>Contact me</span>
-						<Image src={arrowIcon} alt="arrow icon" />
+						<ArrowUpRight className=" h-4 dark:text-white" />
 					</button>
 				</a>
 			</div>
 
-			<div className=" bg-white rounded-lg p-5 w-full md:w-1/2 xl:w-1/2">
+			<div className=" bg-white dark:bg-black rounded-lg p-5 w-full md:w-1/2 xl:w-1/2">
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
