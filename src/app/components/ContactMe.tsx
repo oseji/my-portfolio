@@ -1,6 +1,5 @@
 "use client";
-import Image from "next/image";
-import arrowIcon from "../assets/arrow-up-right.svg";
+
 import { useState, FormEvent } from "react";
 import toast from "react-hot-toast";
 

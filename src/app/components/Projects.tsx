@@ -20,7 +20,6 @@ import trendyTroveImg from "../assets/projects/trendy trove.png";
 import githubSearchImg from "../assets/projects/github search.png";
 import translatorImg from "../assets/projects/translator.png";
 import dictionaryImg from "../assets/projects/dictionary.png";
-import githubIcon from "../assets/github-svgrepo-com.svg";
 
 type Project = {
 	id: number;
