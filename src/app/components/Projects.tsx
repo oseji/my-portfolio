@@ -4,9 +4,10 @@ import Image, { StaticImageData } from "next/image";
 import { useState, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { useModeStore } from "../store/selectedModeState";
+
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ArrowUpRight } from "lucide-react";
-
 import pennyWiseImg from "../assets/projects/pennywise.png";
 import bingeImg from "../assets/projects/binge.png";
 import hrSphereImg from "../assets/projects/hrSphere.png";
@@ -20,8 +21,6 @@ import translatorImg from "../assets/projects/translator.png";
 import dictionaryImg from "../assets/projects/dictionary.png";
 import githubIcon from "../assets/github-svgrepo-com.svg";
 
-type ModeType = "frontend" | "qa";
-
 type Project = {
 	id: number;
 	img: StaticImageData;
@@ -33,6 +32,8 @@ type Project = {
 };
 
 const Projects = () => {
+	const { mode } = useModeStore();
+
 	const frontendProjectData: Project[] = [
 		{
 			id: 1,
@@ -149,9 +150,9 @@ const Projects = () => {
 	);
 
 	const [selectedPage, setSelectedPage] = useState(0);
-	const [selectedMode, setSelectedMode] = useState<ModeType>("frontend");
-	const [slidesPerView, setSlidesPerView] = useState(1); // default = 1 (matches server)
+	const [slidesPerView, setSlidesPerView] = useState(1); // default = 1
 
+	//calculate slides per view based on window width
 	useEffect(() => {
 		const calculateSlidesPerView = () => {
 			if (window.innerWidth >= 1024) return 3;
@@ -169,10 +170,10 @@ const Projects = () => {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	const projects =
-		selectedMode === "frontend" ? frontendProjectData : qaProjectData;
+	const projects = mode === "frontend" ? frontendProjectData : qaProjectData;
 	const totalPages = Math.ceil(projects.length / slidesPerView);
 
+	// update selected page on slide change
 	useEffect(() => {
 		if (!emblaApi) return;
 
@@ -218,40 +219,16 @@ const Projects = () => {
 	return (
 		<section className="section-padding" id="projects">
 			<h1 className="sectionHeading">
-				{selectedMode === "frontend"
+				{mode === "frontend"
 					? "Front-End Projects"
 					: "Quality Assurance Projects"}
 			</h1>
 
 			<p className="sectionHeadingSubText">
-				{selectedMode === "frontend"
+				{mode === "frontend"
 					? "Elegant UIs powered by React, Next.js, TypeScript, and Tailwind."
 					: "Breaking things so your users never have to."}
 			</p>
-
-			{/* Toggle Buttons */}
-			<div className="projectToggle">
-				<button
-					className={`projectToggleButtons ${
-						selectedMode === "frontend"
-							? "text-white bg-[#EA580C]"
-							: "border-gray-300"
-					}`}
-					onClick={() => setSelectedMode("frontend")}
-				>
-					front-end development
-				</button>
-				<button
-					className={`projectToggleButtons ${
-						selectedMode === "qa"
-							? "text-white bg-[#EA580C]"
-							: "border-gray-300"
-					}`}
-					onClick={() => setSelectedMode("qa")}
-				>
-					quality assurance
-				</button>
-			</div>
 
 			{/* Carousel */}
 			<section className="relative max-w-7xl mx-auto px-6 py-6">

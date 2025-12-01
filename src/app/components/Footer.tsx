@@ -6,13 +6,14 @@ import linkedInIcon from "../assets/linkedin-rounded-svgrepo-com.svg";
 const Footer = () => {
 	return (
 		<footer className=" section-padding ">
-			<h1 className=" capitalize font-semibold text-2xl text-center">
+			{/* <h1 className=" capitalize font-semibold text-2xl text-center">
 				ose oziegbe
-			</h1>
+			</h1> */}
 
+			<p className=" text-center mt-4">© 2025 Ose Oziegbe</p>
+			<p className=" text-center mt-4">Frontend & QA Engineer</p>
 			<p className=" text-center mt-4">
-				© 2025 Ose Oziegbe • Frontend & QA Engineer <br /> Turning pixels into
-				products and bugs into features
+				Turning pixels into products and bugs into features
 			</p>
 
 			<div className=" flex flex-row items-center justify-center gap-2 mb-10 mt-4">

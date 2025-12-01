@@ -1,5 +1,6 @@
 "use client";
 
+import { useModeStore } from "../store/selectedModeState";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
@@ -10,6 +11,7 @@ const Header = () => {
 	const [isMenuToggled, setIsMenuToggled] = useState(false);
 	const menuLineRefs = useRef<HTMLSpanElement[]>([]);
 	const navRef = useRef<HTMLElement | null>(null);
+	const { mode, toggle } = useModeStore();
 
 	const toggleMenu = () => {
 		setIsMenuToggled(!isMenuToggled);
@@ -40,6 +42,7 @@ const Header = () => {
 			navRef.current?.classList.add("hideNav");
 		}
 	}, [isMenuToggled]);
+
 	return (
 		<header className=" flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 px-5 md:px-12 lg:px-16 xl:px-28 py-5 fixed w-full bg-white z-50 shadow-xl">
 			<div className=" w-full md:w-auto flex flex-row justify-between items-center">
@@ -69,63 +72,93 @@ const Header = () => {
 				</div>
 			</div>
 
-			<nav
-				className=" hideNav flex flex-col md:flex-row items-center gap-10 transition ease-in-out duration-500"
-				ref={navRef}
-			>
-				<ul className=" flex flex-col md:flex-row items-center gap-4">
-					<li>
-						<a href="#heroSection" onClick={() => setIsMenuToggled(false)}>
-							Home
-						</a>
-					</li>
-					<li>
-						<a href="#projects" onClick={() => setIsMenuToggled(false)}>
-							Projects
-						</a>
-					</li>
-					<li>
-						<a href="#aboutMe" onClick={() => setIsMenuToggled(false)}>
-							About Me
-						</a>
-					</li>
-					<li>
-						<a
-							href="https://drive.google.com/file/d/1SErAAvbaxZQY2XEa0CoU2E6rgyMEmdCf/view?usp=sharing"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							Resume
-						</a>
-					</li>
-				</ul>
+			<div className=" flex flex-col md:flex-row md:gap-10">
+				<nav
+					className=" hideNav flex flex-col md:flex-row items-center gap-10 transition ease-in-out duration-500"
+					ref={navRef}
+				>
+					<ul className=" flex flex-col md:flex-row items-center gap-4">
+						<li>
+							<a href="#projects" onClick={() => setIsMenuToggled(false)}>
+								Projects
+							</a>
+						</li>
+						<li>
+							<a href="#aboutMe" onClick={() => setIsMenuToggled(false)}>
+								About Me
+							</a>
+						</li>
+						<li>
+							<a
+								href="https://drive.google.com/file/d/1SErAAvbaxZQY2XEa0CoU2E6rgyMEmdCf/view?usp=sharing"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								Resume
+							</a>
+						</li>
+					</ul>
 
-				<div className=" flex flex-row items-center gap-2">
-					<div className=" bg-[#FED7AA] rounded-full p-3">
-						<a
-							href="https://github.com/oseji"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<Image src={githubIcon} alt="github icon" className=" h-5 w-5" />
-						</a>
-					</div>
+					<div className=" flex flex-row items-center gap-2">
+						<div className=" bg-[#FED7AA] rounded-full p-3">
+							<a
+								href="https://github.com/oseji"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Image
+									src={githubIcon}
+									alt="github icon"
+									className=" h-5 w-5"
+								/>
+							</a>
+						</div>
 
-					<div className=" bg-[#FED7AA] rounded-full p-3">
-						<a
-							href="https://www.linkedin.com/in/ose-oziegbe-648154254/"
-							target="_blank"
-							rel="noopener noreferrer"
-						>
-							<Image
-								src={linkedInIcon}
-								alt="linkedin icon"
-								className=" h-5 w-5"
-							/>
-						</a>
+						<div className=" bg-[#FED7AA] rounded-full p-3">
+							<a
+								href="https://www.linkedin.com/in/ose-oziegbe-648154254/"
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<Image
+									src={linkedInIcon}
+									alt="linkedin icon"
+									className=" h-5 w-5"
+								/>
+							</a>
+						</div>
 					</div>
-				</div>
-			</nav>
+				</nav>
+
+				<button
+					onClick={toggle}
+					className="relative flex h-12 w-52 items-center justify-center rounded-full bg-gray-200 p-1 shadow-inner transition-all"
+				>
+					{/* Sliding background */}
+					<div
+						className={`absolute top-1 bottom-1 left-1 w-1/2 rounded-full bg-orange-500 transition-transform duration-300 ease-in-out ${
+							mode === "qa" ? "translate-x-full" : ""
+						}`}
+					/>
+
+					{/* Labels */}
+					<span
+						className={`z-10 w-1/2 text-center font-medium transition-colors duration-300 ${
+							mode === "frontend" ? "text-white" : "text-gray-600"
+						}`}
+					>
+						Frontend
+					</span>
+
+					<span
+						className={`z-10 w-1/2 text-center font-medium transition-colors duration-300 ${
+							mode === "qa" ? "text-white" : "text-gray-600"
+						}`}
+					>
+						QA
+					</span>
+				</button>
+			</div>
 		</header>
 	);
 };
