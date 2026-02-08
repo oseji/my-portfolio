@@ -22,7 +22,7 @@ const HeroSection = () => {
 				</h1>
 
 				<p className=" text-center mb-10">
-					Testing software with a developer's edge.
+					Testing software with a developer&apos;s edge.
 				</p>
 
 				<a
