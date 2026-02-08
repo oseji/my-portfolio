@@ -7,9 +7,9 @@ const Footer = () => {
 	return (
 		<footer className=" dark:bg-[#262626] dark:text-white section-padding ">
 			<p className=" text-center mt-4">© 2025 Ose Oziegbe</p>
-			<p className=" text-center mt-4">Frontend & QA Engineer</p>
+			<p className=" text-center mt-4">QA Engineer & Frontend developer </p>
 			<p className=" text-center mt-4">
-				Turning pixels into products and bugs into features
+				Testing smarter because I've built it before
 			</p>
 
 			<div className="  flex flex-row items-center justify-center gap-2 mb-10 mt-4">

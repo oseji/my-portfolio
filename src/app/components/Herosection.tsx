@@ -9,19 +9,20 @@ const HeroSection = () => {
 			id="heroSection"
 		>
 			<div className=" relative translate-y-1/4 md:translate-y-1/2">
-				<div className=" capitalize text-center px-5 py-2 bg-[var(--primary-color)] w-fit mx-auto rounded-full border-black border-2 text-white">
+				{/* <div className=" capitalize text-center px-5 py-2 bg-[var(--primary-color)] w-fit mx-auto rounded-full border-black border-2 text-white">
 					ose oziegbe
-				</div>
+				</div> */}
 
-				<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center">
-					Frontend Developer
-				</h1>
 				<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center mb-2">
 					Quality Assurance Engineer
 				</h1>
 
+				<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center">
+					Frontend Developer
+				</h1>
+
 				<p className=" text-center mb-10">
-					I build it beautiful. I break it better.
+					Testing software with a developer's edge.
 				</p>
 
 				<a

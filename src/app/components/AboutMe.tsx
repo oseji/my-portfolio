@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { useModeStore } from "../store/selectedModeState";
-
-import aboutMeImage from "../assets/about me image.png";
+import myPicture from "../assets/my picture.jpeg";
 
 const AboutMe = () => {
 	const frontendSkills = [
@@ -42,31 +41,9 @@ const AboutMe = () => {
 		"Cross-Browser Testing",
 	];
 
-	const frontendBio = `I’m Ose, a frontend developer who builds dynamic, user-focused web
-							experiences. With Next.js and TailwindCSS as my core tools, I
-							craft responsive, scalable, and visually stunning interfaces that
-							work seamlessly across devices. I’m passionate about adding life
-							to projects with GSAP, creating smooth, engaging animations like
-							scroll-triggered effects and interactive hero sections. I thrive
-							on writing clean, efficient code, solving complex UI challenges,
-							and turning bold ideas into digital experiences that feel
-							intuitive and delightful. When I’m not coding, I’m experimenting
-							with fresh design trends or finding new ways to make websites pop
-							with personality. Explore my projects above and let’s build
-							something extraordinary together.`;
+	const frontendBio = `I'm Ose, a frontend developer who builds dynamic, user-focused web experiences. With Next.js and TailwindCSS as my foundation, I craft responsive, scalable interfaces that work seamlessly across devices. I bring projects to life with GSAP, creating smooth animations like scroll-triggered effects and interactive hero sections. I thrive on writing clean, efficient code, solving complex UI challenges, and transforming bold ideas into digital experiences that feel intuitive and delightful. When I'm not coding, I'm exploring fresh design trends and discovering new ways to infuse websites with personality. Check out my projects above and let's build something extraordinary together.`;
 
-	const qaBio = `I’m Ose, a meticulous QA engineer passionate about delivering
-							seamless, high-quality software. I specialize in building and
-							maintaining Selenium WebDriver automation frameworks to ensure
-							robust testing for web applications. With Postman and Swagger, I
-							validate APIs, ensuring data integrity and reliability across
-							critical backend systems, particularly in fintech. I use MongoDB
-							to debug and verify transaction records, guaranteeing consistency
-							across test and production environments. My focus is on
-							streamlining QA processes and collaborating closely with
-							developers, designers, and product managers in Agile sprints to
-							prioritize testing, resolve issues swiftly, and deliver stable
-							releases.`;
+	const qaBio = `I'm Ose, a QA engineer focused on delivering reliable, high-quality software through smart automation and thorough testing. I build and maintain Selenium WebDriver frameworks using the Page Object Model to ensure comprehensive coverage for web applications. With Postman and Swagger, I validate APIs, verifying data integrity and reliability across critical backend systems, especially in fintech environments. I leverage MongoDB to debug and validate transaction records, ensuring data consistency across test and production environments. My approach centers on streamlining QA workflows and collaborating closely with developers, designers, and product managers in Agile sprints to prioritize testing, accelerate issue resolution, and ship stable, quality releases.`;
 
 	const { mode } = useModeStore();
 
@@ -78,12 +55,19 @@ const AboutMe = () => {
 			<h1 className=" sectionHeading">about me</h1>
 
 			<p className=" sectionHeadingSubText">
-				Selected Works who is anto thoughtful, user-friendly designs. Designing
-				with heart, purpose, and just the right touch of pixel magic
+				{mode === "frontend"
+					? "Frontend developer focused on creating seamless, visually stunning interfaces that users love."
+					: "Testing software with precision and purpose. Automation enthusiast who understands both sides of the code."}
 			</p>
 
 			<div className=" flex flex-col md:flex-row items-center gap-4 md:gap-10">
-				<Image src={aboutMeImage} alt="Ose Oziegbe" />
+				<div className="md:w-1/2 lg:w-1/3 rounded-lg overflow-hidden">
+					<Image
+						src={myPicture}
+						alt="Ose Oziegbe"
+						className="rounded-lg hover:scale-110 transform transition ease-in-out duration-500 w-full h-auto object-cover block"
+					/>
+				</div>
 
 				<div className=" md:w-2/3">
 					<p>{mode === "frontend" ? frontendBio : qaBio}</p>
@@ -99,7 +83,7 @@ const AboutMe = () => {
 								>
 									{skill}
 								</span>
-							)
+							),
 						)}
 					</div>
 				</div>

@@ -21,6 +21,8 @@ import githubSearchImg from "../assets/projects/github search.png";
 import translatorImg from "../assets/projects/translator.png";
 import dictionaryImg from "../assets/projects/dictionary.png";
 
+import swaglabsImg from "../assets/projects/qa/swaglabs.png";
+
 type Project = {
 	id: number;
 	img: StaticImageData;
@@ -138,7 +140,18 @@ const Projects = () => {
 		},
 	];
 
-	const qaProjectData: Project[] = [];
+	const qaProjectData: Project[] = [
+		{
+			id: 1,
+			img: swaglabsImg,
+			title: "Swag Labs Automation Suite",
+			href: "https://github.com/oseji/Swag-Labs-Automation-Project",
+			githubRepo: "https://github.com/oseji/pennywise.git",
+			about:
+				"E2E UI automation with TypeScript, Selenium WebDriver, and Page Object Model. Covers authentication, product flows, cart, and checkout.",
+			stack: ["Selenium Webdriver", "TypeScript", "dotenv"],
+		},
+	];
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(
 		{
@@ -146,7 +159,7 @@ const Projects = () => {
 			align: "start",
 			containScroll: "trimSnaps",
 		},
-		[Autoplay({ delay: 5000, stopOnInteraction: true })]
+		[Autoplay({ delay: 5000, stopOnInteraction: true })],
 	);
 
 	const [selectedPage, setSelectedPage] = useState(0);
@@ -203,7 +216,7 @@ const Projects = () => {
 	const scrollPrev = () => {
 		if (!emblaApi) return;
 		const currentPage = Math.floor(
-			emblaApi.selectedScrollSnap() / slidesPerView
+			emblaApi.selectedScrollSnap() / slidesPerView,
 		);
 		emblaApi.scrollTo((currentPage - 1) * slidesPerView);
 	};
@@ -211,7 +224,7 @@ const Projects = () => {
 	const scrollNext = () => {
 		if (!emblaApi) return;
 		const currentPage = Math.floor(
-			emblaApi.selectedScrollSnap() / slidesPerView
+			emblaApi.selectedScrollSnap() / slidesPerView,
 		);
 		emblaApi.scrollTo((currentPage + 1) * slidesPerView);
 	};
@@ -229,8 +242,8 @@ const Projects = () => {
 
 			<p className="sectionHeadingSubText">
 				{mode === "frontend"
-					? "Elegant UIs powered by React, Next.js, TypeScript, and Tailwind."
-					: "Breaking things so your users never have to."}
+					? "Dynamic web applications built with React, Next.js, TypeScript, and TailwindCSS."
+					: "Automated regression suites powered by modern testing frameworks."}
 			</p>
 
 			{/* Carousel */}
