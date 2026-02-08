@@ -146,7 +146,8 @@ const Projects = () => {
 			img: swaglabsImg,
 			title: "Swag Labs Automation Suite",
 			href: "https://github.com/oseji/Swag-Labs-Automation-Project",
-			githubRepo: "https://github.com/oseji/Swag-Labs-Automation-Project.git",
+			githubRepo:
+				"https://github.com/oseji/Swag-Labs-Automation-Project?tab=readme-ov-file#swaglabs-automation",
 			about:
 				"E2E UI automation with TypeScript, Selenium WebDriver, and Page Object Model. Covers authentication, product flows, cart, and checkout.",
 			stack: ["Selenium Webdriver", "TypeScript", "dotenv"],
