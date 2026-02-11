@@ -49,7 +49,7 @@ const AboutMe = () => {
 
 	return (
 		<section
-			className=" dark:bg-[#262626] dark:text-white section-padding"
+			className=" bg-gray-100 dark:bg-[#262626] dark:text-white section-padding"
 			id="aboutMe"
 		>
 			<h1 className=" sectionHeading">about me</h1>

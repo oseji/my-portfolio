@@ -132,7 +132,7 @@ const Header = () => {
 
 				<button
 					onClick={toggle}
-					className="relative flex h-12 w-52 items-center justify-center rounded-full bg-gray-200 dark:bg-[#3b3b3b] p-1 shadow-inner transition-all cursor-pointer"
+					className="relative flex h-12 w-52 items-center justify-center rounded-full bg-gray-100 dark:bg-[#3b3b3b] p-1 shadow-inner transition-all cursor-pointer"
 				>
 					{/* Sliding background */}
 					<div

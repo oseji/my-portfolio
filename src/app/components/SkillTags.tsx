@@ -1,7 +1,9 @@
 "use client";
-
+import Image from "next/image";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import skillPillIconDark from "../assets/skills pill dark.svg";
+import skillPillIconLight from "../assets/skills pill light.svg";
 
 const SkillTags = () => {
 	const tags = [
@@ -57,8 +59,8 @@ const SkillTags = () => {
 					className={`tag px-3 py-1.5 md:px-5 md:py-2 rounded-full font-medium  shadow-sm flex flex-row justify-center items-center gap-1 border border-black min-w-28 text-sm md:text-xl  ${tag.color}`}
 				>
 					{/* <span className="w-4 h-4 flex items-center justify-center bg-black text-white rounded-full text-[10px]">
-							↻
-						</span> */}
+						<Image src={skillPillIconDark} alt="skill pill icon" />
+					</span> */}
 					{tag.label}
 				</div>
 			))}

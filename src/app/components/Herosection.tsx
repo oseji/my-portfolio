@@ -1,6 +1,6 @@
 import SkillTags from "./SkillTags";
 import Image from "next/image";
-import arrowOrange from "../assets/arrow orange.svg";
+import arrowWhite from "../assets/arrow white.svg";
 
 const HeroSection = () => {
 	return (
@@ -13,25 +13,27 @@ const HeroSection = () => {
 					ose oziegbe
 				</div> */}
 
-				<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center mb-2">
-					Quality Assurance Engineer
-				</h1>
+				<div className=" mb-4">
+					<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center mb-2">
+						Quality Assurance Engineer
+					</h1>
 
-				<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center">
-					Frontend Developer
-				</h1>
+					<h1 className=" text-2xl md:text-4xl lg:text-7xl  font-semibold text-center">
+						Frontend Developer
+					</h1>
+				</div>
 
-				<p className=" text-center mb-10">
+				<p className=" text-center mb-6">
 					Testing software with a developer&apos;s edge.
 				</p>
 
 				<a
 					href="mailto:oseoziegbe0@gmail.com"
-					className=" w-fit flex flex-row items-center gap-3 mx-auto capitalize text-[#EA580C] border border-[#EA580C] rounded-3xl px-6 py-3 transition ease-in-out duration-300 hover:scale-110 cursor-pointer"
+					className=" w-fit flex flex-row items-center gap-3 mx-auto capitalize bg-[#EA580C] text-white rounded-3xl px-6 py-3 transition ease-in-out duration-300 hover:scale-110 cursor-pointer"
 				>
 					<span> let&apos;s talk</span>
 
-					<Image src={arrowOrange} alt="orange arrow" />
+					<Image src={arrowWhite} alt="orange arrow" />
 				</a>
 			</div>
 
