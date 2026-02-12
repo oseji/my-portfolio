@@ -144,7 +144,9 @@ const Header = () => {
 					{/* Labels */}
 					<span
 						className={`z-10 w-1/2 text-center font-medium transition-colors duration-300 ${
-							mode === "frontend" ? "text-white" : "text-gray-600"
+							mode === "frontend"
+								? "text-white"
+								: "text-gray-600 dark:text-gray-300"
 						}`}
 					>
 						Frontend
@@ -152,7 +154,7 @@ const Header = () => {
 
 					<span
 						className={`z-10 w-1/2 text-center font-medium transition-colors duration-300 ${
-							mode === "qa" ? "text-white" : "text-gray-600"
+							mode === "qa" ? "text-white" : "text-gray-600 dark:text-gray-300"
 						}`}
 					>
 						QA

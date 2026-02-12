@@ -52,5 +52,5 @@ html {
 
 .inputLabelGroup > input,
 textarea {
-	@apply placeholder:capitalize border border-slate-200 rounded-lg p-2 focus:outline-none;
+	@apply placeholder:capitalize bg-[#F5F5F5] dark:bg-[#262626] rounded-lg p-2 focus:outline-none;
 }

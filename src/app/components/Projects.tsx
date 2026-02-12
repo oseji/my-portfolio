@@ -8,6 +8,9 @@ import pennyWiseImg from "../assets/projects/pennywise.png";
 import bingeImg from "../assets/projects/binge.png";
 import hrSphereImg from "../assets/projects/hrSphere.png";
 import ipAddressImg from "../assets/projects/ip address.png";
+// import afrostockImg from "../assets/projects/afrostock.png";
+// import finGeniusImg from "../assets/projects/finGenius.png";
+import { ArrowUpRight, GithubIcon } from "lucide-react";
 
 import swaglabsImg from "../assets/projects/qa/swaglabs.png";
 
@@ -63,7 +66,24 @@ const Projects = () => {
 			about: "Tracks IP location using React Leaflet and public APIs.",
 			stack: ["React", "Tailwind", "React-leaflet", "API"],
 		},
-		//
+		// {
+		// 	id: 5,
+		// 	img: afrostockImg,
+		// 	title: "Afrostock",
+		// 	href: "https://afrostock.vercel.app/",
+		// 	githubRepo: "https://github.com/oseji/Afrostock.git",
+		// 	about: "Minimalist landing page with smooth GSAP animations.",
+		// 	stack: ["Next.js", "Tailwind", "GSAP"],
+		// },
+		// {
+		// 	id: 6,
+		// 	img: finGeniusImg,
+		// 	title: "IntelliVest landing page",
+		// 	href: "https://intellivest.vercel.app/",
+		// 	githubRepo: "https://github.com/oseji/IntelliVest.git",
+		// 	about: "Sleek animated landing page built with GSAP.",
+		// 	stack: ["React", "TypeScript", "Tailwind", "GSAP"],
+		// },
 	];
 
 	const qaProjectData: Project[] = [
@@ -99,16 +119,16 @@ const Projects = () => {
 					: "Automated regression suites powered by modern testing frameworks."}
 			</p>
 
-			<section className=" grid grid-cols-2 justify-center gap-8">
+			<section className=" grid grid-cols-1 md:grid-cols-2  justify-center gap-8">
 				{projects.map((project) => (
 					<div
 						key={project.id}
-						className=" rounded-lg border border-[#DFDFDF] dark:border-0 dark:bg-[#262626] w-3/4 min-h-[400px] mx-auto flex flex-col overflow-hidden"
+						className={`rounded-lg border border-[#DFDFDF] dark:border-0 dark:bg-[#262626] w-[450px] min-h-[480px] flex flex-col overflow-hidden ${project.id % 2 === 0 ? "md:mr-auto" : "md:ml-auto"}`}
 					>
 						<Image
 							src={project.img}
 							alt={project.title}
-							className="rounded-t-lg"
+							className="rounded-t-lg h-1/2"
 						/>
 
 						<div className=" flex flex-col justify-between flex-1 gap-5 p-7 ">
@@ -129,6 +149,26 @@ const Projects = () => {
 										{stack}
 									</span>
 								))}
+							</div>
+
+							<div className="flex flex-row justify-between items-center w-full">
+								<a
+									href={project.githubRepo}
+									target="_blank"
+									rel="noopener noreferrer"
+								>
+									<GithubIcon className=" h-4 hover:scale-110 transition ease-in duration-200 text-black dark:text-white" />
+								</a>
+
+								<a
+									href={project.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									className=" hover:text-[#EA580C] text-sm flex flex-row items-center gap-0 hover:scale-110 transition ease-in duration-200"
+								>
+									<span>Visit</span>
+									<ArrowUpRight className=" h-4 " />
+								</a>
 							</div>
 						</div>
 					</div>

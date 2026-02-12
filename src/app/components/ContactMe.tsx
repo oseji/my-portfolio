@@ -75,7 +75,7 @@ const ContactMe = () => {
 				</a>
 			</div>
 
-			<div className=" bg-white dark:bg-black rounded-lg p-5 w-full md:w-1/2 xl:w-1/2">
+			<div className=" bg-white dark:bg-[#1E1E1E] rounded-lg p-5 w-full md:w-1/2 xl:w-1/2">
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
