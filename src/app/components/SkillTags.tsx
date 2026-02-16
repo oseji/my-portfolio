@@ -1,29 +1,67 @@
 "use client";
-import Image from "next/image";
+// import Image from "next/image";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
-import skillPillIconDark from "../assets/skills pill dark.svg";
-import skillPillIconLight from "../assets/skills pill light.svg";
+// import skillPillIconDark from "../assets/skills pill dark.svg";
+// import skillPillIconLight from "../assets/skills pill light.svg";
 
 const SkillTags = () => {
 	const tags = [
-		{ label: "TypeScript", color: "bg-blue-800 text-white" },
-		{ label: "React", color: "bg-sky-900 text-white" },
-		{ label: "Next.js", color: "bg-indigo-900 text-white" },
-		{ label: "Redux Toolkit", color: "bg-purple-800 text-white" },
-		{ label: "Zustand", color: "bg-fuchsia-800 text-white" },
-		{ label: "SCSS", color: "bg-pink-800 text-white" },
-		{ label: "TailwindCSS", color: "bg-lime-800 text-white" },
-		{ label: "API Integration", color: "bg-orange-900 text-white" },
-		{ label: "Git", color: "bg-gray-800 text-white" },
-		{ label: "GSAP", color: "bg-yellow-900 text-white" },
-		{ label: "Framer Motion", color: "bg-amber-900 text-white" },
-		{ label: "Firebase", color: "bg-red-900 text-white" },
-		{ label: "Selenium", color: "bg-cyan-900 text-white" },
-		{ label: "Postman", color: "bg-orange-800 text-white" },
-		{ label: "Swagger", color: "bg-teal-900 text-white" },
-		{ label: "JMeter", color: "bg-indigo-800 text-white" },
-		{ label: "Jira", color: "bg-blue-800 text-white" },
+		// QA skills
+		{
+			label: "Selenium (POM)",
+			color: "bg-emerald-950 text-emerald-400 border border-emerald-800",
+		},
+		{
+			label: "Postman / Swagger",
+			color: "bg-orange-950 text-orange-400 border border-orange-800",
+		},
+		{
+			label: "MongoDB Validation",
+			color: "bg-green-950 text-green-400 border border-green-800",
+		},
+		{
+			label: "API Testing",
+			color: "bg-teal-950 text-teal-400 border border-teal-800",
+		},
+		{
+			label: "Regression Analysis",
+			color: "bg-cyan-950 text-cyan-400 border border-cyan-800",
+		},
+		{
+			label: "E2E Testing",
+			color: "bg-sky-950 text-sky-400 border border-sky-800",
+		},
+		{
+			label: "Jira",
+			color: "bg-blue-950 text-blue-400 border border-blue-800",
+		},
+
+		// frontend skills
+		{
+			label: "Next.js / React",
+			color: "bg-slate-900 text-slate-300 border border-slate-700",
+		},
+		{
+			label: "TypeScript",
+			color: "bg-slate-900 text-blue-300 border border-slate-700",
+		},
+		{
+			label: "Redux / Zustand",
+			color: "bg-slate-900 text-purple-300 border border-slate-700",
+		},
+		{
+			label: "TailwindCSS",
+			color: "bg-slate-900 text-teal-300 border border-slate-700",
+		},
+		{
+			label: "GSAP / Framer",
+			color: "bg-slate-900 text-orange-300 border border-slate-700",
+		},
+		{
+			label: "Git / GitHub",
+			color: "bg-slate-900 text-gray-400 border border-slate-700",
+		},
 	];
 
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -34,16 +72,21 @@ const SkillTags = () => {
 		const elements = containerRef.current.querySelectorAll(".tag");
 
 		elements.forEach((el) => {
+			gsap.set(el, {
+				x: gsap.utils.random(-15, 15),
+				y: gsap.utils.random(-10, 10),
+				rotation: gsap.utils.random(-5, 5),
+			});
+
 			gsap.to(el, {
-				y: () => gsap.utils.random(-10, 10),
-				x: () => gsap.utils.random(-30, 30),
-				rotation: () => gsap.utils.random(-20, 20),
-				duration: () => gsap.utils.random(2, 4),
-				scale: () => gsap.utils.random(0.95, 1.25),
-				ease: "sine.inOut",
-				yoyo: true,
+				x: "+=20",
+				y: "+=15",
+				rotation: "random(-10, 10)",
+				duration: "random(3, 5)",
 				repeat: -1,
-				delay: gsap.utils.random(0, 2),
+				yoyo: true,
+				ease: "sine.inOut",
+				delay: "random(0, 2)",
 			});
 		});
 	}, []);
