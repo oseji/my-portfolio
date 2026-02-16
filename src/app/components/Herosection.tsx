@@ -8,7 +8,7 @@ const HeroSection = () => {
 			className=" dark:bg-[#262626] dark:text-white section-padding flex flex-col items-center justify-center gap-20 md:gap-60 lg:gap-80 xl:gap-20 min-h-screen bg-[#FFF7ED]"
 			id="heroSection"
 		>
-			<div className=" relative translate-y-1/4 md:translate-y-1/2">
+			<div className=" relative translate-y-1/4 md:translate-y-1/2 mt-10 md:mt-0">
 				{/* <div className=" capitalize text-center px-5 py-2 bg-[var(--primary-color)] w-fit mx-auto rounded-full border-black border-2 text-white">
 					ose oziegbe
 				</div> */}

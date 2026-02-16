@@ -119,19 +119,19 @@ const Projects = () => {
 					: "Automated regression suites powered by modern testing frameworks."}
 			</p>
 
-			<section className=" grid grid-cols-1 md:grid-cols-2  justify-center gap-8">
+			<section className=" grid grid-cols-1 md:grid-cols-2 ultra:grid-cols-4 justify-center gap-8">
 				{projects.map((project) => (
 					<div
 						key={project.id}
-						className={`rounded-lg border border-[#DFDFDF] dark:border-0 dark:bg-[#262626] w-[450px] min-h-[480px] flex flex-col overflow-hidden ${project.id % 2 === 0 ? "md:mr-auto" : "md:ml-auto"}`}
+						className={`rounded-lg border border-[#DFDFDF] dark:border-0 dark:bg-[#262626] w-full lg:w-[450px] min-h-[400px] md:min-h-[480px] flex flex-col overflow-hidden ${project.id % 2 === 0 ? "md:mr-auto" : "md:ml-auto"} ultra:mx-0`}
 					>
 						<Image
 							src={project.img}
 							alt={project.title}
-							className="rounded-t-lg h-1/2"
+							className="rounded-t-lg md:h-1/2"
 						/>
 
-						<div className=" flex flex-col justify-between flex-1 gap-5 p-7 ">
+						<div className=" flex flex-col justify-between flex-1 gap-5 p-5 md:p-7 ">
 							<div>
 								<h2 className="text-xl font-semibold">{project.title}</h2>
 
@@ -140,7 +140,7 @@ const Projects = () => {
 								</p>
 							</div>
 
-							<div className=" flex flex-row items-center gap-2">
+							<div className=" flex flex-row flex-wrap items-center gap-2">
 								{project.stack.map((stack, index) => (
 									<span
 										key={index}

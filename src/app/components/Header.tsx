@@ -52,19 +52,19 @@ const Header = () => {
 
 				<div className="menuContainer" onClick={toggleMenu}>
 					<span
-						className="top-[10%] w-[80%] bg-black p-[1px]   absolute  transition ease-in-out duration-300 rounded-lg"
+						className="top-[10%] w-[80%] bg-black dark:bg-white p-[1px]   absolute  transition ease-in-out duration-300 rounded-lg"
 						ref={(el) => {
 							if (el) menuLineRefs.current[0] = el;
 						}}
 					></span>
 					<span
-						className="top-1/2 w-[60%] bg-black p-[1px]   absolute  transition ease-in-out duration-300 rounded-lg"
+						className="top-1/2 w-[60%] bg-black dark:bg-white p-[1px]   absolute  transition ease-in-out duration-300 rounded-lg"
 						ref={(el) => {
 							if (el) menuLineRefs.current[1] = el;
 						}}
 					></span>
 					<span
-						className="top-[90%] w-[80%] bg-black p-[1px]   absolute  transition ease-in-out duration-300 rounded-lg"
+						className="top-[90%] w-[80%] bg-black dark:bg-white p-[1px]   absolute  transition ease-in-out duration-300 rounded-lg"
 						ref={(el) => {
 							if (el) menuLineRefs.current[2] = el;
 						}}
@@ -90,7 +90,7 @@ const Header = () => {
 						</li>
 						<li>
 							<a
-								href="https://drive.google.com/file/d/1SErAAvbaxZQY2XEa0CoU2E6rgyMEmdCf/view?usp=sharing"
+								href="https://drive.google.com/file/d/19VgKqFfT8_QsR7N3wSbW1n9vnH097fYx/view?usp=sharing"
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -148,6 +148,7 @@ const Header = () => {
 								? "text-white"
 								: "text-gray-600 dark:text-gray-300"
 						}`}
+						onClick={() => setIsMenuToggled(false)}
 					>
 						Frontend
 					</span>
@@ -156,6 +157,7 @@ const Header = () => {
 						className={`z-10 w-1/2 text-center font-medium transition-colors duration-300 ${
 							mode === "qa" ? "text-white" : "text-gray-600 dark:text-gray-300"
 						}`}
+						onClick={() => setIsMenuToggled(false)}
 					>
 						QA
 					</span>

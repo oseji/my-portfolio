@@ -5,41 +5,31 @@ import { useModeStore } from "../store/selectedModeState";
 import myPicture from "../assets/my picture.jpeg";
 
 const AboutMe = () => {
-	const frontendSkills = [
-		"HTML5",
-		"CSS3",
-		"SCSS",
-		"JavaScript",
-		"TypeScript",
-		"React.js",
-		"Next.js",
-		"Redux Toolkit",
-		"Zustand",
-		"Tailwind CSS",
-		"Firebase",
-		"API Integration",
-		"Framer Motion",
-		"GSAP (GreenSock)",
-		"Git & GitHub",
-	];
-	const qaSkills = [
-		"Selenium WebDriver",
-		"Postman",
-		"Swagger",
-		"Jira",
-		"Test Case Design & Execution",
-		"Bug Reporting & Tracking",
-		"Database Validation ",
-		"Manual Testing",
-		"Automated Testing",
-		"Functional Testing",
-		"Regression Testing",
-		"End-to-End Testing",
-		"Smoke Testing",
-		"User Acceptance Testing",
-		"Exploratory Testing",
-		"Cross-Browser Testing",
-	];
+	const frontendSkills = {
+		"Core Stack": ["Next.js", "React.js", "TypeScript", "JavaScript"],
+		"State & Data": ["Redux Toolkit", "Zustand", "Firebase", "API Integration"],
+		"UI & Motion": [
+			"Tailwind CSS",
+			"Framer Motion",
+			"GSAP (GreenSock)",
+			"SCSS",
+		],
+	};
+
+	const qaSkills = {
+		"Core Tools": ["Selenium WebDriver (POM)", "Postman", "Swagger", "Jira"],
+		"Technical Testing": [
+			"Database Validation (MongoDB)",
+			"API Testing",
+			"Cross-Browser Testing",
+		],
+		"Testing Lifecycle": [
+			"Regression Testing",
+			"End-to-End Testing",
+			"Smoke Testing",
+			"UAT",
+		],
+	};
 
 	const frontendBio = `I'm Ose, a frontend developer who builds dynamic, user-focused web experiences. With Next.js and TailwindCSS as my foundation, I craft responsive, scalable interfaces that work seamlessly across devices. I bring projects to life with GSAP, creating smooth animations like scroll-triggered effects and interactive hero sections. I thrive on writing clean, efficient code, solving complex UI challenges, and transforming bold ideas into digital experiences that feel intuitive and delightful. When I'm not coding, I'm exploring fresh design trends and discovering new ways to infuse websites with personality. Check out my projects above and let's build something extraordinary together.`;
 
@@ -60,7 +50,7 @@ const AboutMe = () => {
 					: "Testing software with precision and purpose. Automation enthusiast who understands both sides of the code."}
 			</p>
 
-			<div className=" flex flex-col md:flex-row items-center gap-4 md:gap-10">
+			<div className=" flex flex-col lg:flex-row items-center gap-4 md:gap-10">
 				<div className="md:w-1/2 lg:w-1/3 rounded-lg overflow-hidden">
 					<Image
 						src={myPicture}
@@ -69,22 +59,32 @@ const AboutMe = () => {
 					/>
 				</div>
 
-				<div className=" md:w-2/3">
+				<div className=" lg:w-2/3">
 					<p>{mode === "frontend" ? frontendBio : qaBio}</p>
 
 					<h2 className=" font-medium text-xl mb-4 mt-10">Key skills</h2>
 
-					<div className=" flex flex-row flex-wrap items-center gap-4">
-						{(mode === "frontend" ? frontendSkills : qaSkills).map(
-							(skill, index) => (
-								<span
-									key={index}
-									className=" capitalize border border-gray-300 dark:border-0 dark:bg-orange-500 bg-gray-200 rounded-lg px-4 py-2 text-sm"
-								>
-									{skill}
-								</span>
-							),
-						)}
+					<div className=" flex flex-col flex-wrap items-start gap-4">
+						{Object.entries(
+							mode === "frontend" ? frontendSkills : qaSkills,
+						).map(([category, skills], catIndex) => (
+							<div key={catIndex} className="space-y-3">
+								<h4 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+									{category}
+								</h4>
+
+								<div className="flex flex-row flex-wrap items-center gap-3">
+									{skills.map((skill, index) => (
+										<span
+											key={index}
+											className="capitalize border border-gray-300 dark:border-0 dark:bg-orange-500 bg-gray-200 rounded-lg px-4 py-2 text-sm transition-all hover:scale-105"
+										>
+											{skill}
+										</span>
+									))}
+								</div>
+							</div>
+						))}
 					</div>
 				</div>
 			</div>

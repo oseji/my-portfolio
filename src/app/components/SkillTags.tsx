@@ -51,7 +51,7 @@ const SkillTags = () => {
 	return (
 		<div
 			ref={containerRef}
-			className="flex flex-wrap justify-center gap-4 py-10 mt-12"
+			className="flex flex-wrap justify-center gap-4 py-10 md:mt-12"
 		>
 			{tags.map((tag, i) => (
 				<div

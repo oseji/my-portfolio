@@ -53,14 +53,14 @@ const ContactMe = () => {
 
 	return (
 		<section
-			className=" dark:bg-[#262626] dark:text-white section-padding flex flex-col md:flex-row gap md:justify-between items-center gap-10 md:gap-44 bg-[#EA580C]"
+			className=" dark:bg-[#262626] dark:text-white section-padding flex flex-col lg:flex-row gap lg:justify-between items-center gap-10 lg:gap-44 bg-[#EA580C]"
 			style={{
 				backgroundImage: `url(/backgroundImage.svg)`,
 				backgroundSize: "cover",
 				backgroundPosition: "center",
 			}}
 		>
-			<div className=" w-full md:w-1/3 text-white">
+			<div className=" w-full lg:w-1/3 text-white">
 				<h1 className=" text-3xl mb-4 font-medium">
 					Got a Project Idea? Let’s create Something amazing
 				</h1>
@@ -75,7 +75,7 @@ const ContactMe = () => {
 				</a>
 			</div>
 
-			<div className=" bg-white dark:bg-[#1E1E1E] rounded-lg p-5 w-full md:w-1/2 xl:w-1/2">
+			<div className=" bg-white dark:bg-[#1E1E1E] rounded-lg p-5 w-full lg:w-1/2 xl:w-1/2">
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
