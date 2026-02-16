@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SkillTags from "./SkillTags";
+// import SkillTags from "./SkillTags";
 import githubIcon from "../assets/github-svgrepo-com.svg";
 import linkedInIcon from "../assets/linkedin-rounded-svgrepo-com.svg";
 
@@ -38,9 +38,9 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<div className=" hidden md:block">
+			{/* <div className=" hidden md:block">
 				<SkillTags />
-			</div>
+			</div> */}
 		</footer>
 	);
 };

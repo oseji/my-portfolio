@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useModeStore } from "../store/selectedModeState";
 import myPicture from "../assets/my picture.jpeg";
+// import myPic from "../assets/my_picture-removebg-preview.png";
 
 const AboutMe = () => {
 	const frontendSkills = {
@@ -58,6 +59,18 @@ const AboutMe = () => {
 						className="rounded-lg hover:scale-110 transform transition ease-in-out duration-500 w-full h-auto object-cover block"
 					/>
 				</div>
+				{/* 
+				<div className="md:w-1/2 lg:w-1/3 rounded-lg overflow-hidden">
+					<div className="relative rounded-xl overflow-hidden transition-all duration-300 dark:bg-gradient-to-br dark:from-gray-800 dark:to-black   bg-gradient-to-br from-gray-100 to-gray-300 border-2 border-orange-500/50 dark:border-orange-500/30">
+						<Image
+							src={myPic}
+							alt="Ose Oziegbe"
+							className="w-full h-full object-cover transition ease-in-out duration-500 hover:scale-110"
+							width={300}
+							height={300}
+						/>
+					</div>
+				</div> */}
 
 				<div className=" lg:w-2/3">
 					<p>{mode === "frontend" ? frontendBio : qaBio}</p>
