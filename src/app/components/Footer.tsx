@@ -5,7 +5,7 @@ import linkedInIcon from "../assets/linkedin-rounded-svgrepo-com.svg";
 
 const Footer = () => {
 	return (
-		<footer className=" dark:bg-[#262626] dark:text-white section-padding ">
+		<footer className=" bg-slate-50 dark:bg-[#262626] dark:text-white section-padding ">
 			<p className=" text-center mt-4">© 2025 Ose Oziegbe</p>
 			<p className=" text-center mt-4">QA Engineer & Frontend developer </p>
 			<p className=" text-center mt-4">

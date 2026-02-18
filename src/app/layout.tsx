@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { satoshiVariable } from "./fonts/satoshi";
 import { Toaster } from "react-hot-toast";
+import CustomCursor from "./components/customCursor";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,6 +17,8 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${satoshiVariable.className} antialiased`}>
+				<CustomCursor />
+
 				{children}
 
 				<Toaster

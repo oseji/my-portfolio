@@ -104,7 +104,7 @@ const Projects = () => {
 
 	return (
 		<section
-			className=" dark:bg-black dark:text-white section-padding"
+			className=" bg-slate-50 dark:bg-black dark:text-white section-padding"
 			id="projects"
 		>
 			<h1 className="sectionHeading">

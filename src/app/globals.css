@@ -4,6 +4,20 @@
 	--breakpoint-ultra: 2100px;
 }
 
+@toggle-cursor {
+	* {
+		cursor: none !important;
+	}
+}
+
+/* Hide cursor on all elements to ensure the custom one takes over */
+html,
+body,
+a,
+button {
+	cursor: none !important;
+}
+
 :root {
 	--primary-color: #ea580c;
 }
