@@ -1,21 +1,24 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export default function CustomCursor() {
 	const dot = useRef<HTMLDivElement>(null);
 	const outline = useRef<HTMLDivElement>(null);
+	const [isDesktop, setIsDesktop] = useState(false);
 
 	useEffect(() => {
-		// Cursor Movement Logic
+		const mediaQuery = window.matchMedia("(min-width: 1024px)");
+
+		const handleResize = () => setIsDesktop(mediaQuery.matches);
+		handleResize(); // Initial check
+
+		if (!mediaQuery.matches) return;
+
 		const moveCursor = (e: MouseEvent) => {
 			const { clientX, clientY } = e;
-
-			// Dot follows immediately
 			gsap.set(dot.current, { x: clientX, y: clientY });
-
-			// Outline follows with a slight smooth lag
 			gsap.to(outline.current, {
 				x: clientX,
 				y: clientY,
@@ -24,15 +27,13 @@ export default function CustomCursor() {
 			});
 		};
 
-		// Hover scaling for interactive elements
 		const handleHover = () =>
-			gsap.to(outline.current, { scale: 1.5, duration: 0.4 });
+			gsap.to(outline.current, { scale: 1.5, duration: 0.3 });
 		const handleUnhover = () =>
-			gsap.to(outline.current, { scale: 1, duration: 0.4 });
+			gsap.to(outline.current, { scale: 1, duration: 0.3 });
 
 		window.addEventListener("mousemove", moveCursor);
 
-		// Attach listeners to all links/buttons
 		const targets = document.querySelectorAll("a, button, .clickable");
 		targets.forEach((el) => {
 			el.addEventListener("mouseenter", handleHover);
@@ -46,7 +47,10 @@ export default function CustomCursor() {
 				el.removeEventListener("mouseleave", handleUnhover);
 			});
 		};
-	}, []);
+	}, [isDesktop]);
+
+	// Only render the divs if we are on a desktop-sized screen
+	if (!isDesktop) return null;
 
 	return (
 		<>
