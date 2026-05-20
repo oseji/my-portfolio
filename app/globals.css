@@ -1,26 +1,390 @@
 @import "tailwindcss";
 
+/* ─── Theme tokens*/
+@theme {
+    --color-bg: #f4efe6;
+    --color-bg-soft: #faf7f0;
+    --color-ink: #14110d;
+    --color-muted: rgba(20, 17, 13, 0.55);
+    --color-line: rgba(20, 17, 13, 0.12);
+    --color-accent: #ee5b1a;
+
+    --font-serif:
+        var(--font-serif-raw), "Instrument Serif", ui-serif, Georgia, serif;
+    --font-sans:
+        var(--font-sans-raw), "Space Grotesk", ui-sans-serif, system-ui,
+        sans-serif;
+    --font-mono:
+        var(--font-mono-raw), "JetBrains Mono", ui-monospace, monospace;
+}
+
+/*  CSS variables for runtime-tweakable values */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --ed-accent: #ee5b1a;
+    --ed-bg: #f4efe6;
+    --ed-ink: #14110d;
+    --ed-muted: rgba(20, 17, 13, 0.55);
+    --ed-line: rgba(20, 17, 13, 0.12);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    cursor: none;
+    background: var(--ed-bg);
+}
+
+@media (hover: none) {
+    body {
+        cursor: auto;
+    }
+    .ed-cursor,
+    .ed-cursor-dot {
+        display: none !important;
+    }
+}
+
+::selection {
+    background: var(--ed-accent);
+    color: #fff;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Custom cursor — large blob lags behind a small dot */
+.ed-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1.5px solid;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition:
+        width 0.25s,
+        height 0.25s,
+        opacity 0.2s;
+}
+.ed-cursor.big {
+    width: 88px;
+    height: 88px;
+}
+.ed-cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* Nav*/
+.ed-nav-link {
+    position: relative;
+    padding: 6px 0;
+}
+.ed-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.ed-nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* Persona toggle */
+.ed-toggle-bg {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    width: calc(50% - 4px);
+    background: var(--ed-accent);
+    border-radius: 999px;
+    transition:
+        left 0.35s cubic-bezier(0.2, 0.7, 0.3, 1),
+        background 0.25s;
+}
+
+/* Hero */
+.ed-hero-tag-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--ed-accent) 25%, transparent);
+    animation: ed-pulse 2.4s ease-in-out infinite;
+}
+@keyframes ed-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 4px
+            color-mix(in srgb, var(--ed-accent) 25%, transparent);
+    }
+    50% {
+        box-shadow: 0 0 0 10px
+            color-mix(in srgb, var(--ed-accent) 0%, transparent);
+    }
+}
+
+/* H1 entrance animation: words rise + fade per index */
+.ed-h1 {
+    overflow: hidden;
+}
+.ed-h1-word {
+    display: inline-block;
+    margin-right: 0.15em;
+    transform: translateY(40px);
+    opacity: 0;
+    transition:
+        transform 1s cubic-bezier(0.2, 0.7, 0.3, 1),
+        opacity 1s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.ed-h1.is-in .ed-h1-word {
+    transform: translateY(0);
+    opacity: 1;
+}
+.ed-h1.is-in .ed-h1-word:nth-child(1) {
+    transition-delay: 0.05s;
+}
+.ed-h1.is-in .ed-h1-word:nth-child(2) {
+    transition-delay: 0.12s;
+}
+.ed-h1.is-in .ed-h1-word:nth-child(3) {
+    transition-delay: 0.19s;
+}
+.ed-h1.is-in .ed-h1-word:nth-child(4) {
+    transition-delay: 0.26s;
+}
+.ed-h1.is-in .ed-h1-word:nth-child(5) {
+    transition-delay: 0.33s;
+}
+.ed-h1-em {
+    font-style: italic;
+}
+
+/* CTA buttons */
+.ed-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px -8px
+        color-mix(in srgb, var(--ed-accent) 40%, transparent);
+}
+.ed-btn-ghost:hover {
+    background: var(--ed-ink);
+    color: var(--ed-bg);
+    box-shadow: none;
+}
+
+/* Marquee */
+.ed-marquee-track {
+    animation: ed-marquee 50s linear infinite;
+    width: max-content;
+}
+@keyframes ed-marquee {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* 
+   Project cards — 3D tilt + reveal-on-hover overlay
+    */
+.ed-proj {
+    transition: padding 0.3s;
+}
+.ed-proj.is-hover {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.ed-proj-title {
+    transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.ed-proj.is-hover .ed-proj-title {
+    transform: translateX(8px);
+}
+
+.ed-proj-vis {
+    transform-style: preserve-3d;
+    transition:
+        transform 0.15s ease-out,
+        box-shadow 0.4s;
+    box-shadow: 0 12px 32px -16px rgba(20, 17, 13, 0.18);
+}
+.ed-proj.is-hover .ed-proj-vis {
+    box-shadow: 0 24px 60px -20px rgba(20, 17, 13, 0.28);
+}
+.ed-proj-overlay {
+    opacity: 0;
+    transform: translateY(8px);
+    transition:
+        opacity 0.25s,
+        transform 0.25s;
+}
+.ed-proj.is-hover .ed-proj-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Portrait — striped placeholder (replace with <Image> when you have one)*/
+.ed-portrait-img {
+    background: repeating-linear-gradient(
+        45deg,
+        color-mix(in srgb, var(--ed-accent) 20%, transparent),
+        color-mix(in srgb, var(--ed-accent) 20%, transparent) 8px,
+        color-mix(in srgb, var(--ed-accent) 35%, transparent) 8px,
+        color-mix(in srgb, var(--ed-accent) 35%, transparent) 16px
+    );
+}
+.ed-portrait-img::after {
+    content: "PORTRAIT · 4×5";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font: 500 11px/1 var(--font-mono);
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.85);
+    padding: 8px 12px;
+    background: rgba(20, 17, 13, 0.5);
+    border-radius: 4px;
+}
+
+/* Skill chip hover invert */
+.ed-skill {
+    transition:
+        background 0.2s,
+        color 0.2s;
+    cursor: none;
+}
+.ed-skill:hover {
+    background: var(--ed-ink);
+    color: var(--ed-bg);
+}
+
+/* 
+   Reveal-on-scroll utility (parent toggles .is-visible via IntersectionObserver)*/
+.ed-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity 0.9s cubic-bezier(0.2, 0.7, 0.3, 1),
+        transform 0.9s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.ed-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+/* Contact form inputs (live on the orange block — white-on-translucent) */
+
+.ed-input {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border: 0.5px solid rgba(255, 255, 255, 0.25);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font: 400 15px/1.4 var(--font-sans);
+    color: #fff;
+    outline: none;
+    cursor: none;
+    width: 100%;
+    transition:
+        background 0.2s,
+        border-color 0.2s;
+}
+.ed-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+.ed-input:focus {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: #fff;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Responsive — touch & small-screen polish
+   (Tailwind handles layout breakpoints in each component;
+    these are the CSS-only details that can't be done with utilities)
+   ───────────────────────────────────────────────────────────── */
+
+/* Touch / no-hover devices — restore the real cursor everywhere */
+@media (hover: none), (pointer: coarse) {
+    body,
+    *,
+    a,
+    button,
+    input,
+    textarea,
+    label,
+    .ed-btn,
+    .ed-skill,
+    .ed-input {
+        cursor: auto !important;
+    }
+    a,
+    button,
+    .ed-btn,
+    [data-hover] {
+        cursor: pointer !important;
+    }
+    .ed-proj.is-hover {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .ed-proj.is-hover .ed-proj-title {
+        transform: none;
+    }
+    .ed-proj-overlay {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* Small screens — prevent iOS form-zoom + tighten chrome */
+@media (max-width: 640px) {
+    .ed-input {
+        font-size: 16px;
+        padding: 12px 14px;
+        border-radius: 10px;
+    }
+    .ed-cursor,
+    .ed-cursor-dot {
+        display: none !important;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .ed-marquee-track {
+        animation: none;
+    }
+    .ed-h1-word {
+        transform: none;
+        opacity: 1;
+    }
 }

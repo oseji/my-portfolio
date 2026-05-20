@@ -1,7 +1,5 @@
-const config = {
-  plugins: {
-    "@tailwindcss/postcss": {},
-  },
+// postcss.config.mjs
+// Tailwind 4 PostCSS plugin — required for `@import "tailwindcss"` to compile.
+export default {
+  plugins: { "@tailwindcss/postcss": {} },
 };
-
-export default config;
