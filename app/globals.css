@@ -243,9 +243,19 @@ a {
         transform 0.15s ease-out,
         box-shadow 0.4s;
     box-shadow: 0 12px 32px -16px rgba(20, 17, 13, 0.18);
+    overflow: hidden;
 }
 .ed-proj.is-hover .ed-proj-vis {
     box-shadow: 0 24px 60px -20px rgba(20, 17, 13, 0.28);
+}
+
+/* Screenshot zoom — neutral by default, zooms in on card hover */
+.ed-proj-vis img {
+    transform: scale(1);
+    transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.ed-proj.is-hover .ed-proj-vis img {
+    transform: scale(1.06);
 }
 .ed-proj-overlay {
     opacity: 0;

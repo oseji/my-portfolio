@@ -28,7 +28,7 @@ export function ProjectMock({ project }: Props) {
             alt={`${project.title} screenshot`}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover object-top"
+            className="object-contain"
             placeholder="blur"
         />
     );

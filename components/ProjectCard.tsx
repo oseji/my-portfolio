@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import type { Project } from "@/lib/portfolio";
 import { ProjectMock } from "./ProjectMock";
+import Image from "next/image";
+import hrsphereImage from "../assets/projects/hrSphere.png";
+import pennywiseImage from "../assets/projects/pennywise.png";
+import bingeImage from "../assets/projects/binge.png";
+import iptrackerImage from "../assets/projects/ip address.png";
+import swaglabsImage from "../assets/projects/qa/swaglabs.png";
 
 type Props = { project: Project; index: number; accent: string };
 
@@ -77,7 +83,7 @@ export function ProjectCard({ project, index, accent }: Props) {
                 <div
                     className="ed-proj-vis relative overflow-hidden rounded-xl sm:rounded-2xl"
                     style={{
-                        aspectRatio: "5 / 3.2",
+                        aspectRatio: "16 / 9",
                         background: `linear-gradient(135deg, ${project.accent}30, ${accent}20)`,
                         transform: isCoarse
                             ? "none"
