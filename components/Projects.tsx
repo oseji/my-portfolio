@@ -20,6 +20,7 @@ export function Projects({ persona, accent }: Props) {
             className="mx-auto max-w-[1600px] px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-12 lg:py-32"
         >
             <SectionHead
+                className="ed-reveal"
                 index="01 / Selected work"
                 eyebrow={
                     persona === "frontend"
@@ -39,7 +40,7 @@ export function Projects({ persona, accent }: Props) {
                 accent={accent}
             />
 
-            <div className="flex flex-col [&>article:last-child]:border-b [&>article:last-child]:border-line">
+            <div className="ed-reveal flex flex-col [&>article:last-child]:border-b [&>article:last-child]:border-line">
                 {projects.map((p, i) => (
                     <ProjectCard
                         key={p.id}

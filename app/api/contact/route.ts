@@ -23,5 +23,13 @@ export async function POST(req: NextRequest) {
         return Response.json({ error: error.message }, { status: 500 });
     }
 
+    // Auto-reply to the sender
+    await resend.emails.send({
+        from: "Ose Oziegbe <onboarding@resend.dev>",
+        to: email,
+        subject: "Got your message — talk soon",
+        text: `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nOse\noseoziegbe0@gmail.com`,
+    });
+
     return Response.json({ ok: true });
 }

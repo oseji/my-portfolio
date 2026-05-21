@@ -6,11 +6,12 @@ type Props = {
     title: ReactNode;
     sub?: ReactNode;
     accent: string;
+    className?: string;
 };
 
-export function SectionHead({ index, eyebrow, title, sub, accent }: Props) {
+export function SectionHead({ index, eyebrow, title, sub, accent, className = "" }: Props) {
     return (
-        <header className="mb-10 grid grid-cols-1 items-end gap-5 sm:mb-14 sm:gap-8 md:mb-16 md:grid-cols-[1fr_2fr] md:gap-10 lg:mb-20 lg:gap-12">
+        <header className={`mb-10 grid grid-cols-1 items-end gap-5 sm:mb-14 sm:gap-8 md:mb-16 md:grid-cols-[1fr_2fr] md:gap-10 lg:mb-20 lg:gap-12 ${className}`}>
             <div className="flex flex-col gap-2">
                 <span
                     className="font-mono text-sm font-medium tracking-[.04em]"

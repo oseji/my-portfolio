@@ -40,19 +40,33 @@ export function About({ persona, accent }: Props) {
                 index="02 / About"
                 eyebrow="The person behind the work"
                 title={
-                    <>
-                        A QA engineer with a{" "}
-                        <em className="italic" style={{ color: accent }}>
-                            frontend developer's
-                        </em>{" "}
-                        DNA.
-                    </>
+                    persona === "frontend" ? (
+                        <>
+                            A frontend developer with a{" "}
+                            <em className="italic" style={{ color: accent }}>
+                                tester's eye.
+                            </em>
+                        </>
+                    ) : (
+                        <>
+                            A QA engineer with a{" "}
+                            <em className="italic" style={{ color: accent }}>
+                                frontend developer's
+                            </em>{" "}
+                            DNA.
+                        </>
+                    )
                 }
-                sub="Testing software with precision and purpose. Automation enthusiast who understands both sides of the code."
+                sub={
+                    persona === "frontend"
+                        ? "Building interfaces with precision and an eye for what breaks. Clean code, tested instincts."
+                        : "Testing software with precision and purpose. Automation enthusiast who understands both sides of the code."
+                }
                 accent={accent}
+                className="ed-reveal"
             />
 
-            <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 md:gap-14 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
+            <div className="ed-reveal grid grid-cols-1 items-start gap-10 sm:gap-12 md:gap-14 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
                 <div className="max-w-sm lg:max-w-none">
                     <div
                         className="rounded border bg-white/50 px-3.5 pt-3.5 pb-0"
