@@ -18,13 +18,29 @@
         var(--font-mono-raw), "JetBrains Mono", ui-monospace, monospace;
 }
 
-/*  CSS variables for runtime-tweakable values */
 :root {
     --ed-accent: #ee5b1a;
     --ed-bg: #f4efe6;
     --ed-ink: #14110d;
     --ed-muted: rgba(20, 17, 13, 0.55);
     --ed-line: rgba(20, 17, 13, 0.12);
+}
+
+html.dark {
+    --ed-bg: #110f0b;
+    --ed-ink: #f0ebe1;
+    --ed-muted: rgba(240, 235, 225, 0.5);
+    --ed-line: rgba(240, 235, 225, 0.1);
+
+    --color-bg: #110f0b;
+    --color-bg-soft: #1c1915;
+    --color-ink: #f0ebe1;
+    --color-muted: rgba(240, 235, 225, 0.5);
+    --color-line: rgba(240, 235, 225, 0.1);
+}
+
+html.dark body {
+    background: var(--ed-bg);
 }
 
 html {

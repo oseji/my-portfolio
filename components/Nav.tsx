@@ -8,9 +8,17 @@ type Props = {
     persona: Persona;
     setPersona: (p: Persona) => void;
     accent: string;
+    isDark: boolean;
+    toggleDark: () => void;
 };
 
-export function Nav({ persona, setPersona, accent }: Props) {
+export function Nav({
+    persona,
+    setPersona,
+    accent,
+    isDark,
+    toggleDark,
+}: Props) {
     return (
         <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 border-b border-line bg-[color-mix(in_srgb,var(--ed-bg)_80%,transparent)] px-4 py-3 backdrop-blur-[20px] sm:gap-4 sm:px-6 sm:py-4 md:gap-6 md:px-8 md:py-5 lg:px-12 lg:py-[22px]">
             <div className="order-1 flex flex-1 items-center gap-3 sm:gap-4 md:flex-none md:gap-6">
@@ -58,7 +66,44 @@ export function Nav({ persona, setPersona, accent }: Props) {
                 </a>
             </nav>
 
-            <div className="order-2 md:order-3">
+            <div className="order-2 md:order-3 flex flex-row items-center gap-3">
+                {/* Dark mode toggle */}
+                <button
+                    onClick={toggleDark}
+                    data-hover
+                    aria-label="Toggle dark mode"
+                    className="cursor-none rounded-full border border-line p-2 text-muted transition-colors hover:border-ink hover:text-ink"
+                >
+                    {isDark ? (
+                        /* Sun icon */
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                        >
+                            <circle cx="12" cy="12" r="4" />
+                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                        </svg>
+                    ) : (
+                        /* Moon icon */
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            strokeLinecap="round"
+                        >
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                        </svg>
+                    )}
+                </button>
+
                 <PersonaToggle
                     value={persona}
                     onChange={setPersona}
