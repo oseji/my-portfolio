@@ -7,7 +7,7 @@ type Props = { persona: Persona; accent: string };
 
 const GROUP_LABELS: Record<Persona, Record<string, string>> = {
     frontend: { core: "Core stack", state: "State & data", ui: "UI & motion" },
-    qa: { tools: "Tooling", methods: "Methods" },
+    qa: { automation: "Automation", api: "API & Backend", methods: "Methods" },
 };
 
 export function About({ persona, accent }: Props) {
