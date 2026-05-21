@@ -3,12 +3,6 @@
 import { useEffect, useRef, useState, type MouseEvent } from "react";
 import type { Project } from "@/lib/portfolio";
 import { ProjectMock } from "./ProjectMock";
-import Image from "next/image";
-import hrsphereImage from "../assets/projects/hrSphere.png";
-import pennywiseImage from "../assets/projects/pennywise.png";
-import bingeImage from "../assets/projects/binge.png";
-import iptrackerImage from "../assets/projects/ip address.png";
-import swaglabsImage from "../assets/projects/qa/swaglabs.png";
 
 type Props = { project: Project; index: number; accent: string };
 
