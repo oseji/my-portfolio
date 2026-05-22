@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Favicon options — Ose Oziegbe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --ink: #0e0c0a;
+    --accent: #ee5b1a;
+    --display: "Space Grotesk", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--display); }
+  body { padding: 48px 32px 80px; }
+  .hd { display: flex; justify-content: space-between; align-items: baseline; max-width: 1200px; margin: 0 auto 48px; padding-bottom: 24px; border-bottom: 1px solid rgba(14,12,10,.1); }
+  .hd h1 { font: 700 28px/1 var(--display); letter-spacing: -.02em; margin: 0; }
+  .hd p { font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: rgba(14,12,10,.5); margin: 0; }
+  .grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px; }
+  .card { background: #fff; border: 1px solid rgba(14,12,10,.08); border-radius: 16px; overflow: hidden; }
+  .card-hd { padding: 18px 22px; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid rgba(14,12,10,.06); }
+  .card-hd h2 { font: 700 17px/1 var(--display); letter-spacing: -.01em; margin: 0; }
+  .card-hd code { font: 500 10px/1 var(--mono); color: rgba(14,12,10,.5); }
+  .card-body { padding: 32px 22px; display: flex; flex-direction: column; gap: 24px; align-items: center; }
+  .big { width: 160px; height: 160px; border-radius: 32px; overflow: hidden; box-shadow: 0 18px 40px -16px rgba(0,0,0,.2); }
+  .big img { width: 100%; height: 100%; display: block; }
+  .sizes { display: flex; gap: 18px; align-items: flex-end; padding: 12px 0 0; border-top: 1px dashed rgba(14,12,10,.1); width: 100%; justify-content: center; }
+  .size { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .size span { font: 500 10px/1 var(--mono); color: rgba(14,12,10,.5); }
+  .sz-16  img { width: 16px; height: 16px; image-rendering: -webkit-optimize-contrast; }
+  .sz-32  img { width: 32px; height: 32px; }
+  .sz-48  img { width: 48px; height: 48px; }
+  .sz-64  img { width: 64px; height: 64px; }
+
+  /* fake browser tab to show 16px in context */
+  .tab-wrap { width: 100%; background: rgba(14,12,10,.04); border-radius: 10px; padding: 8px; display: flex; align-items: center; gap: 6px; }
+  .tab { background: #fff; border-radius: 6px 6px 0 0; padding: 6px 12px 6px 8px; display: inline-flex; align-items: center; gap: 6px; font: 500 11px/1 var(--display); color: rgba(14,12,10,.7); box-shadow: 0 1px 0 rgba(14,12,10,.05); }
+  .tab img { width: 14px; height: 14px; }
+  .tab-x { color: rgba(14,12,10,.3); font-size: 12px; }
+
+  .install { max-width: 1200px; margin: 64px auto 0; background: var(--ink); color: #fff; border-radius: 16px; padding: 32px; }
+  .install h3 { font: 700 18px/1 var(--display); margin: 0 0 16px; letter-spacing: -.01em; }
+  .install pre { font: 500 12px/1.55 var(--mono); margin: 0; white-space: pre-wrap; word-break: break-word; color: rgba(255,255,255,.85); }
+  .install p { font: 400 13px/1.55 var(--display); color: rgba(255,255,255,.6); margin: 0 0 16px; max-width: 60ch; }
+  .install a { color: var(--accent); }
+</style>
+</head>
+<body>
+  <header class="hd">
+    <h1>Favicon options</h1>
+    <p>5 directions · SVG · scalable</p>
+  </header>
+
+  <section class="grid">
+
+    <article class="card">
+      <header class="card-hd">
+        <h2>A — Ring on ink</h2>
+        <code>favicon-a-mark.svg</code>
+      </header>
+      <div class="card-body">
+        <div class="big"><img src="favicon-a-mark.svg" alt="" /></div>
+        <div class="tab-wrap">
+          <span class="tab"><img src="favicon-a-mark.svg" alt="" />Ose Oziegbe · Frontend<span class="tab-x">×</span></span>
+        </div>
+        <div class="sizes">
+          <div class="size sz-16"><img src="favicon-a-mark.svg" alt="" /><span>16</span></div>
+          <div class="size sz-32"><img src="favicon-a-mark.svg" alt="" /><span>32</span></div>
+          <div class="size sz-48"><img src="favicon-a-mark.svg" alt="" /><span>48</span></div>
+          <div class="size sz-64"><img src="favicon-a-mark.svg" alt="" /><span>64</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header class="card-hd">
+        <h2>B — Ring on cream</h2>
+        <code>favicon-b-cream.svg</code>
+      </header>
+      <div class="card-body">
+        <div class="big" style="border: 1px solid rgba(14,12,10,.08);"><img src="favicon-b-cream.svg" alt="" /></div>
+        <div class="tab-wrap">
+          <span class="tab"><img src="favicon-b-cream.svg" alt="" />Ose Oziegbe · Frontend<span class="tab-x">×</span></span>
+        </div>
+        <div class="sizes">
+          <div class="size sz-16"><img src="favicon-b-cream.svg" alt="" /><span>16</span></div>
+          <div class="size sz-32"><img src="favicon-b-cream.svg" alt="" /><span>32</span></div>
+          <div class="size sz-48"><img src="favicon-b-cream.svg" alt="" /><span>48</span></div>
+          <div class="size sz-64"><img src="favicon-b-cream.svg" alt="" /><span>64</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header class="card-hd">
+        <h2>C — Solid orange tile</h2>
+        <code>favicon-c-solid.svg</code>
+      </header>
+      <div class="card-body">
+        <div class="big"><img src="favicon-c-solid.svg" alt="" /></div>
+        <div class="tab-wrap">
+          <span class="tab"><img src="favicon-c-solid.svg" alt="" />Ose Oziegbe · Frontend<span class="tab-x">×</span></span>
+        </div>
+        <div class="sizes">
+          <div class="size sz-16"><img src="favicon-c-solid.svg" alt="" /><span>16</span></div>
+          <div class="size sz-32"><img src="favicon-c-solid.svg" alt="" /><span>32</span></div>
+          <div class="size sz-48"><img src="favicon-c-solid.svg" alt="" /><span>48</span></div>
+          <div class="size sz-64"><img src="favicon-c-solid.svg" alt="" /><span>64</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header class="card-hd">
+        <h2>D — Letter O.</h2>
+        <code>favicon-d-wordmark.svg</code>
+      </header>
+      <div class="card-body">
+        <div class="big"><img src="favicon-d-wordmark.svg" alt="" /></div>
+        <div class="tab-wrap">
+          <span class="tab"><img src="favicon-d-wordmark.svg" alt="" />Ose Oziegbe · Frontend<span class="tab-x">×</span></span>
+        </div>
+        <div class="sizes">
+          <div class="size sz-16"><img src="favicon-d-wordmark.svg" alt="" /><span>16</span></div>
+          <div class="size sz-32"><img src="favicon-d-wordmark.svg" alt="" /><span>32</span></div>
+          <div class="size sz-48"><img src="favicon-d-wordmark.svg" alt="" /><span>48</span></div>
+          <div class="size sz-64"><img src="favicon-d-wordmark.svg" alt="" /><span>64</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="card">
+      <header class="card-hd">
+        <h2>E — Serif italic "oo"</h2>
+        <code>favicon-e-monogram.svg</code>
+      </header>
+      <div class="card-body">
+        <div class="big" style="border: 1px solid rgba(14,12,10,.08);"><img src="favicon-e-monogram.svg" alt="" /></div>
+        <div class="tab-wrap">
+          <span class="tab"><img src="favicon-e-monogram.svg" alt="" />Ose Oziegbe · Frontend<span class="tab-x">×</span></span>
+        </div>
+        <div class="sizes">
+          <div class="size sz-16"><img src="favicon-e-monogram.svg" alt="" /><span>16</span></div>
+          <div class="size sz-32"><img src="favicon-e-monogram.svg" alt="" /><span>32</span></div>
+          <div class="size sz-48"><img src="favicon-e-monogram.svg" alt="" /><span>48</span></div>
+          <div class="size sz-64"><img src="favicon-e-monogram.svg" alt="" /><span>64</span></div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <section class="install">
+    <h3>How to install</h3>
+    <p>Pick a file from <code style="color:#fff">favicons/</code> and drop one line in each portfolio's <code style="color:#fff">&lt;head&gt;</code>. Modern browsers handle SVG favicons directly — no .ico build needed.</p>
+    <pre>&lt;link rel="icon" type="image/svg+xml" href="favicons/favicon-a-mark.svg" /&gt;</pre>
+  </section>
+
+</body>
+</html>
