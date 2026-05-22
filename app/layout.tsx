@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   title: "Ose Oziegbe — Frontend Developer & QA Engineer",
   description:
     "Frontend developer and QA engineer building dynamic interfaces and shipping flawless software.",
+  icons: {
+    icon: "/favicons/favicon-a-mark.svg",
+  },
 };
 
 export default function RootLayout({
