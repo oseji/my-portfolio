@@ -2,10 +2,10 @@
 import Image from "next/image";
 import type { Project } from "@/lib/portfolio";
 
-import pennywiseImg from "@/assets/projects/pennywise.png";
-import bingeImg from "@/assets/projects/binge.png";
-import hrSphereImg from "@/assets/projects/hrSphere.png";
-import ipAddressImg from "@/assets/projects/ip address.png";
+import pennywiseImg from "@/assets/projects/frontend/pennywise.jpeg";
+import bingeImg from "@/assets/projects/frontend/binge.jpeg";
+import hrSphereImg from "@/assets/projects/frontend/hrsphere.jpeg";
+import ipAddressImg from "@/assets/projects/frontend/ipAddress.jpeg";
 import swagImg from "@/assets/projects/qa/swaglabs.png";
 
 const PROJECT_IMAGES: Record<string, typeof pennywiseImg> = {

@@ -91,7 +91,7 @@ export function ProjectCard({ project, index, accent }: Props) {
                         rel="noopener noreferrer"
                     >
                         <div
-                            className="ed-proj-overlay absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-[.04em] text-ink sm:right-4 sm:bottom-4 sm:px-3.5 sm:py-2.5 sm:text-xs"
+                            className="ed-proj-overlay absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-[.04em] text-[#14110d] sm:right-4 sm:bottom-4 sm:px-3.5 sm:py-2.5 sm:text-xs"
                             style={{ borderColor: accent }}
                         >
                             <span>View project</span>
