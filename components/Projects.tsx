@@ -34,8 +34,8 @@ export function Projects({ persona, accent }: Props) {
                 }
                 sub={
                     persona === "frontend"
-                        ? "Dynamic web applications built with React, Next.js, TypeScript, and TailwindCSS."
-                        : "Automated regression suites powered by modern testing frameworks."
+                        ? "Frontend builds across fintech, media, SaaS, and utilities."
+                        : "Automation I've written from scratch, covering UI flows, API calls, and the stuff in between."
                 }
                 accent={accent}
             />

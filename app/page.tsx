@@ -14,7 +14,7 @@ import { ScrollReveal } from "@/components/ScrollReveal";
 const ACCENT = "#ee5b1a";
 
 export default function Home() {
-    const [persona, setPersona] = useState<Persona>("frontend");
+    const [persona, setPersona] = useState<Persona>("qa");
     const [isDark, setIsDark] = useState(false);
 
     useEffect(() => {

@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
             await resend.emails.send({
                 from: `Ose Oziegbe <${FROM_DOMAIN}>`,
                 to: email,
-                subject: "Got your message — talk soon",
+                subject: "Got your message, talk soon",
                 text: `Hi ${name},\n\nThanks for reaching out! I've received your message and will get back to you within 24 hours.\n\nOse\noseoziegbe0@gmail.com`,
             });
         } catch {

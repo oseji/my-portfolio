@@ -59,8 +59,8 @@ export function About({ persona, accent }: Props) {
                 }
                 sub={
                     persona === "frontend"
-                        ? "Building interfaces with precision and an eye for what breaks. Clean code, tested instincts."
-                        : "Testing software with precision and purpose. Automation enthusiast who understands both sides of the code."
+                        ? "I care as much about how an interface feels as how it works. Clean code, tested instincts, and I don't ship things I wouldn't want to use myself."
+                        : "Having built UIs before means I know where most bugs tend to come from. I automate what I can, but I make sure I understand what's actually failing before I write a single test."
                 }
                 accent={accent}
                 className="ed-reveal"

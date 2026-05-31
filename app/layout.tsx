@@ -27,9 +27,9 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ose Oziegbe — QA Engineer & Frontend Developer",
+  title: "Ose Oziegbe, QA Engineer and Frontend Developer",
   description:
-    "QA engineer and frontend developer specialising in fintech — building reliable software and dynamic interfaces.",
+    "QA engineer and frontend developer specialising in fintech. I build test automation and web interfaces.",
   icons: {
     icon: "/favicons/favicon-a-mark.svg",
   },

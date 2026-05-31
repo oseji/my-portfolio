@@ -31,8 +31,8 @@ export function Hero({ persona, accent }: Props) {
     const chips = isFE ? portfolio.skills.frontend : portfolio.skills.qa;
 
     const bio = isFE
-        ? "I build dynamic, motion-driven web experiences with Next.js, TypeScript, and a healthy obsession with how interfaces feel under the hand."
-        : "I write the tests that catch the bugs your users would have found. Selenium, Postman, MongoDB — automated, observable, repeatable.";
+        ? "I build web UIs with Next.js and TypeScript. I use GSAP for the animation work and I care a lot about how the finished product actually feels to use."
+        : "I write the tests that catch bugs before your users do. Selenium, Appium, Playwright, Postman, I've used all of them in production and know my way around each one.";
 
     return (
         <section className="relative overflow-hidden px-4 pt-8 pb-6 sm:px-6 sm:pt-12 sm:pb-8 md:px-8 md:pt-16 lg:px-12 lg:pt-20 lg:pb-10">
@@ -43,7 +43,7 @@ export function Hero({ persona, accent }: Props) {
                         style={{ background: accent }}
                     />
                     <span>
-                        {isFE ? "Frontend Developer" : "QA Engineer"} —
+                        {isFE ? "Frontend Developer" : "QA Engineer"} ·
                         Available for select projects · 2026
                     </span>
                 </div>
