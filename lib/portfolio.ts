@@ -128,8 +128,8 @@ export const portfolio: Portfolio = {
                 id: "swag",
                 title: "Swag Labs Automation Suite",
                 tag: "E2E · UI Automation",
-                blurb: "End-to-end UI automation with TypeScript, Selenium WebDriver, and Page Object Model. Covers authentication, product flows, cart, and checkout.",
-                stack: ["Selenium WebDriver", "TypeScript", "dotenv"],
+                blurb: "End-to-end UI automation with TypeScript, Selenium WebDriver, and a Page Object Model architecture. Covers authentication, product flows, cart, checkout, and menu behavior. Allure reporting with step-level detail and automatic screenshots on failure.",
+                stack: ["Selenium WebDriver", "TypeScript", "Mocha", "Chai", "Allure"],
                 accent: "#f97316",
                 year: "2026",
                 githubLink:
