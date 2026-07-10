@@ -11,7 +11,12 @@ type Props = {
 
 export function PersonaToggle({ value, onChange, accent }: Props) {
   return (
-    <div className="relative inline-flex flex-none rounded-full bg-[rgba(20,17,13,0.06)] p-1" data-hover>
+    <div
+      className="relative inline-flex flex-none rounded-full bg-chip p-1"
+      role="group"
+      aria-label="Choose persona"
+      data-hover
+    >
       <div
         className="ed-toggle-bg"
         style={{
@@ -23,6 +28,7 @@ export function PersonaToggle({ value, onChange, accent }: Props) {
         className={`relative z-10 min-w-[88px] cursor-none rounded-full px-[18px] py-2 text-center font-mono text-[11px] font-medium uppercase tracking-[.04em] transition-colors whitespace-nowrap ${
           value === "frontend" ? "text-white" : "text-muted"
         }`}
+        aria-pressed={value === "frontend"}
         onClick={() => onChange("frontend")}
       >
         Frontend
@@ -31,6 +37,7 @@ export function PersonaToggle({ value, onChange, accent }: Props) {
         className={`relative z-10 min-w-[88px] cursor-none rounded-full px-[18px] py-2 text-center font-mono text-[11px] font-medium uppercase tracking-[.04em] transition-colors whitespace-nowrap ${
           value === "qa" ? "text-white" : "text-muted"
         }`}
+        aria-pressed={value === "qa"}
         onClick={() => onChange("qa")}
       >
         QA

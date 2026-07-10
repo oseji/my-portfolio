@@ -1,21 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { portfolio, type Persona } from "@/lib/portfolio";
 
 type Props = { persona: Persona; accent: string };
-type Word = string | { em: string };
 
 export function Hero({ persona, accent }: Props) {
-    const isFE = persona === "frontend";
     const h1Ref = useRef<HTMLHeadingElement>(null);
-    const [scrollY, setScrollY] = useState(0);
-
-    useEffect(() => {
-        const onScroll = () => setScrollY(window.scrollY);
-        window.addEventListener("scroll", onScroll, { passive: true });
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
 
     useEffect(() => {
         if (!h1Ref.current) return;
@@ -24,27 +15,20 @@ export function Hero({ persona, accent }: Props) {
         return () => clearTimeout(t);
     }, [persona]);
 
-    const headline: Word[] = isFE
-        ? ["Crafting", "interfaces", "that feel", { em: "alive" }, "."]
-        : ["Breaking", "things so", "users", { em: "never" }, "have to."];
-
-    const chips = isFE ? portfolio.skills.frontend : portfolio.skills.qa;
-
-    const bio = isFE
-        ? "I build web UIs with Next.js and TypeScript. I use GSAP for the animation work and I care a lot about how the finished product actually feels to use."
-        : "I write the tests that catch bugs before your users do. Selenium, Appium, Playwright, Postman, I've used all of them in production and know my way around each one.";
+    const { role, headline, heroBio } = portfolio.taglines[persona];
+    const chips = portfolio.skills[persona];
+    const year = new Date().getFullYear();
 
     return (
         <section className="relative overflow-hidden px-4 pt-8 pb-6 sm:px-6 sm:pt-12 sm:pb-8 md:px-8 md:pt-16 lg:px-12 lg:pt-20 lg:pb-10">
             <div className="mx-auto max-w-[1600px]">
-                <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-line bg-white/40 px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-[.05em] text-muted sm:mb-8 sm:px-[14px] sm:py-[10px] sm:text-[11px] sm:tracking-[.06em] md:mb-10">
+                <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-line bg-bg-soft/60 px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-[.05em] text-muted sm:mb-8 sm:px-[14px] sm:py-[10px] sm:text-[11px] sm:tracking-[.06em] md:mb-10">
                     <span
                         className="ed-hero-tag-dot"
                         style={{ background: accent }}
                     />
                     <span>
-                        {isFE ? "Frontend Developer" : "QA Engineer"} ·
-                        Available for select projects · 2026
+                        {role} · Available for select projects · {year}
                     </span>
                 </div>
 
@@ -72,7 +56,7 @@ export function Hero({ persona, accent }: Props) {
 
                 <div className="mt-8 flex flex-col items-stretch gap-6 sm:mt-10 md:mt-12 md:flex-wrap md:items-end md:justify-between lg:mt-14 lg:flex-row">
                     <p className="max-w-[55ch] font-sans text-[15px] leading-[1.5] text-muted sm:text-base md:text-[17px] lg:text-[18px]">
-                        {bio}
+                        {heroBio}
                     </p>
 
                     <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
@@ -108,11 +92,11 @@ export function Hero({ persona, accent }: Props) {
                 </div>
             </div>
 
-            <div className="mt-12 overflow-hidden border-y border-line py-4 will-change-transform sm:mt-16 sm:py-5 md:mt-20 md:py-6">
-                <div
-                    className="ed-marquee-track flex gap-7 sm:gap-9 md:gap-12"
-                    style={{ transform: `translateX(${-scrollY * 0.4}px)` }}
-                >
+            <div
+                aria-hidden="true"
+                className="mt-12 overflow-hidden border-y border-line py-4 sm:mt-16 sm:py-5 md:mt-20 md:py-6"
+            >
+                <div className="ed-marquee-track flex gap-7 sm:gap-9 md:gap-12">
                     {[...chips, ...chips, ...chips].map((c, i) => (
                         <span
                             key={i}
