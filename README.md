@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ose Oziegbe — Portfolio
 
-## Getting Started
+Personal portfolio for my two hats: **QA engineer** and **frontend developer**. A persona toggle in the nav switches the entire site — headline, bio, skills, and project list — between the two, and the choice persists across visits.
 
-First, run the development server:
+## Stack
+
+- [Next.js](https://nextjs.org) (App Router, React Compiler) + TypeScript
+- Tailwind CSS v4
+- [Resend](https://resend.com) for the contact form
+
+## Highlights
+
+- **Persona switching** — all copy and projects live in [`lib/portfolio.ts`](lib/portfolio.ts) as a single typed object; components render whichever persona is active.
+- **Dark mode** without a flash of light theme (inline script applies the saved theme before first paint).
+- **Custom cursor, scroll reveals, marquee** — all plain CSS/IntersectionObserver, no animation library, with `prefers-reduced-motion` respected.
+- **Contact form** backed by a rate-limited, honeypot-protected API route.
+- **SEO** — Open Graph/Twitter cards with a generated OG image, sitemap, robots, and JSON-LD.
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run lint
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Environment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Create `.env.local`:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+RESEND_API_KEY=...            # required for the contact form
+RESEND_FROM=...               # optional: verified-domain sender, enables auto-replies
+NEXT_PUBLIC_SITE_URL=...      # canonical URL used in metadata/sitemap (set in production)
+```
 
-## Learn More
+## Editing content
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Everything user-facing — name, taglines, skills, projects, socials — is in [`lib/portfolio.ts`](lib/portfolio.ts). Project screenshots live in `assets/projects/` and are mapped to project ids in [`components/ProjectMock.tsx`](components/ProjectMock.tsx).

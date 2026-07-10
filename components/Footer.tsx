@@ -14,10 +14,20 @@ export function Footer({ accent }: Props) {
                     <span>{portfolio.footer}</span>
                 </div>
                 <div className="flex flex-wrap justify-center gap-4 font-mono text-[11px] font-medium sm:gap-6 sm:text-xs">
-                    <a href={portfolio.social.github} data-hover>
+                    <a
+                        href={portfolio.social.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-hover
+                    >
                         GitHub ↗
                     </a>
-                    <a href={portfolio.social.linkedin} data-hover>
+                    <a
+                        href={portfolio.social.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-hover
+                    >
                         LinkedIn ↗
                     </a>
                     <a href={`mailto:${portfolio.social.email}`} data-hover>

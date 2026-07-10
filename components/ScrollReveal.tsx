@@ -8,19 +8,22 @@ import { useEffect } from "react";
 
 export function ScrollReveal() {
     useEffect(() => {
+        // One shared observer for every reveal element
+        const io = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        io.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.08 },
+        );
+
         const observe = (el: Element) => {
             // Skip elements already revealed
             if (el.classList.contains("is-visible")) return;
-
-            const io = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("is-visible");
-                        io.disconnect();
-                    }
-                },
-                { threshold: 0.08 },
-            );
             io.observe(el);
         };
 
@@ -39,7 +42,10 @@ export function ScrollReveal() {
         });
         mo.observe(document.body, { childList: true, subtree: true });
 
-        return () => mo.disconnect();
+        return () => {
+            mo.disconnect();
+            io.disconnect();
+        };
     }, []);
 
     return null;

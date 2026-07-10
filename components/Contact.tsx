@@ -20,6 +20,8 @@ export function Contact({ accent }: Props) {
             name: (form.elements.namedItem("name") as HTMLInputElement).value,
             email: (form.elements.namedItem("email") as HTMLInputElement).value,
             message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+            // Honeypot — humans never see or fill this field
+            company: (form.elements.namedItem("company") as HTMLInputElement).value,
         };
 
         try {
@@ -51,7 +53,7 @@ export function Contact({ accent }: Props) {
             <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-start gap-10 sm:gap-12 md:gap-14 lg:grid-cols-2 lg:gap-20">
                 <div>
                     <span className="font-mono text-[11px] font-medium uppercase tracking-[.08em] opacity-80">
-                        03 / Let's talk
+                        03 / Let&apos;s talk
                     </span>
                     <h2
                         className="m-0 mt-3 mb-4 font-serif font-normal leading-[.98] tracking-[-0.02em] sm:mt-4 sm:mb-6"
@@ -59,7 +61,7 @@ export function Contact({ accent }: Props) {
                     >
                         Got a project?{" "}
                         <em className="italic opacity-85">
-                            Let's create something amazing
+                            Let&apos;s create something amazing
                         </em>
                         .
                     </h2>
@@ -97,6 +99,12 @@ export function Contact({ accent }: Props) {
                                     href={row.href}
                                     className="break-all hover:underline"
                                     data-hover
+                                    {...(row.href.startsWith("http")
+                                        ? {
+                                              target: "_blank",
+                                              rel: "noopener noreferrer",
+                                          }
+                                        : {})}
                                 >
                                     {row.value}
                                 </a>
@@ -124,6 +132,15 @@ export function Contact({ accent }: Props) {
                         </div>
                     ) : (
                         <>
+                            {/* Honeypot: hidden from humans, bots fill it and get silently dropped */}
+                            <input
+                                type="text"
+                                name="company"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                aria-hidden="true"
+                                className="absolute -left-[9999px] h-0 w-0 opacity-0"
+                            />
                             <Field label="Your name">
                                 <input
                                     type="text"

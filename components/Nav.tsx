@@ -2,7 +2,7 @@
 
 import type { Persona } from "@/lib/portfolio";
 import { PersonaToggle } from "./PersonaToggle";
-import { portfolio, Portfolio } from "@/lib/portfolio";
+import { portfolio } from "@/lib/portfolio";
 
 type Props = {
     persona: Persona;
@@ -61,6 +61,7 @@ export function Nav({
                     className="ed-nav-link whitespace-nowrap"
                     data-hover
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
                     Résumé ↗
                 </a>

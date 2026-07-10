@@ -1,6 +1,6 @@
 import { portfolio, type Persona, type Skill } from "@/lib/portfolio";
 import { SectionHead } from "./SectionHead";
-import profilePicture from "../public/IMG_5571.jpeg";
+import profilePicture from "@/assets/portrait.jpeg";
 import Image from "next/image";
 
 type Props = { persona: Persona; accent: string };
@@ -44,14 +44,14 @@ export function About({ persona, accent }: Props) {
                         <>
                             A frontend developer with a{" "}
                             <em className="italic" style={{ color: accent }}>
-                                tester's eye.
+                                tester&apos;s eye.
                             </em>
                         </>
                     ) : (
                         <>
                             A QA engineer with a{" "}
                             <em className="italic" style={{ color: accent }}>
-                                frontend developer's
+                                frontend developer&apos;s
                             </em>{" "}
                             DNA.
                         </>
@@ -69,7 +69,7 @@ export function About({ persona, accent }: Props) {
             <div className="ed-reveal grid grid-cols-1 items-start gap-10 sm:gap-12 md:gap-14 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
                 <div className="max-w-sm lg:max-w-none">
                     <div
-                        className="rounded border bg-white/50 px-3.5 pt-3.5 pb-0"
+                        className="rounded border bg-bg-soft/60 px-3.5 pt-3.5 pb-0"
                         style={{ borderColor: accent, borderWidth: "0.5px" }}
                     >
                         <div
@@ -97,11 +97,11 @@ export function About({ persona, accent }: Props) {
                         className="m-0 mb-6 font-serif font-normal leading-[1.18] tracking-[-0.01em] sm:mb-8 md:mb-10"
                         style={{ fontSize: "clamp(22px, 5.5vw, 42px)" }}
                     >
-                        "I write code, then I try to break it.{" "}
+                        &ldquo;I write code, then I try to break it.{" "}
                         <em className="italic" style={{ color: accent }}>
                             Both jobs make the other one better.
                         </em>
-                        "
+                        &rdquo;
                     </p>
 
                     <div className="columns-1 gap-8 sm:gap-10 md:columns-2">
@@ -126,7 +126,7 @@ export function About({ persona, accent }: Props) {
                                     {grouped[g].map((s) => (
                                         <span
                                             key={s.name}
-                                            className="ed-skill rounded-full bg-[rgba(20,17,13,0.06)] px-3 py-1.5 font-mono text-[11px] font-medium sm:px-3.5 sm:py-2 sm:text-xs"
+                                            className="ed-skill rounded-full bg-chip px-3 py-1.5 font-mono text-[11px] font-medium sm:px-3.5 sm:py-2 sm:text-xs"
                                         >
                                             {s.name}
                                         </span>

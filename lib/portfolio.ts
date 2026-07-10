@@ -3,6 +3,10 @@
 
 export type Persona = "frontend" | "qa";
 
+// A word in the hero headline. Plain strings render normally,
+// { em } words render italic in the accent color.
+export type HeadlineWord = string | { em: string };
+
 export type Skill = {
     name: string;
     group: string;
@@ -23,7 +27,15 @@ export type Project = {
 export type Portfolio = {
     name: string;
     short: string;
-    taglines: Record<Persona, { hero: string; sub: string; bio: string }>;
+    taglines: Record<
+        Persona,
+        {
+            role: string;
+            headline: HeadlineWord[];
+            heroBio: string;
+            bio: string;
+        }
+    >;
     skills: Record<Persona, Skill[]>;
     projects: Record<Persona, Project[]>;
     social: { github: string; linkedin: string; email: string; resume: string };
@@ -35,13 +47,29 @@ export const portfolio: Portfolio = {
     short: "Ose",
     taglines: {
         frontend: {
-            hero: "Crafting Interfaces That Feel Alive",
-            sub: "Frontend Developer · Next.js · TypeScript · Motion",
+            role: "Frontend Developer",
+            headline: [
+                "Crafting",
+                "interfaces",
+                "that feel",
+                { em: "alive" },
+                ".",
+            ],
+            heroBio:
+                "I build web UIs with Next.js and TypeScript. I use GSAP for the animation work and I care a lot about how the finished product actually feels to use.",
             bio: "I'm Ose, a frontend developer. I mostly work in Next.js and TypeScript and have been building UIs for a few years now. I use GSAP for animation work: scroll triggers, hero sections, transitions. I pay a lot of attention to how things feel to actually use, which sounds vague, but it usually makes a difference in the end.",
         },
         qa: {
-            hero: "Breaking Things So Users Never Have To",
-            sub: "QA Engineer · Web & Mobile Automation · Fintech · TypeScript",
+            role: "QA Engineer",
+            headline: [
+                "Breaking",
+                "things so",
+                "users",
+                { em: "never" },
+                "have to.",
+            ],
+            heroBio:
+                "I write the tests that catch bugs before your users do. Selenium, Appium, Playwright, Postman, I've used all of them in production and know my way around each one.",
             bio: "I'm Ose, a QA engineer. Most of my experience has been in fintech, writing automation for mobile apps with Appium and WebdriverIO and web apps with Selenium or Playwright, all in TypeScript. For API testing I use Postman, Swagger or Hoppscotch. My frontend background helps a lot here. I can read through the codebase when I need to and usually figure out what's going wrong a lot faster.",
         },
     },
@@ -70,9 +98,10 @@ export const portfolio: Portfolio = {
             { name: "MongoDB", group: "api" },
             { name: "Mobile QA", group: "methods" },
             { name: "Web QA", group: "methods" },
+            { name: "Automated Testing", group: "methods" },
             { name: "E2E Testing", group: "methods" },
             { name: "Regression Testing", group: "methods" },
-            { name: "Automated Testing", group: "methods" },
+
             { name: "Jira / ClickUp", group: "methods" },
         ],
     },
@@ -129,7 +158,13 @@ export const portfolio: Portfolio = {
                 title: "Swag Labs Automation Suite",
                 tag: "E2E · UI Automation",
                 blurb: "End-to-end UI automation with TypeScript, Selenium WebDriver, and a Page Object Model architecture. Covers authentication, product flows, cart, checkout, and menu behavior. Allure reporting with step-level detail and automatic screenshots on failure.",
-                stack: ["Selenium WebDriver", "TypeScript", "Mocha", "Chai", "Allure"],
+                stack: [
+                    "Selenium WebDriver",
+                    "TypeScript",
+                    "Mocha",
+                    "Chai",
+                    "Allure",
+                ],
                 accent: "#f97316",
                 year: "2026",
                 githubLink:
