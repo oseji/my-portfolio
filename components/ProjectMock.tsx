@@ -7,6 +7,7 @@ import bingeImg from "@/assets/projects/frontend/binge.jpeg";
 import hrSphereImg from "@/assets/projects/frontend/hrsphere.jpeg";
 import ipAddressImg from "@/assets/projects/frontend/ipAddress.jpeg";
 import swagImg from "@/assets/projects/qa/swaglabs.png";
+import restfulImg from "@/assets/projects/qa/restful-booker.png";
 
 const PROJECT_IMAGES: Record<string, typeof pennywiseImg> = {
     pennywise: pennywiseImg,
@@ -14,6 +15,7 @@ const PROJECT_IMAGES: Record<string, typeof pennywiseImg> = {
     hrsphere: hrSphereImg,
     iptracker: ipAddressImg,
     swag: swagImg,
+    restful: restfulImg,
 };
 
 type Props = { project: Project };

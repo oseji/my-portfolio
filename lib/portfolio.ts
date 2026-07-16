@@ -70,7 +70,7 @@ export const portfolio: Portfolio = {
             ],
             heroBio:
                 "I write the tests that catch bugs before your users do. Selenium, Appium, Playwright, Postman, I've used all of them in production and know my way around each one.",
-            bio: "I'm Ose, a QA engineer. Most of my experience has been in fintech, writing automation for mobile apps with Appium and WebdriverIO and web apps with Selenium or Playwright, all in TypeScript. For API testing I use Postman, Swagger or Hoppscotch. My frontend background helps a lot here. I can read through the codebase when I need to and usually figure out what's going wrong a lot faster.",
+            bio: "I'm Ose, a QA engineer. Most of my experience has been in fintech, writing automation for mobile apps with Appium and WebdriverIO and web apps with Selenium or Playwright, all in TypeScript. For API testing I use Postman, Swagger or Hoppscotch. Lately I've been picking up k6 and moving further into API and performance testing. My frontend background helps a lot here. I can read through the codebase when I need to and usually figure out what's going wrong a lot faster.",
         },
     },
     skills: {
@@ -95,6 +95,7 @@ export const portfolio: Portfolio = {
             { name: "Postman", group: "api" },
             { name: "Swagger", group: "api" },
             { name: "Hoppscotch", group: "api" },
+            { name: "k6", group: "api" },
             { name: "MongoDB", group: "api" },
             { name: "Mobile QA", group: "methods" },
             { name: "Web QA", group: "methods" },
@@ -171,6 +172,19 @@ export const portfolio: Portfolio = {
                     "https://github.com/oseji/Swag-Labs-Automation-Project?tab=readme-ov-file#swaglabs-automation",
                 liveLink:
                     "https://github.com/oseji/Swag-Labs-Automation-Project",
+            },
+            {
+                id: "restful",
+                title: "Restful-Booker k6",
+                tag: "API · Performance",
+                blurb: "A k6 suite that walks the full booking lifecycle: auth, create, update, delete, then verify the delete took. Every step asserts on the data, not just the status code, and carries its own latency budget under load peaking at 25 concurrent users. Testing it surfaced six API quirks, including a DELETE that returns 201.",
+                stack: ["k6", "JavaScript", "Performance Testing"],
+                accent: "#7d64ff",
+                year: "2026",
+                githubLink:
+                    "https://github.com/oseji/restful-booker-k6-project/blob/main/README.md",
+                liveLink:
+                    "https://github.com/oseji/restful-booker-k6-project.git",
             },
         ],
     },
