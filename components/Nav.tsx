@@ -2,7 +2,8 @@
 
 import type { Persona } from "@/lib/portfolio";
 import { PersonaToggle } from "./PersonaToggle";
-import { portfolio } from "@/lib/portfolio";
+// Only used by the Résumé nav link, commented out below.
+// import { portfolio } from "@/lib/portfolio";
 
 type Props = {
     persona: Persona;
@@ -56,7 +57,7 @@ export function Nav({
                 >
                     Contact
                 </a>
-                <a
+                {/* <a
                     href={portfolio.social.resume}
                     className="ed-nav-link whitespace-nowrap"
                     data-hover
@@ -64,7 +65,7 @@ export function Nav({
                     rel="noopener noreferrer"
                 >
                     Résumé ↗
-                </a>
+                </a> */}
             </nav>
 
             <div className="order-2 md:order-3 flex flex-row items-center gap-3">
