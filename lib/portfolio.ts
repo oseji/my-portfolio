@@ -186,6 +186,19 @@ export const portfolio: Portfolio = {
                 liveLink:
                     "https://github.com/oseji/restful-booker-k6-project.git",
             },
+            {
+                id: "fundtransfer",
+                title: "Fintech Fund Transfer API",
+                tag: "API · Case Study",
+                blurb: "An end-to-end QA case study for a fund transfer endpoint on a digital wallet platform: test strategy, an 18 case catalogue with boundary value analysis, a security and compliance approach, and an automated suite of 8 scenarios and 21 assertions covering the happy path plus every failure class, up to the approval workflow that trips above £5,000. Written from the specification alone, with a mock server generated from the collection's own saved examples so the whole run reproduces in two commands.",
+                stack: ["Postman", "Newman", "JavaScript", "Mock Server"],
+                accent: "#10b981",
+                year: "2026",
+                githubLink:
+                    "https://github.com/oseji/fintech-fund-transfer-api-testing/blob/main/README.md",
+                liveLink:
+                    "https://github.com/oseji/fintech-fund-transfer-api-testing.git",
+            },
         ],
     },
     social: {
