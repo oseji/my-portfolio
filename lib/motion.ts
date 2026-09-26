@@ -559,28 +559,6 @@ export function setupReveals(root: HTMLElement, persona: Persona) {
             });
         }
     }
-
-    // Frontend plates drift inside their frames as they cross the viewport.
-    if (persona === "frontend") {
-        gsap.utils
-            .toArray<HTMLElement>(".plate__img", root)
-            .forEach((img) => {
-                gsap.fromTo(
-                    img,
-                    { yPercent: -4 },
-                    {
-                        yPercent: 4,
-                        ease: "none",
-                        scrollTrigger: {
-                            trigger: img.parentElement,
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: true,
-                        },
-                    },
-                );
-            });
-    }
 }
 
 // ─── Persona exit ─────────────────────────────────────────────

@@ -1165,6 +1165,10 @@ html[data-persona] .tag[aria-pressed="true"]::before {
     display: block;
     width: 100%;
     height: auto;
+    transition: transform 0.6s var(--ease-plot);
+}
+.case__exhibit:hover .exhibit__frame img {
+    transform: scale(1.03);
 }
 .exhibit__scan {
     position: absolute;
@@ -1400,7 +1404,7 @@ html[data-persona="frontend"] .cov .tick {
 }
 .plate__img {
     position: absolute;
-    inset: -4.5%;
+    inset: 0;
 }
 .plate__img img {
     object-fit: cover;
@@ -1975,7 +1979,11 @@ html.motion:not(.motion-ready) [data-hero] {
     .readout__label::after {
         content: none;
     }
-    .plate__media:hover .plate__img img {
+    .plate__media:hover .plate__img img,
+    .case__exhibit:hover .exhibit__frame img {
         transform: none;
+    }
+    .exhibit__frame img {
+        transition: none;
     }
 }
