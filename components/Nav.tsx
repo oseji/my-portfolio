@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import type { Persona } from "@/lib/portfolio";
+import { ScrollTrigger, useGSAP } from "@/lib/motion";
 import { PersonaToggle } from "./PersonaToggle";
 // Only used by the Résumé nav link, commented out below.
 // import { portfolio } from "@/lib/portfolio";
@@ -8,110 +10,115 @@ import { PersonaToggle } from "./PersonaToggle";
 type Props = {
     persona: Persona;
     setPersona: (p: Persona) => void;
-    accent: string;
     isDark: boolean;
-    toggleDark: () => void;
+    toggleDark: (e?: { currentTarget: EventTarget | null }) => void;
 };
 
-export function Nav({
-    persona,
-    setPersona,
-    accent,
-    isDark,
-    toggleDark,
-}: Props) {
+const LINKS = [
+    { id: "work", label: "Work" },
+    { id: "about", label: "About" },
+    { id: "contact", label: "Contact" },
+];
+
+export function Nav({ persona, setPersona, isDark, toggleDark }: Props) {
+    const [current, setCurrent] = useState<string | null>(null);
+
+    // Scroll-spy: the section under the strip is marked current.
+    useGSAP(() => {
+        const triggers = LINKS.map(({ id }) =>
+            ScrollTrigger.create({
+                trigger: `#${id}`,
+                start: "top 40%",
+                end: "bottom 40%",
+                onToggle: (self) => {
+                    if (self.isActive) setCurrent(id);
+                    else setCurrent((c) => (c === id ? null : c));
+                },
+            }),
+        );
+        return () => triggers.forEach((t) => t.kill());
+    });
+
     return (
-        <header className="sticky top-0 z-50 flex flex-wrap items-center justify-between gap-3 border-b border-line bg-[color-mix(in_srgb,var(--ed-bg)_80%,transparent)] px-4 py-3 backdrop-blur-[20px] sm:gap-4 sm:px-6 sm:py-4 md:gap-6 md:px-8 md:py-5 lg:px-12 lg:py-[22px]">
-            <div className="order-1 flex flex-1 items-center gap-3 sm:gap-4 md:flex-none md:gap-6">
-                <span className="inline-flex items-center gap-2 whitespace-nowrap font-mono text-xs font-medium tracking-[.02em] sm:text-sm">
-                    <span
-                        className="inline-block h-2 w-2 flex-none rounded-full"
-                        style={{ background: accent }}
-                    />
+        <header className="strip">
+            <div className="shell strip__row">
+                <a href="#top" className="wordmark">
                     Ose Oziegbe
-                </span>
-                <span className="hidden whitespace-nowrap border-l border-line pl-6 font-mono text-[10px] font-medium uppercase leading-snug tracking-[.08em] text-muted lg:inline-block">
-                    Portfolio · {new Date().getFullYear()}
-                </span>
-            </div>
+                </a>
 
-            <nav className="order-3 -mx-4 flex w-full gap-5 overflow-x-auto px-4 pt-3 font-sans text-xs font-medium [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-6 sm:text-[13px] md:order-2 md:mx-0 md:w-auto md:gap-7 md:overflow-visible md:px-0 md:pt-0">
-                <a
-                    href="#work"
-                    className="ed-nav-link whitespace-nowrap"
-                    data-hover
-                >
-                    Work
-                </a>
-                <a
-                    href="#about"
-                    className="ed-nav-link whitespace-nowrap"
-                    data-hover
-                >
-                    About
-                </a>
-                <a
-                    href="#contact"
-                    className="ed-nav-link whitespace-nowrap"
-                    data-hover
-                >
-                    Contact
-                </a>
-                {/* <a
-                    href={portfolio.social.resume}
-                    className="ed-nav-link whitespace-nowrap"
-                    data-hover
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Résumé ↗
-                </a> */}
-            </nav>
-
-            <div className="order-2 md:order-3 flex flex-row items-center gap-3">
-                {/* Dark mode toggle */}
-                <button
-                    onClick={toggleDark}
-                    data-hover
-                    aria-label="Toggle dark mode"
-                    className="cursor-none rounded-full border border-line p-2 text-muted transition-colors hover:border-ink hover:text-ink"
-                >
-                    {isDark ? (
-                        /* Sun icon */
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
+                <nav className="strip__nav" aria-label="Sections">
+                    {LINKS.map((l) => (
+                        <a
+                            key={l.id}
+                            href={`#${l.id}`}
+                            className="navlink"
+                            aria-current={current === l.id ? "true" : undefined}
                         >
-                            <circle cx="12" cy="12" r="4" />
-                            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-                        </svg>
-                    ) : (
-                        /* Moon icon */
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                        >
-                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                        </svg>
-                    )}
-                </button>
+                            {l.label}
+                        </a>
+                    ))}
+                    {/* <a
+                        href={portfolio.social.resume}
+                        className="navlink"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Résumé ↗
+                    </a> */}
+                </nav>
 
-                <PersonaToggle
-                    value={persona}
-                    onChange={setPersona}
-                    accent={accent}
-                />
+                <div className="strip__controls">
+                    <button
+                        type="button"
+                        onClick={toggleDark}
+                        className="icon-btn"
+                        aria-label={
+                            isDark
+                                ? "Switch to light theme"
+                                : "Switch to dark theme"
+                        }
+                        aria-pressed={isDark}
+                    >
+                        {isDark ? <SunIcon /> : <MoonIcon />}
+                    </button>
+                    <PersonaToggle value={persona} onChange={setPersona} />
+                </div>
             </div>
         </header>
+    );
+}
+
+function SunIcon() {
+    return (
+        <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="square"
+            aria-hidden="true"
+        >
+            <circle cx="12" cy="12" r="4.25" />
+            <path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8" />
+        </svg>
+    );
+}
+
+function MoonIcon() {
+    return (
+        <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinejoin="round"
+            aria-hidden="true"
+        >
+            <path d="M20.5 14.2A8.5 8.5 0 1 1 9.8 3.5a6.8 6.8 0 0 0 10.7 10.7Z" />
+        </svg>
     );
 }
