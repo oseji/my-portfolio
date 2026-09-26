@@ -42,3 +42,9 @@ yarn-error.log*
 next-env.d.ts
 
 .claude/
+
+# local docs (kept out of the repo)
+PRODUCT.md
+DESIGN.md
+CLAUDE.md
+AGENTS.md
