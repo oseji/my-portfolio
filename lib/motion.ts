@@ -533,6 +533,33 @@ export function setupReveals(root: HTMLElement, persona: Persona) {
         });
     });
 
+    // Frontend plates lean with scroll velocity and settle back, like a
+    // flexible curve under a hand. QA exhibits stay rigid on purpose.
+    if (persona === "frontend") {
+        const frames = gsap.utils.toArray<HTMLElement>(".plate__frame", root);
+        // Desktop pointers only: touch momentum scrolling doesn't need it.
+        if (frames.length && window.matchMedia("(pointer: fine)").matches) {
+            const setSkew = gsap.quickSetter(frames, "skewY", "deg");
+            const lean = gsap.utils.clamp(-3.5, 3.5);
+            const proxy = { skew: 0 };
+            ScrollTrigger.create({
+                onUpdate: (self) => {
+                    const s = lean(self.getVelocity() / -450);
+                    if (Math.abs(s) > Math.abs(proxy.skew)) {
+                        proxy.skew = s;
+                        gsap.to(proxy, {
+                            skew: 0,
+                            duration: 0.9,
+                            ease: "power3",
+                            overwrite: true,
+                            onUpdate: () => setSkew(proxy.skew),
+                        });
+                    }
+                },
+            });
+        }
+    }
+
     // Frontend plates drift inside their frames as they cross the viewport.
     if (persona === "frontend") {
         gsap.utils
@@ -596,4 +623,45 @@ export function exitVisible(persona: Persona): Promise<HTMLElement[]> {
             });
         }
     });
+}
+
+// ─── Replay ───────────────────────────────────────────────────
+// Hovering a readout re-runs it, the way you'd re-run a suite.
+
+export function replay(el: HTMLElement) {
+    if (el.dataset.replaying) return;
+    const build = BUILDERS[el.dataset.reveal ?? ""];
+    if (!build) return;
+    const p: Persona =
+        document.documentElement.dataset.persona === "frontend" ? "frontend" : "qa";
+    el.dataset.replaying = "1";
+    build(el, p)
+        .eventCallback("onComplete", () => {
+            delete el.dataset.replaying;
+        })
+        .play(0);
+}
+
+// ─── Lens sweep ───────────────────────────────────────────────
+// A single pass across the viewport that carries a persona switch, in the
+// incoming persona's grammar: a redline scanning across for QA, a soft
+// cobalt wash for Frontend. Runs from the switch's side of the screen.
+
+export function sweep(el: HTMLElement, to: Persona) {
+    const vw = window.innerWidth;
+    const tl = gsap.timeline();
+    if (to === "qa") {
+        const line = el.querySelector<HTMLElement>(".sweep__line");
+        if (!line) return tl;
+        tl.set(line, { autoAlpha: 1, x: vw })
+            .to(line, { x: -140, duration: 0.75, ease: "plot" })
+            .set(line, { autoAlpha: 0 });
+    } else {
+        const wash = el.querySelector<HTMLElement>(".sweep__wash");
+        if (!wash) return tl;
+        tl.set(wash, { autoAlpha: 1, x: vw })
+            .to(wash, { x: -wash.offsetWidth, duration: 1.1, ease: "power2.inOut" })
+            .set(wash, { autoAlpha: 0 });
+    }
+    return tl;
 }

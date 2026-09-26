@@ -5,6 +5,7 @@ import { portfolio, type Persona } from "@/lib/portfolio";
 import { gsap, prefersReduced, useGSAP } from "@/lib/motion";
 import { Words } from "./Words";
 import { Magnetic } from "./Magnetic";
+import { ProjectMock } from "./ProjectMock";
 import { ArrowDown, ArrowUpRight } from "./Icons";
 
 type Props = { persona: Persona };
@@ -14,6 +15,8 @@ export function Hero({ persona }: Props) {
     const field = useRef<HTMLDivElement>(null);
     const dim = useRef<HTMLDivElement>(null);
     const span = useRef<HTMLDivElement>(null);
+    const cursor = useRef<HTMLDivElement>(null);
+    const peek = useRef<HTMLDivElement>(null);
     const played = useRef(false);
 
     const { role, headline, heroBio } = portfolio.taglines[persona];
@@ -80,11 +83,160 @@ export function Hero({ persona }: Props) {
             };
             const hide = () => {
                 current = null;
+                gsap.killTweensOf([d, s, line, val]);
                 gsap.to([d, s], { opacity: 0, duration: 0.2, ease: "none" });
             };
             inspect.current = { show, hide };
         },
         { scope: root },
+    );
+
+    // ─── Ruler cursor and project peek ────────────────────────
+    const track = useRef<{
+        move: (e: React.PointerEvent) => void;
+        leave: () => void;
+        peekShow: (id: string, e: React.PointerEvent) => void;
+        peekMove: (e: React.PointerEvent) => void;
+        peekHide: () => void;
+    } | null>(null);
+
+    useGSAP(
+        () => {
+            const f = field.current;
+            const c = cursor.current;
+            const root_ = root.current;
+            if (!f || !c || !root_) return;
+            const label = c.querySelector<HTMLElement>(".ruler__cursor-val");
+            const qa = persona === "qa";
+            const reduced = prefersReduced();
+            const cx = gsap.quickTo(c, "x", { duration: 0.5, ease: "curve" });
+
+            const pk = peek.current;
+            const px = pk && gsap.quickTo(pk, "x", { duration: 0.6, ease: "curve" });
+            const py = pk && gsap.quickTo(pk, "y", { duration: 0.6, ease: "curve" });
+            const pr = pk && gsap.quickTo(pk, "rotation", { duration: 0.8, ease: "curve" });
+            let lastX = 0;
+            let shownId: string | null = null;
+
+            const index = root_.querySelector(".sheet-index");
+            const place = (e: React.PointerEvent, snap: boolean) => {
+                if (!pk) return;
+                const r = root_.getBoundingClientRect();
+                // Sit left of the pointer, but never over the index itself.
+                const limit = index
+                    ? index.getBoundingClientRect().left - r.left - pk.offsetWidth - 24
+                    : Infinity;
+                let x = Math.min(e.clientX - r.left - pk.offsetWidth - 28, limit);
+                let y = e.clientY - r.top - pk.offsetHeight / 2;
+                if (snap) {
+                    x = Math.round(x / 8) * 8;
+                    y = Math.round(y / 8) * 8;
+                }
+                return { x, y };
+            };
+
+            track.current = {
+                move: (e) => {
+                    const fr = f.getBoundingClientRect();
+                    let x = gsap.utils.clamp(0, fr.width, e.clientX - fr.left);
+                    // The checker's cursor snaps to the ruler's ticks.
+                    if (qa) x = Math.round(x / 10) * 10;
+                    if (label) label.textContent = String(Math.round(x));
+                    if (qa || reduced) gsap.set(c, { x });
+                    else cx(x);
+                    gsap.to(c, { opacity: 1, duration: 0.15, overwrite: "auto" });
+                },
+                leave: () => {
+                    gsap.to(c, { opacity: 0, duration: 0.25 });
+                },
+                peekShow: (id, e) => {
+                    if (!pk || reduced) return;
+                    const imgs = pk.querySelectorAll<HTMLElement>(".peek__img");
+                    imgs.forEach((im) =>
+                        gsap.set(im, { autoAlpha: im.dataset.id === id ? 1 : 0 }),
+                    );
+                    const at = place(e, qa);
+                    if (!shownId) {
+                        gsap.set(pk, { ...at, rotation: 0 });
+                        if (qa)
+                            gsap.fromTo(
+                                pk,
+                                { autoAlpha: 1, clipPath: "inset(0 0 100% 0)" },
+                                { clipPath: "inset(0 0 0% 0)", duration: 0.3, ease: "plot" },
+                            );
+                        else
+                            gsap.fromTo(
+                                pk,
+                                { autoAlpha: 0, scale: 0.8 },
+                                { autoAlpha: 1, scale: 1, duration: 0.5, ease: "curve" },
+                            );
+                    } else if (qa) {
+                        // Swap the exhibit under a scan, like changing sheets.
+                        gsap.fromTo(
+                            pk,
+                            { clipPath: "inset(0 100% 0 0)" },
+                            { clipPath: "inset(0 0% 0 0)", duration: 0.22, ease: "plot" },
+                        );
+                    }
+                    shownId = id;
+                    lastX = e.clientX;
+                },
+                peekMove: (e) => {
+                    if (!pk || !shownId || reduced) return;
+                    const at = place(e, qa);
+                    if (!at) return;
+                    if (qa) {
+                        gsap.set(pk, at);
+                    } else {
+                        px?.(at.x);
+                        py?.(at.y);
+                        pr?.(gsap.utils.clamp(-9, 9, (e.clientX - lastX) * 0.6));
+                        lastX = e.clientX;
+                    }
+                },
+                peekHide: () => {
+                    if (!pk) return;
+                    shownId = null;
+                    gsap.to(pk, { autoAlpha: 0, duration: 0.2, ease: "none" });
+                },
+            };
+        },
+        { scope: root, dependencies: [persona], revertOnUpdate: true },
+    );
+
+    // ─── Leaving the hero ─────────────────────────────────────
+    // QA: the headline recedes as one rigid plate. Frontend: its words
+    // drift apart at different rates, like layers.
+    useGSAP(
+        () => {
+            const el = root.current;
+            if (!el || prefersReduced()) return;
+            const $ = gsap.utils.selector(el);
+            const st = { trigger: el, start: "top top", end: "bottom top" };
+            if (persona === "qa") {
+                gsap.to($(".headline"), {
+                    y: 110,
+                    opacity: 0.25,
+                    ease: "none",
+                    scrollTrigger: { ...st, scrub: true },
+                });
+            } else {
+                $(".headline .wi").forEach((w, i) =>
+                    gsap.to(w, {
+                        y: 50 + i * 22,
+                        skewY: i % 2 ? 3 : -3,
+                        ease: "none",
+                        scrollTrigger: { ...st, scrub: 1.2 },
+                    }),
+                );
+                gsap.to($(".headline"), {
+                    opacity: 0.3,
+                    ease: "none",
+                    scrollTrigger: { ...st, scrub: 1.2 },
+                });
+            }
+        },
+        { scope: root, dependencies: [persona], revertOnUpdate: true },
     );
 
     // Once the visitor starts measuring, the load-time demo stops steering.
@@ -110,6 +262,7 @@ export function Hero({ persona }: Props) {
             }
             const first = !played.current;
             let cancelled = false;
+            inspect.current?.hide();
             const $ = gsap.utils.selector(el);
             const qa = persona === "qa";
             const tl = gsap.timeline({ paused: true });
@@ -296,10 +449,17 @@ export function Hero({ persona }: Props) {
                 ref={field}
                 className="field"
                 onPointerOver={onOver}
-                onPointerLeave={() => inspect.current?.hide()}
+                onPointerMove={(e) => e.pointerType === "mouse" && track.current?.move(e)}
+                onPointerLeave={() => {
+                    inspect.current?.hide();
+                    track.current?.leave();
+                }}
             >
                 <Ruler />
                 <div ref={span} className="ruler__span" aria-hidden="true" />
+                <div ref={cursor} className="ruler__cursor" aria-hidden="true">
+                    <span className="ruler__cursor-val" />
+                </div>
 
                 <p className="status t-label" data-hero data-swap key={`s-${persona}`}>
                     <span>{role}</span>
@@ -340,27 +500,43 @@ export function Hero({ persona }: Props) {
                         </Magnetic>
                         <a href="#work" className="btn btn--line">
                             See selected work
-                            <ArrowDown />
+                            <ArrowDown className="arrow arrow--down" />
                         </a>
                     </div>
                 </div>
 
                 <nav className="sheet-index" aria-label="Selected work" data-swap>
                     <p className="sheet-index__label t-label">Selected work</p>
-                    <ul>
+                    <ul onPointerLeave={() => track.current?.peekHide()}>
                         {projects.map((p) => (
                             <li key={p.id}>
-                                <a href={`#project-${p.id}`}>
+                                <a
+                                    href={`#project-${p.id}`}
+                                    onPointerEnter={(e) =>
+                                        e.pointerType === "mouse" && track.current?.peekShow(p.id, e)
+                                    }
+                                    onPointerMove={(e) =>
+                                        e.pointerType === "mouse" && track.current?.peekMove(e)
+                                    }
+                                >
                                     <span className="sheet-index__title">{p.title}</span>
                                     <span className="sheet-index__meta t-label t-muted">
                                         {p.tag.split(" · ")[0]} · {p.year}
                                     </span>
-                                    <ArrowDown size={12} />
+                                    <ArrowDown size={12} className="arrow arrow--down" />
                                 </a>
                             </li>
                         ))}
                     </ul>
                 </nav>
+
+                <div ref={peek} className="peek" aria-hidden="true">
+                    {projects.map((p) => (
+                        <div key={p.id} className="peek__img" data-id={p.id}>
+                            <ProjectMock project={p} fill sizes="340px" />
+                        </div>
+                    ))}
+                </div>
             </div>
         </section>
     );

@@ -9,6 +9,7 @@ import {
     gsap,
     prefersReduced,
     setupReveals,
+    sweep,
     useGSAP,
     visibleSwaps,
 } from "@/lib/motion";
@@ -46,6 +47,7 @@ export default function Home() {
     const isDark = useSyncExternalStore(subscribe, getIsDark, () => false);
     const root = useRef<HTMLDivElement>(null);
     const switching = useRef(false);
+    const sweepRef = useRef<HTMLDivElement>(null);
 
     // Scroll reveals, rebuilt in the new grammar whenever the persona changes.
     // Whatever is on screen at that moment re-plots as one top-to-bottom pass.
@@ -105,6 +107,7 @@ export default function Home() {
                     { opacity: 1, duration: 0.25, ease: "none", clearProps: "opacity" },
                 );
             } else {
+                if (sweepRef.current) sweep(sweepRef.current, next);
                 const touched = await exitVisible(persona);
                 // Clear the exit styles and commit in the same task, so no
                 // frame is painted between the old content leaving and the
@@ -187,6 +190,10 @@ export default function Home() {
                     <Contact />
                 </main>
                 <Footer persona={persona} />
+            </div>
+            <div ref={sweepRef} className="sweep" aria-hidden="true">
+                <span className="sweep__line" />
+                <span className="sweep__wash" />
             </div>
         </>
     );

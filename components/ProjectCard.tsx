@@ -7,7 +7,7 @@
 
 import { useRef, type PointerEvent } from "react";
 import type { Project, Readout as ReadoutT } from "@/lib/portfolio";
-import { formatStat, gsap, prefersReduced, scanPass, useGSAP } from "@/lib/motion";
+import { formatStat, gsap, prefersReduced, replay, scanPass, useGSAP } from "@/lib/motion";
 import { EXHIBIT_CAPTIONS, ProjectMock } from "./ProjectMock";
 import { Words } from "./Words";
 import { ArrowUpRight, Tick } from "./Icons";
@@ -78,10 +78,17 @@ function Tags({ project, trace, onTrace }: { project: Project } & TraceProps) {
 
 // Readouts restate what the blurb already says, in the form a reviewer
 // would scan for: what was covered, how the suite walks, what it counted.
+function rerun(e: PointerEvent<HTMLElement>) {
+    if (e.pointerType !== "mouse" || prefersReduced()) return;
+    e.currentTarget
+        .querySelectorAll<HTMLElement>("[data-reveal]")
+        .forEach((el) => replay(el));
+}
+
 function Readout({ r }: { r: ReadoutT }) {
     if (r.kind === "coverage") {
         return (
-            <div className="readout">
+            <div className="readout" onPointerEnter={rerun}>
                 <span className="readout__label t-label">Flows covered</span>
                 <ul className="cov" data-reveal="coverage">
                     {r.items.map((item) => (
@@ -115,7 +122,7 @@ function Readout({ r }: { r: ReadoutT }) {
 
     if (r.kind === "figures") {
         return (
-            <div className="readout">
+            <div className="readout" onPointerEnter={rerun}>
                 <span className="readout__label t-label">Scope</span>
                 {figs}
             </div>
@@ -123,7 +130,7 @@ function Readout({ r }: { r: ReadoutT }) {
     }
 
     return (
-        <div className="readout">
+        <div className="readout" onPointerEnter={rerun}>
             <span className="readout__label t-label">Booking lifecycle</span>
             <div className="flow-wrap" data-reveal="flow">
                 <span className="flow__line" aria-hidden="true" />

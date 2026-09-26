@@ -60,6 +60,23 @@ export function Contact() {
         { dependencies: [submitted] },
     );
 
+    // Focusing a field wakes its label: re-lettered for QA, lifted for Frontend.
+    const onFocusField = (e: React.FocusEvent<HTMLFormElement>) => {
+        if (prefersReduced()) return;
+        const label = (e.target as Element)
+            .closest(".cell")
+            ?.querySelector<HTMLElement>(".cell__label");
+        if (!label || gsap.isTweening(label)) return;
+        if (document.documentElement.dataset.persona === "frontend") {
+            gsap.fromTo(label, { y: 5, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.55, ease: "curve" });
+        } else {
+            gsap.to(label, {
+                duration: 0.4,
+                scrambleText: { text: label.textContent ?? "", chars: "upperCase", speed: 0.9 },
+            });
+        }
+    };
+
     const rows = [
         { label: "Email", value: portfolio.social.email, href: `mailto:${portfolio.social.email}` },
         { label: "GitHub", value: "@oseji", href: portfolio.social.github },
@@ -98,6 +115,7 @@ export function Contact() {
 
                 <form
                     onSubmit={onSubmit}
+                    onFocus={onFocusField}
                     className="sheet"
                     data-reveal="cells"
                     aria-label="Contact form"
@@ -158,6 +176,7 @@ export function Contact() {
                                 <button type="submit" disabled={pending} className="btn">
                                     {pending ? "Sending…" : "Send message"}
                                     {!pending && <ArrowUpRight />}
+                                    {pending && <span className="btn__plot" aria-hidden="true" />}
                                 </button>
                             </div>
                             {/* Honeypot: hidden from humans, bots fill it and get silently dropped */}
