@@ -242,11 +242,17 @@ export function Hero({ persona }: Props) {
     // Once the visitor starts measuring, the load-time demo stops steering.
     const touched = useRef(false);
 
-    const onOver = (e: React.PointerEvent) => {
-        if (e.pointerType !== "mouse") return;
+    // Measure whichever word is under the pointer. Checked on every move,
+    // not just on pointerover, so it still works when the pointer is already
+    // resting on a word (e.g. it arrived while the words were still clipped
+    // by the entrance and couldn't be hit).
+    const onInspect = (e: React.PointerEvent) => {
+        if (e.pointerType === "touch") return;
+        const w = (e.target as Element).closest(".headline .w");
+        const word = w?.querySelector(".wi");
+        if (!word) return;
         touched.current = true;
-        const w = (e.target as Element).closest(".headline .wi");
-        if (w) inspect.current?.show(w);
+        inspect.current?.show(word);
     };
 
     // ─── The plot: entrance, and re-plot on persona change ─────
@@ -448,8 +454,11 @@ export function Hero({ persona }: Props) {
             <div
                 ref={field}
                 className="field"
-                onPointerOver={onOver}
-                onPointerMove={(e) => e.pointerType === "mouse" && track.current?.move(e)}
+                onPointerOver={onInspect}
+                onPointerMove={(e) => {
+                    onInspect(e);
+                    if (e.pointerType !== "touch") track.current?.move(e);
+                }}
                 onPointerLeave={() => {
                     inspect.current?.hide();
                     track.current?.leave();
