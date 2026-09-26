@@ -1,37 +1,49 @@
-import { portfolio } from "@/lib/portfolio";
+import { portfolio, type Persona } from "@/lib/portfolio";
+import { ArrowUpRight } from "./Icons";
 
-type Props = { accent: string };
+type Props = { persona: Persona };
 
-export function Footer({ accent }: Props) {
+// The drawing's title block. Both signatures are true; the active lens
+// marks whose hand you're looking at.
+export function Footer({ persona }: Props) {
     return (
-        <footer className="border-t border-line px-4 py-6 sm:px-6 sm:py-7 md:px-8 lg:px-12 lg:py-8">
-            <div className="mx-auto flex max-w-[1600px] flex-col flex-wrap items-center justify-between gap-5 sm:flex-row sm:gap-8 md:gap-10">
-                <div className="font-serif text-2xl font-normal sm:text-3xl">
-                    Ose<span style={{ color: accent }}>.</span>
+        <footer className="shell">
+            <div className="titleblock" data-reveal="titleblock">
+                <div className="tb tb--name">
+                    <span className="tb__k t-label">Title</span>
+                    <span className="tb__v">{portfolio.name}</span>
                 </div>
-                <div className="flex flex-col gap-1 text-center font-mono text-[10px] font-medium uppercase leading-snug tracking-[.04em] text-muted sm:text-[11px]">
-                    <span>© {new Date().getFullYear()} Ose Oziegbe</span>
-                    <span>{portfolio.footer}</span>
+                <div className={`tb${persona === "frontend" ? " tb--lens" : ""}`}>
+                    <span className="tb__k t-label">Drawn by</span>
+                    <span className="tb__v">{portfolio.name}</span>
                 </div>
-                <div className="flex flex-wrap justify-center gap-4 font-mono text-[11px] font-medium sm:gap-6 sm:text-xs">
-                    <a
-                        href={portfolio.social.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-hover
-                    >
-                        GitHub ↗
+                <div className={`tb${persona === "qa" ? " tb--lens" : ""}`}>
+                    <span className="tb__k t-label">Checked by</span>
+                    <span className="tb__v">{portfolio.name}</span>
+                </div>
+                <div className="tb">
+                    <span className="tb__k t-label">Based</span>
+                    <span className="tb__v">Lagos · Remote</span>
+                </div>
+                <div className="tb">
+                    <span className="tb__k t-label">Note</span>
+                    <span className="tb__v">{portfolio.footer}</span>
+                </div>
+                <div className="tb">
+                    <span className="tb__k t-label">Issued</span>
+                    <span className="tb__v">
+                        © {new Date().getFullYear()} {portfolio.name}
+                    </span>
+                </div>
+                <div className="tb tb--links">
+                    <a className="link" href={portfolio.social.github} target="_blank" rel="noopener noreferrer">
+                        GitHub <ArrowUpRight size={12} />
                     </a>
-                    <a
-                        href={portfolio.social.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-hover
-                    >
-                        LinkedIn ↗
+                    <a className="link" href={portfolio.social.linkedin} target="_blank" rel="noopener noreferrer">
+                        LinkedIn <ArrowUpRight size={12} />
                     </a>
-                    <a href={`mailto:${portfolio.social.email}`} data-hover>
-                        Email ↗
+                    <a className="link" href={`mailto:${portfolio.social.email}`}>
+                        Email <ArrowUpRight size={12} />
                     </a>
                 </div>
             </div>

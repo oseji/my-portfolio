@@ -7,7 +7,7 @@ import bingeImg from "@/assets/projects/frontend/binge.jpeg";
 import hrSphereImg from "@/assets/projects/frontend/hrsphere.jpeg";
 import ipAddressImg from "@/assets/projects/frontend/ipAddress.jpeg";
 import swagImg from "@/assets/projects/qa/swaglabs.png";
-import restfulImg from "@/assets/projects/qa/restful-booker.png";
+import restfulImg from "@/assets/projects/qa/restful-booker-k6-output.png";
 import fundTransferImg from "@/assets/projects/qa/fund-transfer-api.png";
 
 const PROJECT_IMAGES: Record<string, typeof pennywiseImg> = {
@@ -20,19 +20,36 @@ const PROJECT_IMAGES: Record<string, typeof pennywiseImg> = {
     fundtransfer: fundTransferImg,
 };
 
-type Props = { project: Project };
+// What each QA screenshot actually shows, for its exhibit caption.
+export const EXHIBIT_CAPTIONS: Record<string, string> = {
+    swag: "System under test",
+    restful: "k6 run output",
+    fundtransfer: "Test run report",
+};
 
-export function ProjectMock({ project }: Props) {
+type Props = {
+    project: Project;
+    fill?: boolean;
+    sizes?: string;
+};
+
+export function ProjectMock({ project, fill = false, sizes }: Props) {
     const src = PROJECT_IMAGES[project.id];
     if (!src) return null;
 
-    return (
+    return fill ? (
         <Image
             src={src}
             alt={`${project.title} screenshot`}
             fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-contain"
+            sizes={sizes ?? "(max-width: 1023px) 100vw, 60vw"}
+            placeholder="blur"
+        />
+    ) : (
+        <Image
+            src={src}
+            alt={`${project.title} screenshot`}
+            sizes={sizes ?? "(max-width: 1023px) 100vw, 45vw"}
             placeholder="blur"
         />
     );

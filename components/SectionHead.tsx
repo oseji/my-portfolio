@@ -1,42 +1,26 @@
 import type { ReactNode } from "react";
+import type { HeadlineWord } from "@/lib/portfolio";
+import { Words } from "./Words";
 
 type Props = {
-    index: string;
-    eyebrow: string;
-    title: ReactNode;
+    id: string;
+    title: HeadlineWord[] | string;
     sub?: ReactNode;
-    accent: string;
-    className?: string;
+    swapKey?: string;
 };
 
-export function SectionHead({ index, eyebrow, title, sub, accent, className = "" }: Props) {
+export function SectionHead({ id, title, sub, swapKey }: Props) {
     return (
-        <header className={`mb-10 grid grid-cols-1 items-end gap-5 sm:mb-14 sm:gap-8 md:mb-16 md:grid-cols-[1fr_2fr] md:gap-10 lg:mb-20 lg:gap-12 ${className}`}>
-            <div className="flex flex-col gap-2">
-                <span
-                    className="font-mono text-sm font-medium tracking-[.04em]"
-                    style={{ color: accent }}
-                >
-                    {index}
-                </span>
-                <span className="font-mono text-[11px] font-medium uppercase leading-snug tracking-[.08em] text-muted">
-                    {eyebrow}
-                </span>
-            </div>
-
-            <div>
-                <h2
-                    className="m-0 font-serif font-normal leading-none tracking-[-0.02em]"
-                    style={{ fontSize: "clamp(32px, 7vw, 72px)" }}
-                >
-                    {title}
-                </h2>
-                {sub && (
-                    <p className="mt-3 max-w-[60ch] font-sans text-[15px] leading-[1.5] text-muted sm:mt-4 sm:text-base">
-                        {sub}
-                    </p>
-                )}
-            </div>
+        <header className="sec-head grid12">
+            <span className="sec-head__rule" data-reveal="rule" aria-hidden="true" />
+            <h2 id={id} className="t-h2" data-reveal="words" data-swap key={`t-${swapKey}`}>
+                <Words segs={title} />
+            </h2>
+            {sub && (
+                <p className="sec-head__sub" data-reveal="fade" data-swap key={`s-${swapKey}`}>
+                    {sub}
+                </p>
+            )}
         </header>
     );
 }

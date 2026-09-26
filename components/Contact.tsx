@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
+import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import { portfolio } from "@/lib/portfolio";
+import { gsap, prefersReduced, useGSAP } from "@/lib/motion";
+import { SectionHead } from "./SectionHead";
+import { ArrowUpRight } from "./Icons";
 
-type Props = { accent: string };
-
-export function Contact({ accent }: Props) {
+export function Contact() {
     const [submitted, setSubmitted] = useState(false);
     const [pending, setPending] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const stampRef = useRef<HTMLDivElement>(null);
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -44,110 +46,104 @@ export function Contact({ accent }: Props) {
         }
     };
 
-    return (
-        <section
-            id="contact"
-            className="px-4 py-16 text-white sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-12 lg:py-32"
-            style={{ background: accent }}
-        >
-            <div className="mx-auto grid max-w-[1600px] grid-cols-1 items-start gap-10 sm:gap-12 md:gap-14 lg:grid-cols-2 lg:gap-20">
-                <div>
-                    <span className="font-mono text-[11px] font-medium uppercase tracking-[.08em] opacity-80">
-                        03 / Let&apos;s talk
-                    </span>
-                    <h2
-                        className="m-0 mt-3 mb-4 font-serif font-normal leading-[.98] tracking-[-0.02em] sm:mt-4 sm:mb-6"
-                        style={{ fontSize: "clamp(32px, 8vw, 80px)" }}
-                    >
-                        Got a project?{" "}
-                        <em className="italic opacity-85">
-                            Let&apos;s create something amazing
-                        </em>
-                        .
-                    </h2>
-                    <p className="m-0 mb-8 max-w-[40ch] font-sans text-[15px] leading-[1.5] opacity-90 sm:mb-10 sm:text-base md:text-[17px] lg:text-[18px]">
-                        Open for exciting freelance & full-time opportunities.
-                        Reply within 24h, usually faster.
-                    </p>
+    // The receipt is stamped onto the sheet.
+    useGSAP(
+        () => {
+            const s = stampRef.current;
+            if (!submitted || !s || prefersReduced()) return;
+            gsap.fromTo(
+                s,
+                { scale: 1.7, rotate: -14, opacity: 0 },
+                { scale: 1, rotate: -6, opacity: 1, duration: 0.42, ease: "settle" },
+            );
+        },
+        { dependencies: [submitted] },
+    );
 
-                    <div className="flex flex-col gap-4 border-t border-white/20 pt-5 sm:pt-6">
-                        {[
-                            {
-                                label: "Email",
-                                value: portfolio.social.email,
-                                href: `mailto:${portfolio.social.email}`,
-                            },
-                            {
-                                label: "Github",
-                                value: "@oseji",
-                                href: portfolio.social.github,
-                            },
-                            {
-                                label: "Linkedin",
-                                value: "Ose Oziegbe",
-                                href: portfolio.social.linkedin,
-                            },
-                        ].map((row) => (
-                            <div
-                                key={row.label}
-                                className="grid grid-cols-[80px_1fr] gap-4 font-mono text-xs font-medium leading-snug sm:grid-cols-[100px_1fr] sm:gap-6 sm:text-[13px]"
-                            >
-                                <span className="text-[10px] uppercase tracking-[.04em] opacity-65 sm:text-[11px]">
-                                    {row.label}
-                                </span>
+    // Focusing a field wakes its label: re-lettered for QA, lifted for Frontend.
+    const onFocusField = (e: React.FocusEvent<HTMLFormElement>) => {
+        if (prefersReduced()) return;
+        const label = (e.target as Element)
+            .closest(".cell")
+            ?.querySelector<HTMLElement>(".cell__label");
+        if (!label || gsap.isTweening(label)) return;
+        if (document.documentElement.dataset.persona === "frontend") {
+            gsap.fromTo(label, { y: 5, opacity: 0.4 }, { y: 0, opacity: 1, duration: 0.55, ease: "curve" });
+        } else {
+            gsap.to(label, {
+                duration: 0.4,
+                scrambleText: { text: label.textContent ?? "", chars: "upperCase", speed: 0.9 },
+            });
+        }
+    };
+
+    const rows = [
+        { label: "Email", value: portfolio.social.email, href: `mailto:${portfolio.social.email}` },
+        { label: "GitHub", value: "@oseji", href: portfolio.social.github },
+        { label: "LinkedIn", value: "Ose Oziegbe", href: portfolio.social.linkedin },
+    ];
+
+    return (
+        <section id="contact" className="shell sec" aria-labelledby="contact-title">
+            <SectionHead
+                id="contact-title"
+                swapKey="contact"
+                title={["Got a project?", { em: "Let's create something amazing" }, "."]}
+                sub="Open for exciting freelance & full-time opportunities. Reply within 24h, usually faster."
+            />
+
+            <div className="grid12">
+                <dl className="contact__rows" data-reveal="list">
+                    {rows.map((row) => (
+                        <div key={row.label}>
+                            <dt className="t-label">{row.label}</dt>
+                            <dd>
                                 <a
                                     href={row.href}
-                                    className="break-all hover:underline"
-                                    data-hover
+                                    className="link"
                                     {...(row.href.startsWith("http")
-                                        ? {
-                                              target: "_blank",
-                                              rel: "noopener noreferrer",
-                                          }
+                                        ? { target: "_blank", rel: "noopener noreferrer" }
                                         : {})}
                                 >
                                     {row.value}
+                                    <ArrowUpRight size={12} />
                                 </a>
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                            </dd>
+                        </div>
+                    ))}
+                </dl>
 
                 <form
                     onSubmit={onSubmit}
-                    className="flex flex-col gap-4 rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-[20px] sm:gap-[18px] sm:p-6 md:p-8"
+                    onFocus={onFocusField}
+                    className="sheet"
+                    data-reveal="cells"
+                    aria-label="Contact form"
+                    noValidate={false}
                 >
                     {submitted ? (
-                        <div className="flex flex-col items-center gap-2 p-8 text-center">
-                            <div
-                                className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-white text-2xl"
-                                style={{ color: accent }}
-                            >
-                                ✓
+                        <div className="sheet__done" role="status">
+                            <div ref={stampRef} className="stamp">
+                                <span className="stamp__big">Received</span>
+                                <span className="t-label">Checked · {new Date().getFullYear()}</span>
                             </div>
-                            <h3 className="m-0 font-serif text-3xl font-normal">
+                            <p className="t-h3" style={{ fontSize: "1.75rem" }}>
                                 Message received.
-                            </h3>
-                            <p className="m-0 opacity-85">Talk soon.</p>
+                            </p>
+                            <p className="t-muted" style={{ margin: 0 }}>
+                                Talk soon.
+                            </p>
                         </div>
                     ) : (
                         <>
-                            {/* Honeypot: hidden from humans, bots fill it and get silently dropped */}
-                            <input
-                                type="text"
-                                name="company"
-                                tabIndex={-1}
-                                autoComplete="off"
-                                aria-hidden="true"
-                                className="absolute -left-[9999px] h-0 w-0 opacity-0"
-                            />
                             <Field label="Your name">
                                 <input
                                     type="text"
                                     name="name"
                                     placeholder="e.g. Genevieve Anyanwu"
+                                    autoComplete="name"
                                     required
-                                    className="ed-input"
+                                    className="input"
                                 />
                             </Field>
                             <Field label="Email">
@@ -155,48 +151,43 @@ export function Contact({ accent }: Props) {
                                     type="email"
                                     name="email"
                                     placeholder="you@email.com"
+                                    autoComplete="email"
                                     required
-                                    className="ed-input"
+                                    className="input"
                                 />
                             </Field>
-                            <Field label="About the project">
+                            <Field label="About the project" wide>
                                 <textarea
-                                    rows={3}
+                                    rows={4}
                                     name="message"
                                     placeholder="A few lines on what you're building, timeline, budget..."
                                     required
-                                    className="ed-input resize-y"
+                                    className="input"
                                 />
                             </Field>
-                            {error && (
-                                <p className="text-center font-sans text-sm opacity-90">
-                                    {error}
+                            <div className="sheet__foot">
+                                <p
+                                    className={error ? "sheet__error" : "sheet__note t-label"}
+                                    role={error ? "alert" : undefined}
+                                    style={{ margin: 0 }}
+                                >
+                                    {error ?? "All fields required"}
                                 </p>
-                            )}
-                            <button
-                                type="submit"
-                                disabled={pending}
-                                className="mt-1.5 inline-flex cursor-none items-center justify-center gap-2.5 rounded-full bg-white p-4 font-sans text-sm font-medium transition-transform duration-200 ease-out hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed"
-                                style={{ color: accent }}
-                                data-hover
-                            >
-                                {pending ? "Sending…" : "Send message"}
-                                {!pending && (
-                                    <svg
-                                        width="14"
-                                        height="14"
-                                        viewBox="0 0 14 14"
-                                        fill="none"
-                                    >
-                                        <path
-                                            d="M3 11L11 3M11 3H5M11 3V9"
-                                            stroke="currentColor"
-                                            strokeWidth="1.6"
-                                            strokeLinecap="round"
-                                        />
-                                    </svg>
-                                )}
-                            </button>
+                                <button type="submit" disabled={pending} className="btn">
+                                    {pending ? "Sending…" : "Send message"}
+                                    {!pending && <ArrowUpRight />}
+                                    {pending && <span className="btn__plot" aria-hidden="true" />}
+                                </button>
+                            </div>
+                            {/* Honeypot: hidden from humans, bots fill it and get silently dropped */}
+                            <input
+                                type="text"
+                                name="company"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                aria-hidden="true"
+                                className="hp"
+                            />
                         </>
                     )}
                 </form>
@@ -205,10 +196,10 @@ export function Contact({ accent }: Props) {
     );
 }
 
-function Field({ label, children }: { label: string; children: ReactNode }) {
+function Field({ label, wide, children }: { label: string; wide?: boolean; children: ReactNode }) {
     return (
-        <label className="flex flex-col gap-2 font-mono text-xs font-medium uppercase tracking-[.04em] opacity-85">
-            <span>{label}</span>
+        <label className={`cell${wide ? " cell--wide" : ""}`}>
+            <span className="cell__label t-label">{label}</span>
             {children}
         </label>
     );

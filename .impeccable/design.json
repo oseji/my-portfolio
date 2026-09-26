@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-26T00:00:00Z",
+  "title": "Design System: Ose Oziegbe Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "paper": { "role": "neutral", "displayName": "Drafting Film", "canonical": "#eef2f4", "tonalRamp": ["#f7f9fa", "#eef2f4", "#e2e8ed"] },
+      "ink": { "role": "primary", "displayName": "Prussian Ink", "canonical": "#0f2340", "tonalRamp": ["#0f2340", "#475a74"] },
+      "cobalt": { "role": "primary", "displayName": "Cobalt Line", "canonical": "#2748d8", "tonalRamp": ["#2748d8", "#9cbbff"] },
+      "highlighter": { "role": "secondary", "displayName": "Checker's Highlighter", "canonical": "#ffdc3a", "tonalRamp": ["#ffdc3a"] },
+      "red-pencil": { "role": "secondary", "displayName": "Red Pencil", "canonical": "#c22f28", "tonalRamp": ["#c22f28", "#ff9a8c"] },
+      "blueprint-paper": { "role": "neutral", "displayName": "Cyanotype Ground", "canonical": "#113a6b", "tonalRamp": ["#15437a", "#113a6b", "#0d3160"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero headline only; Archivo wdth 118." },
+      "h2": { "displayName": "Section title", "purpose": "One per section, under its plotted rule." },
+      "label": { "displayName": "Title-block lettering", "purpose": "Condensed caps for meta, captions, and field labels." },
+      "data": { "displayName": "Measured values", "purpose": "Ruler, redlines, HTTP, counts. Never decoration." }
+    },
+    "shadows": [
+      { "name": "peek", "value": "0 18px 40px -18px rgb(15 35 64 / 0.14)", "purpose": "The floating project preview; the only element that sits above the sheet." }
+    ],
+    "motion": [
+      { "name": "plot", "value": "cubic-bezier(0.7, 0, 0.3, 1)", "purpose": "Straightedge (QA): even, deliberate travel that lands exactly. Wipes, rules, redlines." },
+      { "name": "settle", "value": "cubic-bezier(0.2, 0.9, 0.1, 1)", "purpose": "Straightedge snaps: stamps, nodes, magnets returning." },
+      { "name": "curve", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "French curve (Frontend): long fluid deceleration. Rises, blooms, glides." },
+      { "name": "qa-counter", "value": "steps(min(n, 20))", "purpose": "Checker counts in visible increments." },
+      { "name": "theme-print", "value": "View Transition clip, 820ms plot (QA) / 1000ms circle bloom from the switch (Frontend)", "purpose": "A change of print." }
+    ],
+    "breakpoints": [
+      { "name": "phone", "value": "767px" },
+      { "name": "tablet", "value": "1023px" },
+      { "name": "shell", "value": "1440px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Ink block; the lens's field wipes in on hover.",
+      "html": "<a class=\"ds-btn\">Start a project <span>↗</span></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 22px;background:#0f2340;color:#eef2f4;border:1px solid #0f2340;border-radius:2px;font:650 15px Archivo,system-ui,sans-serif;position:relative;overflow:hidden;isolation:isolate}.ds-btn::before{content:\"\";position:absolute;inset:0;z-index:-1;background:#ffdc3a;clip-path:inset(0 100% 0 0);transition:clip-path .38s cubic-bezier(.7,0,.3,1)}.ds-btn:hover{color:#0f2340}.ds-btn:hover::before{clip-path:inset(0)}"
+    },
+    {
+      "name": "Trace Tag",
+      "kind": "chip",
+      "refersTo": "tag",
+      "description": "A stack item that traces its tool across projects when pressed.",
+      "html": "<button class=\"ds-tag\" aria-pressed=\"true\">Tailwind ✓</button>",
+      "css": ".ds-tag{height:30px;padding:0 10px;border:1px solid #ffdc3a;border-radius:1px;background:#ffdc3a;color:#0f2340;font:550 13px Archivo,system-ui,sans-serif}"
+    },
+    {
+      "name": "Title-block Field",
+      "kind": "input",
+      "refersTo": "input-cell",
+      "description": "A labelled cell in the contact sheet grid.",
+      "html": "<label class=\"ds-cell\"><span>YOUR NAME</span><input placeholder=\"e.g. Genevieve Anyanwu\"></label>",
+      "css": ".ds-cell{display:flex;flex-direction:column;gap:4px;padding:12px 16px 14px;border:1px solid rgb(15 35 64/.38);background:#f7f9fa;font-family:Archivo,system-ui,sans-serif}.ds-cell span{font-size:12px;font-weight:600;letter-spacing:.09em;color:#475a74}.ds-cell input{border:0;background:transparent;font-size:18px;color:#0f2340;outline:none}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Drawn & Checked",
+    "overview": "An engineering drawing sheet for one person who both builds interfaces and breaks them. Whiteprint in light, cyanotype blueprint in dark. The persona switch chooses whose hand you see: the checker's highlighter and red pencil, or the drafter's cobalt ink.",
+    "keyCharacteristics": [
+      "Archivo on its width axis carries every role",
+      "Square forms, 1px rules, title-block cells",
+      "Two motion grammars: straightedge (QA) and French curve (Frontend)",
+      "Evidence restated from real project data"
+    ],
+    "rules": [
+      { "name": "The Lens Rule", "body": "--accent is a field, --accent-line is a stroke or text; components read the lens from html[data-persona].", "section": "colors" },
+      { "name": "The Highlighter Rule", "body": "Yellow sits behind navy ink only.", "section": "colors" },
+      { "name": "The Grammar Rule", "body": "Every animation is either straightedge or French curve; nothing uses a generic fade-up.", "section": "motion" }
+    ],
+    "dos": [
+      "Do keep content visible by default and give reduced motion a real alternative.",
+      "Do restate evidence from project blurbs, never embellish it."
+    ],
+    "donts": [
+      "Don't use pills, glass, gradient text, or decorative circles.",
+      "Don't use the mono face as decoration."
+    ]
+  }
+}

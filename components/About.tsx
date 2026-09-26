@@ -1,139 +1,125 @@
+"use client";
+
+import { useRef } from "react";
+import Image from "next/image";
 import { portfolio, type Persona, type Skill } from "@/lib/portfolio";
+import { fracture, prefersReduced } from "@/lib/motion";
 import { SectionHead } from "./SectionHead";
 import profilePicture from "@/assets/portrait.jpeg";
-import Image from "next/image";
 
-type Props = { persona: Persona; accent: string };
+type Props = { persona: Persona };
 
 const GROUP_LABELS: Record<Persona, Record<string, string>> = {
     frontend: { core: "Core stack", state: "State & data", ui: "UI & motion" },
     qa: { automation: "Automation", api: "API & Backend", methods: "Methods" },
 };
 
-export function About({ persona, accent }: Props) {
-    const bio =
-        persona === "frontend"
-            ? portfolio.taglines.frontend.bio
-            : portfolio.taglines.qa.bio;
-    const skills =
-        persona === "frontend"
-            ? portfolio.skills.frontend
-            : portfolio.skills.qa;
+export function About({ persona }: Props) {
+    const { bio } = portfolio.taglines[persona];
+    const skills = portfolio.skills[persona];
+    const brk = useRef<HTMLSpanElement>(null);
 
     const sentences = bio.split(". ").filter(Boolean);
     const half = Math.ceil(sentences.length / 2);
-    const col1 = sentences.slice(0, half).join(". ") + ".";
-    const col2 =
-        sentences.slice(half).join(". ") + (sentences.length > half ? "." : "");
+    const close = (t: string) => (t && !/[.!?]$/.test(t) ? t + "." : t);
+    const col1 = close(sentences.slice(0, half).join(". "));
+    const col2 = close(sentences.slice(half).join(". "));
 
     const grouped = skills.reduce<Record<string, Skill[]>>((acc, s) => {
         (acc[s.group] = acc[s.group] || []).push(s);
         return acc;
     }, {});
 
+    // Hovering "break it" breaks it again.
+    const rebreak = () => {
+        const el = brk.current;
+        if (!el || prefersReduced()) return;
+        const a = el.querySelector(".brk__a");
+        const b = el.querySelector(".brk__b");
+        if (a && b) fracture(a, b, persona);
+    };
+
     return (
-        <section
-            id="about"
-            className="mx-auto max-w-[1600px] px-4 py-16 sm:px-6 sm:py-20 md:px-8 md:py-24 lg:px-12 lg:py-32"
-        >
+        <section id="about" className="shell sec" aria-labelledby="about-title">
             <SectionHead
-                index="02 / About"
-                eyebrow="The person behind the work"
+                id="about-title"
+                swapKey={persona}
                 title={
-                    persona === "frontend" ? (
-                        <>
-                            A frontend developer with a{" "}
-                            <em className="italic" style={{ color: accent }}>
-                                tester&apos;s eye.
-                            </em>
-                        </>
-                    ) : (
-                        <>
-                            A QA engineer with a{" "}
-                            <em className="italic" style={{ color: accent }}>
-                                frontend developer&apos;s
-                            </em>{" "}
-                            DNA.
-                        </>
-                    )
+                    persona === "frontend"
+                        ? ["A frontend developer with a", { em: "tester's eye." }]
+                        : ["A QA engineer with a", { em: "frontend developer's" }, "DNA."]
                 }
                 sub={
                     persona === "frontend"
                         ? "I care as much about how an interface feels as how it works. Clean code, tested instincts, and I don't ship things I wouldn't want to use myself."
                         : "Having built UIs before means I know where most bugs tend to come from. I automate what I can, but I make sure I understand what's actually failing before I write a single test."
                 }
-                accent={accent}
-                className="ed-reveal"
             />
 
-            <div className="ed-reveal grid grid-cols-1 items-start gap-10 sm:gap-12 md:gap-14 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
-                <div className="max-w-sm lg:max-w-none">
-                    <div
-                        className="rounded border bg-bg-soft/60 px-3.5 pt-3.5 pb-0"
-                        style={{ borderColor: accent, borderWidth: "0.5px" }}
-                    >
-                        <div
-                            className="relative overflow-hidden rounded-sm"
-                            style={{ aspectRatio: "4 / 5" }}
+            <div className="about grid12">
+                <figure className="about__photo" data-reveal="photo">
+                    <div className="photo__frame">
+                        <Image
+                            src={profilePicture}
+                            alt="Ose Oziegbe"
+                            fill
+                            sizes="(max-width: 767px) 90vw, (max-width: 1023px) 40vw, 30vw"
+                            placeholder="blur"
+                        />
+                    </div>
+                    <figcaption className="t-label">
+                        <span>Ose Oziegbe</span>
+                        <span>Lagos · Remote</span>
+                    </figcaption>
+                </figure>
+
+                <div className="about__main">
+                    <blockquote className="quote" data-reveal="quote">
+                        <span className="w"><span className="wi">&ldquo;I write code,</span></span>{" "}
+                        <span className="w"><span className="wi">then I try to</span></span>{" "}
+                        <span
+                            ref={brk}
+                            className="brk"
+                            onPointerEnter={(e) => e.pointerType === "mouse" && rebreak()}
                         >
-                            <Image
-                                src={profilePicture}
-                                alt="Ose Oziegbe"
-                                fill
-                                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 60vw, 35vw"
-                                className="object-cover"
-                                placeholder="blur"
-                            />
-                        </div>
-                        <div className="flex justify-between px-1 py-3 font-mono text-[11px] font-medium uppercase leading-none tracking-[.04em] text-muted">
-                            <span>Ose Oziegbe</span>
-                            <span>Lagos · Remote</span>
-                        </div>
-                    </div>
-                </div>
+                            <span className="w">
+                                <span className="wi brk__wi">
+                                    <span className="brk__a">break it.</span>
+                                    <span className="brk__b" aria-hidden="true">
+                                        break it.
+                                    </span>
+                                </span>
+                            </span>
+                        </span>{" "}
+                        <span className="second">
+                            <span className="w"><span className="wi">Both jobs make the</span></span>{" "}
+                            <span className="w"><span className="wi">other one better.&rdquo;</span></span>
+                        </span>
+                    </blockquote>
 
-                <div>
-                    <p
-                        className="m-0 mb-6 font-serif font-normal leading-[1.18] tracking-[-0.01em] sm:mb-8 md:mb-10"
-                        style={{ fontSize: "clamp(22px, 5.5vw, 42px)" }}
-                    >
-                        &ldquo;I write code, then I try to break it.{" "}
-                        <em className="italic" style={{ color: accent }}>
-                            Both jobs make the other one better.
-                        </em>
-                        &rdquo;
-                    </p>
-
-                    <div className="columns-1 gap-8 sm:gap-10 md:columns-2">
-                        <p className="m-0 mb-4 break-inside-avoid font-sans text-[15px] leading-[1.6] text-ink sm:text-base">
-                            {col1}
-                        </p>
-                        <p className="m-0 mb-4 break-inside-avoid font-sans text-[15px] leading-[1.6] text-ink sm:text-base">
-                            {col2}
-                        </p>
+                    <div className="about__bio" data-reveal="fade" data-swap key={`b-${persona}`}>
+                        <p>{col1}</p>
+                        <p>{col2}</p>
                     </div>
 
-                    <div className="mt-8 flex flex-col gap-5 border-t border-line pt-6 sm:mt-10 sm:gap-6 sm:pt-7 md:mt-12 md:gap-7 md:pt-8">
-                        {Object.keys(grouped).map((g) => (
-                            <div
-                                key={g}
-                                className="grid grid-cols-1 items-start gap-3 sm:gap-4 md:grid-cols-[140px_1fr] md:gap-6"
-                            >
-                                <div className="pt-1.5 font-mono text-[11px] font-medium uppercase leading-snug tracking-[.08em] text-muted">
-                                    {GROUP_LABELS[persona][g] ?? g}
+                    <div className="parts" data-swap key={`p-${persona}`}>
+                        <p className="parts__cap t-label">Tools I work with</p>
+                        <dl data-reveal="list">
+                            {Object.keys(grouped).map((g) => (
+                                <div key={g} className="parts__row">
+                                    <dt className="t-label">{GROUP_LABELS[persona][g] ?? g}</dt>
+                                    <dd>
+                                        <ul>
+                                            {grouped[g].map((s) => (
+                                                <li key={s.name} className="part">
+                                                    <span className="part__hl">{s.name}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </dd>
                                 </div>
-                                <div className="flex flex-wrap gap-2">
-                                    {grouped[g].map((s) => (
-                                        <span
-                                            key={s.name}
-                                            className="ed-skill rounded-full bg-chip px-3 py-1.5 font-mono text-[11px] font-medium sm:px-3.5 sm:py-2 sm:text-xs"
-                                        >
-                                            {s.name}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
+                            ))}
+                        </dl>
                     </div>
                 </div>
             </div>

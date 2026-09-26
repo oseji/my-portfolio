@@ -1,30 +1,25 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { Instrument_Serif, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Archivo, Martian_Mono } from "next/font/google";
 import { portfolio } from "@/lib/portfolio";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
-const serif = Instrument_Serif({
-  weight: "400",
-  style: ["normal", "italic"],
+// Archivo on its width axis carries the whole system: wide and heavy for
+// display, condensed caps for title-block lettering, normal width for body.
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-serif-raw",
+  axes: ["wdth"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
-const sans = Space_Grotesk({
-  weight: ["400", "500", "600", "700"],
+// Only for measured values, counts, and HTTP.
+const martian = Martian_Mono({
+  weight: ["400", "500"],
   subsets: ["latin"],
-  variable: "--font-sans-raw",
-  display: "swap",
-});
-
-const mono = JetBrains_Mono({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-mono-raw",
+  variable: "--font-martian",
   display: "swap",
 });
 
@@ -52,8 +47,10 @@ export const metadata: Metadata = {
   },
 };
 
-// Applies the saved theme before first paint to avoid a light-mode flash.
-const themeScript = `try{if(localStorage.getItem("theme")==="dark")document.documentElement.classList.add("dark")}catch(e){}`;
+// Runs before first paint: applies the saved (or system) theme, the saved
+// persona's accent, and flags whether the motion layer will run so the hero
+// can wait for it instead of flashing in unanimated.
+const themeScript = `try{var d=document.documentElement,t=localStorage.getItem("theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))d.classList.add("dark");d.dataset.persona=localStorage.getItem("persona")==="frontend"?"frontend":"qa";if(!matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("motion")}catch(e){}`;
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -73,10 +70,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${serif.variable} ${sans.variable} ${mono.variable}`}
+      className={`${archivo.variable} ${martian.variable}`}
+      data-persona="qa"
       suppressHydrationWarning
     >
-      <body className="bg-bg text-ink font-sans antialiased">
+      <body>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"

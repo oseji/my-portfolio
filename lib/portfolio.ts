@@ -12,6 +12,20 @@ export type Skill = {
     group: string;
 };
 
+// A figure pulled straight from a project's blurb, shown as a readout.
+export type Stat = {
+    value: number;
+    prefix?: string;
+    label: string;
+};
+
+// Structured facts restated from the blurb so QA work can show its evidence
+// at a glance. Never add anything here the blurb doesn't already say.
+export type Readout =
+    | { kind: "coverage"; items: string[] }
+    | { kind: "lifecycle"; steps: string[]; stats: Stat[]; finding: string }
+    | { kind: "figures"; stats: Stat[] };
+
 export type Project = {
     id: string;
     title: string;
@@ -22,6 +36,7 @@ export type Project = {
     year: string;
     githubLink: string;
     liveLink: string;
+    readout?: Readout;
 };
 
 export type Portfolio = {
@@ -168,6 +183,16 @@ export const portfolio: Portfolio = {
                 ],
                 accent: "#f97316",
                 year: "2026",
+                readout: {
+                    kind: "coverage",
+                    items: [
+                        "Authentication",
+                        "Product flows",
+                        "Cart",
+                        "Checkout",
+                        "Menu behavior",
+                    ],
+                },
                 githubLink:
                     "https://github.com/oseji/Swag-Labs-Automation-Project?tab=readme-ov-file#swaglabs-automation",
                 liveLink:
@@ -181,6 +206,15 @@ export const portfolio: Portfolio = {
                 stack: ["k6", "JavaScript", "Performance Testing"],
                 accent: "#7d64ff",
                 year: "2026",
+                readout: {
+                    kind: "lifecycle",
+                    steps: ["Auth", "Create", "Update", "Delete", "Verify"],
+                    stats: [
+                        { value: 25, label: "Concurrent users at peak" },
+                        { value: 6, label: "API quirks surfaced" },
+                    ],
+                    finding: "DELETE returns 201",
+                },
                 githubLink:
                     "https://github.com/oseji/restful-booker-k6-project/blob/main/README.md",
                 liveLink:
@@ -194,6 +228,19 @@ export const portfolio: Portfolio = {
                 stack: ["Postman", "Newman", "JavaScript", "Mock Server"],
                 accent: "#10b981",
                 year: "2026",
+                readout: {
+                    kind: "figures",
+                    stats: [
+                        { value: 18, label: "Cases in the catalogue" },
+                        { value: 8, label: "Automated scenarios" },
+                        { value: 21, label: "Assertions" },
+                        {
+                            value: 5000,
+                            prefix: "£",
+                            label: "Approval workflow trips above",
+                        },
+                    ],
+                },
                 githubLink:
                     "https://github.com/oseji/fintech-fund-transfer-api-testing/blob/main/README.md",
                 liveLink:
