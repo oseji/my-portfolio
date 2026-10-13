@@ -4,7 +4,7 @@
 /* ─────────────────────────────────────────────────────────────
    Drawn & Checked
    Light is a whiteprint (drafting film, Prussian ink).
-   Dark is a cyanotype blueprint (Prussian ground, white linework).
+   Dark is a black print (near-black ground, off-white linework).
    The persona picks whose tool marks the page: the checker's
    highlighter and red pencil (QA) or the drafter's cobalt ink (Frontend).
    ───────────────────────────────────────────────────────────── */
@@ -37,19 +37,19 @@
 }
 
 html.dark {
-    --paper: #113a6b;
-    --paper-2: #0d3160;
-    --paper-3: #15437a;
-    --ink: #eef4fc;
-    --ink-2: #b3c6e2;
-    --rule: rgb(238 244 252 / 0.2);
-    --rule-2: rgb(238 244 252 / 0.46);
-    --cobalt: #9cbbff;
-    --on-cobalt: #0b2a52;
-    --red: #ff9a8c;
+    --paper: #0a0a0b;
+    --paper-2: #131315;
+    --paper-3: #18181b;
+    --ink: #f2f2ef;
+    --ink-2: #a3a3a0;
+    --rule: rgb(242 242 239 / 0.16);
+    --rule-2: rgb(242 242 239 / 0.36);
+    --cobalt: #8fa8ff;
+    --on-cobalt: #0a0a0b;
+    --red: #ff8a7a;
     --yellow: #ffdc3a;
-    --on-yellow: #0b2a52;
-    --shade: rgb(3 14 30 / 0.4);
+    --on-yellow: #0a0a0b;
+    --shade: rgb(0 0 0 / 0.6);
 
     color-scheme: dark;
 }
