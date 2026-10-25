@@ -36,7 +36,7 @@ export function Projects({ persona }: Props) {
             <SectionHead
                 id="work-title"
                 swapKey={persona}
-                title={qa ? "Tests, automated." : "Interfaces, shipped."}
+                title={qa ? "Tests, automated." : "Things I've built."}
                 sub={
                     qa
                         ? "Automation I've written from scratch, covering UI flows, API calls, and the stuff in between."
